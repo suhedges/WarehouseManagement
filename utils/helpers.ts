@@ -51,29 +51,42 @@ export const exportCSV = async (data: Product[], filename: string): Promise<bool
   try {
     const csvContent = generateCSV(data);
     console.log('Exporting CSV with content:', csvContent.substring(0, 200) + '...');
+    console.log('Platform:', Platform.OS);
     
     if (Platform.OS === 'web') {
       // For web, create a download link
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
+      
+      // Create and trigger download
       const link = document.createElement('a');
-      link.setAttribute('href', url);
-      link.setAttribute('download', filename);
-      link.style.visibility = 'hidden';
+      link.href = url;
+      link.download = filename;
+      link.style.display = 'none';
+      
       document.body.appendChild(link);
       link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url); // Clean up the URL object
+      
+      // Clean up
+      setTimeout(() => {
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }, 100);
+      
       console.log('CSV download initiated for:', filename);
       return true;
     } else {
       // For mobile, save to file and share
       const filePath = `${FileSystem.documentDirectory}${filename}`;
-      await FileSystem.writeAsStringAsync(filePath, csvContent);
+      await FileSystem.writeAsStringAsync(filePath, csvContent, {
+        encoding: FileSystem.EncodingType.UTF8,
+      });
       console.log('CSV saved to:', filePath);
+      
       await Share.share({
         url: filePath,
         title: filename,
+        message: `Exported ${data.length} products to ${filename}`,
       });
       return true;
     }

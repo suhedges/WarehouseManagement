@@ -20,7 +20,8 @@ import {
   Download, 
   AlertTriangle, 
   AlertCircle,
-  Search
+  Search,
+  Settings
 } from 'lucide-react-native';
 
 export default function WarehouseDetailScreen() {
@@ -33,8 +34,7 @@ export default function WarehouseDetailScreen() {
     syncStatus,
     getProductsWithoutBarcode,
     getProductsBelowMin,
-    getProductsOverstock,
-    deleteWarehouse
+    getProductsOverstock
   } = useWarehouse();
   
   const [searchQuery, setSearchQuery] = useState('');
@@ -60,23 +60,7 @@ export default function WarehouseDetailScreen() {
     }
   }, [warehouse, isLoading, router]);
 
-  const handleDeleteWarehouse = () => {
-    Alert.alert(
-      'Delete Warehouse',
-      `Are you sure you want to delete "${warehouse?.name}"? This will delete all products in this warehouse and cannot be undone.`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: () => {
-            deleteWarehouse(id);
-            router.replace('/warehouses');
-          },
-        },
-      ]
-    );
-  };
+
 
   const handleMassBarcodeScanning = () => {
     if (productsWithoutBarcode.length === 0) {
@@ -106,6 +90,12 @@ export default function WarehouseDetailScreen() {
           </TouchableOpacity>
           <Text style={styles.title}>{warehouse.name}</Text>
           <View style={styles.headerRight}>
+            <TouchableOpacity 
+              onPress={() => router.push(`/warehouse-settings/${id}`)}
+              style={styles.settingsButton}
+            >
+              <Settings size={20} color={colors.text} />
+            </TouchableOpacity>
             <SyncStatus status={syncStatus} />
           </View>
         </View>
@@ -258,13 +248,7 @@ export default function WarehouseDetailScreen() {
         />
       )}
 
-      <View style={styles.footer}>
-        <Button
-          title="Delete Warehouse"
-          onPress={handleDeleteWarehouse}
-          variant="danger"
-        />
-      </View>
+
     </SafeAreaView>
   );
 }
@@ -408,16 +392,10 @@ const styles = StyleSheet.create({
   },
   listContent: {
     padding: 16,
-    paddingBottom: 100,
+    paddingBottom: 32,
   },
-  footer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 16,
-    backgroundColor: colors.card,
-    borderTopWidth: 1,
-    borderTopColor: colors.border,
+  settingsButton: {
+    marginRight: 12,
+    padding: 4,
   },
 });
