@@ -28,6 +28,7 @@ function RootLayoutNav() {
       <Stack.Screen name="scanner" options={{ presentation: 'modal', title: "Barcode Scanner" }} />
       <Stack.Screen name="mass-scanner" options={{ presentation: 'modal', title: "Mass Barcode Scanner" }} />
       <Stack.Screen name="import" options={{ presentation: 'modal', title: "Import Products" }} />
+      <Stack.Screen name="github-settings" options={{ presentation: 'modal', title: "GitHub Settings" }} />
     </Stack>
   );
 }

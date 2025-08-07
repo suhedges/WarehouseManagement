@@ -11,7 +11,7 @@ import { SyncStatus } from '@/components/SyncStatus';
 import { colors } from '@/constants/colors';
 import { useWarehouse } from '@/hooks/warehouse-store';
 import { useAuth } from '@/hooks/auth-store';
-import { Warehouse as WarehouseIcon, LogOut, Plus, Package } from 'lucide-react-native';
+import { Warehouse as WarehouseIcon, LogOut, Plus, Package, Settings } from 'lucide-react-native';
 
 export default function WarehousesScreen() {
   const router = useRouter();
@@ -66,6 +66,12 @@ export default function WarehousesScreen() {
           </View>
           <View style={styles.headerRight}>
             <SyncStatus status={syncStatus} />
+            <TouchableOpacity 
+              onPress={() => router.push('/github-settings')} 
+              style={styles.settingsButton}
+            >
+              <Settings size={20} color={colors.gray[600]} />
+            </TouchableOpacity>
             <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
               <LogOut size={20} color={colors.gray[600]} />
             </TouchableOpacity>
@@ -170,6 +176,10 @@ const styles = StyleSheet.create({
   headerRight: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  settingsButton: {
+    padding: 8,
+    marginRight: 4,
   },
   logoutButton: {
     padding: 8,
