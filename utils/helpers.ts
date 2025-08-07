@@ -50,6 +50,7 @@ export const generateCSV = (products: Product[]): string => {
 export const exportCSV = async (data: Product[], filename: string): Promise<boolean> => {
   try {
     const csvContent = generateCSV(data);
+    console.log('Exporting CSV with content:', csvContent.substring(0, 200) + '...');
     
     if (Platform.OS === 'web') {
       // For web, create a download link
@@ -62,11 +63,14 @@ export const exportCSV = async (data: Product[], filename: string): Promise<bool
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      URL.revokeObjectURL(url); // Clean up the URL object
+      console.log('CSV download initiated for:', filename);
       return true;
     } else {
       // For mobile, save to file and share
       const filePath = `${FileSystem.documentDirectory}${filename}`;
       await FileSystem.writeAsStringAsync(filePath, csvContent);
+      console.log('CSV saved to:', filePath);
       await Share.share({
         url: filePath,
         title: filename,

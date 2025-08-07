@@ -9,7 +9,7 @@ import { useWarehouse } from '@/hooks/warehouse-store';
 import { X } from 'lucide-react-native';
 
 export default function BarcodeScanner() {
-  const params = useLocalSearchParams<{ productId: string; isNew: string }>();
+  const params = useLocalSearchParams<{ productId: string; isNew: string; warehouseId?: string }>();
   const router = useRouter();
   const { getProduct, updateProduct } = useWarehouse();
   
@@ -17,7 +17,12 @@ export default function BarcodeScanner() {
   const [scanned, setScanned] = useState(false);
   const [barcodeData, setBarcodeData] = useState('');
   
-  const product = params.productId ? getProduct(params.productId) : null;
+  const isNewProduct = params.isNew === 'true';
+  const product = params.productId && !isNewProduct ? getProduct(params.productId) : null;
+  
+  console.log('Scanner params:', params);
+  console.log('Is new product:', isNewProduct);
+  console.log('Product found:', product);
 
   useEffect(() => {
     if (!permission) {
@@ -34,10 +39,26 @@ export default function BarcodeScanner() {
   };
 
   const handleConfirm = () => {
-    if (product && barcodeData) {
-      updateProduct(product.id, { barcode: barcodeData });
+    if (barcodeData) {
+      if (isNewProduct) {
+        // For new products, navigate back with the scanned barcode
+        router.navigate({
+          pathname: '/product/[id]',
+          params: { 
+            id: params.productId, 
+            warehouseId: params.warehouseId,
+            scannedBarcode: barcodeData 
+          }
+        });
+      } else if (product) {
+        // For existing products, update directly
+        console.log('Updating product with barcode:', barcodeData);
+        updateProduct(product.id, { barcode: barcodeData });
+        router.back();
+      }
+    } else {
+      router.back();
     }
-    router.back();
   };
 
   const handleCancel = () => {

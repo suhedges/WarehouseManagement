@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, Alert, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter, useFocusEffect } from 'expo-router';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Input } from '@/components/Input';
@@ -142,9 +142,27 @@ export default function ProductDetailScreen() {
   const handleScanBarcode = () => {
     router.push({
       pathname: '/scanner',
-      params: { productId: params.id, isNew: isNewProduct ? 'true' : 'false' }
+      params: { 
+        productId: params.id, 
+        isNew: isNewProduct ? 'true' : 'false',
+        warehouseId: params.warehouseId 
+      }
     });
   };
+  
+  // Listen for navigation focus to check for scanned barcode
+  useFocusEffect(
+    React.useCallback(() => {
+      // Check if we have a scanned barcode in the route params
+      const currentParams = params as any;
+      if (currentParams?.scannedBarcode) {
+        console.log('Received scanned barcode:', currentParams.scannedBarcode);
+        setFormData(prev => ({ ...prev, barcode: currentParams.scannedBarcode }));
+        // Clear the scanned barcode from params by navigating without it
+        router.setParams({ scannedBarcode: undefined });
+      }
+    }, [params, router])
+  );
 
   if (isLoading || (!isNewProduct && !product)) {
     return <LoadingIndicator message="Loading product..." />;
@@ -197,7 +215,7 @@ export default function ProductDetailScreen() {
                 value={formData.barcode}
                 onChangeText={(text) => setFormData({ ...formData, barcode: text })}
                 containerStyle={styles.barcodeInput}
-                editable={false}
+                editable={true}
               />
               <Button
                 title="Scan"

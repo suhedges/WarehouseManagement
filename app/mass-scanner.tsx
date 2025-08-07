@@ -44,6 +44,7 @@ export default function MassBarcodeScanner() {
 
   const handleConfirm = () => {
     if (currentProduct && barcodeData) {
+      console.log('Mass scanner updating product:', currentProduct.id, 'with barcode:', barcodeData);
       updateProduct(currentProduct.id, { barcode: barcodeData });
       
       if (isLastProduct) {
