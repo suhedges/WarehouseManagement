@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { Button } from '@/components/Button';
 import { colors } from '@/constants/colors';
 import { useWarehouse } from '@/hooks/warehouse-store';
@@ -13,23 +13,21 @@ export default function BarcodeScanner() {
   const router = useRouter();
   const { getProduct, updateProduct } = useWarehouse();
   
-  const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+  const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
   const [barcodeData, setBarcodeData] = useState('');
   
   const product = params.productId ? getProduct(params.productId) : null;
 
-
   useEffect(() => {
-    const getBarCodeScannerPermissions = async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    };
-
-    getBarCodeScannerPermissions();
-  }, []);
+    if (!permission) {
+      requestPermission();
+    }
+  }, [permission, requestPermission]);
 
   const handleBarCodeScanned = ({ type, data }: { type: string; data: string }) => {
+    if (scanned) return; // Prevent multiple scans
+    
     setScanned(true);
     setBarcodeData(data);
     console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
@@ -51,7 +49,7 @@ export default function BarcodeScanner() {
     setBarcodeData('');
   };
 
-  if (hasPermission === null) {
+  if (!permission) {
     return (
       <SafeAreaView style={styles.container}>
         <Text style={styles.text}>Requesting camera permission...</Text>
@@ -59,10 +57,11 @@ export default function BarcodeScanner() {
     );
   }
 
-  if (hasPermission === false) {
+  if (!permission.granted) {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={styles.text}>No access to camera</Text>
+        <Text style={styles.text}>We need your permission to show the camera</Text>
+        <Button title="Grant Permission" onPress={requestPermission} style={styles.button} />
         <Button title="Go Back" onPress={handleCancel} style={styles.button} />
       </SafeAreaView>
     );
@@ -71,10 +70,36 @@ export default function BarcodeScanner() {
   return (
     <SafeAreaView style={styles.container} edges={['bottom']}>
       <View style={styles.scannerContainer}>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={styles.scanner}
-        />
+        {Platform.OS !== 'web' ? (
+          <CameraView
+            style={styles.scanner}
+            facing={'back' as CameraType}
+            onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
+            barcodeScannerSettings={{
+              barcodeTypes: [
+                'aztec', 'ean13', 'ean8', 'qr', 'pdf417', 'upc_e', 'datamatrix',
+                'code39', 'code93', 'itf14', 'codabar', 'code128', 'upc_a'
+              ],
+            }}
+          />
+        ) : (
+          <View style={[styles.scanner, styles.webFallback]}>
+            <Text style={styles.webFallbackText}>
+              Camera scanning is not available on web.
+              Please use the mobile app to scan barcodes.
+            </Text>
+            <Button
+              title="Enter Barcode Manually"
+              onPress={() => {
+                const barcode = prompt('Enter barcode manually:');
+                if (barcode) {
+                  handleBarCodeScanned({ type: 'manual', data: barcode });
+                }
+              }}
+              style={styles.manualButton}
+            />
+          </View>
+        )}
         
         <View style={styles.overlay}>
           <View style={styles.scannerFrame} />
@@ -223,6 +248,21 @@ const styles = StyleSheet.create({
     margin: 24,
   },
   button: {
+    marginTop: 16,
+  },
+  webFallback: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.gray[800],
+  },
+  webFallbackText: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 24,
+    paddingHorizontal: 32,
+  },
+  manualButton: {
     marginTop: 16,
   },
 });
