@@ -24,13 +24,27 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       const config = await githubSync.loadConfig();
       setGithubConfig(config);
       
-      // Load local data
-      await loadData();
+      // Load local data first
+      const storedWarehouses = await AsyncStorage.getItem(WAREHOUSES_STORAGE_KEY);
+      const storedProducts = await AsyncStorage.getItem(PRODUCTS_STORAGE_KEY);
+      
+      let localWarehouses: Warehouse[] = [];
+      let localProducts: Product[] = [];
+      
+      if (storedWarehouses) {
+        localWarehouses = JSON.parse(storedWarehouses);
+        setWarehouses(localWarehouses);
+      }
+      
+      if (storedProducts) {
+        localProducts = JSON.parse(storedProducts);
+        setProducts(localProducts);
+      }
       
       // If GitHub is configured, try to sync
       if (config) {
         try {
-          const syncedData = await githubSync.syncData(warehouses, products);
+          const syncedData = await githubSync.syncData(localWarehouses, localProducts);
           setWarehouses(syncedData.warehouses);
           setProducts(syncedData.products);
           await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(syncedData.warehouses));
@@ -47,31 +61,13 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     } finally {
       setIsLoading(false);
     }
-  }, [warehouses, products]);
+  }, []);
 
   useEffect(() => {
     initializeData();
   }, [initializeData]);
 
-  const loadData = async () => {
-    try {
-      setIsLoading(true);
-      const storedWarehouses = await AsyncStorage.getItem(WAREHOUSES_STORAGE_KEY);
-      const storedProducts = await AsyncStorage.getItem(PRODUCTS_STORAGE_KEY);
-      
-      if (storedWarehouses) {
-        setWarehouses(JSON.parse(storedWarehouses));
-      }
-      
-      if (storedProducts) {
-        setProducts(JSON.parse(storedProducts));
-      }
-    } catch (error) {
-      console.error('Failed to load data:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+
 
   const performSync = useCallback(async () => {
     if (!githubConfig) {
