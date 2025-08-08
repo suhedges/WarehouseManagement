@@ -51,18 +51,22 @@ export default function BarcodeScanner() {
     if (barcodeData) {
       try {
         if (isNewProduct) {
-          router.navigate({
+          router.replace({
             pathname: '/product/[id]',
-            params: { 
+            params: {
               id: params.productId,
               warehouseId: params.warehouseId,
-              scannedBarcode: barcodeData 
-            }
+              scannedBarcode: barcodeData,
+            },
           });
         } else if (product) {
-          console.log('Updating product with barcode:', barcodeData);
-          updateProduct(product.id, { barcode: barcodeData });
-          router.back();
+          router.replace({
+            pathname: '/product/[id]',
+            params: {
+              id: product.id,
+              scannedBarcode: barcodeData,
+            },
+          });
         } else {
           Alert.alert('Product Error', 'Product not found to update.');
         }
