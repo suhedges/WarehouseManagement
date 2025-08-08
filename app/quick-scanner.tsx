@@ -16,6 +16,7 @@ export default function QuickScannerScreen() {
   const [permission, requestPermission] = useCameraPermissions();
   const [isScanning, setIsScanning] = useState<boolean>(true);
   const [scannedData, setScannedData] = useState<string>('');
+  const [isReady, setIsReady] = useState<boolean>(false);
   
   const warehouse = getWarehouse(warehouseId);
 
@@ -26,8 +27,16 @@ export default function QuickScannerScreen() {
     }
   }, [warehouse, router]);
 
+  useEffect(() => {
+    if (permission?.granted && isScanning) {
+      setIsReady(false);
+      const t = setTimeout(() => setIsReady(true), 200);
+      return () => clearTimeout(t);
+    }
+  }, [permission?.granted, isScanning]);
+
   const handleBarcodeScanned = ({ data }: { data: string }) => {
-    if (!isScanning) return;
+    if (!isScanning || !isReady) return;
     
     console.log('Barcode scanned:', data);
     setIsScanning(false);
@@ -122,7 +131,7 @@ export default function QuickScannerScreen() {
         <CameraView
           style={styles.camera}
           facing="back"
-          onBarcodeScanned={isScanning ? handleBarcodeScanned : undefined}
+          onBarcodeScanned={isScanning && isReady ? handleBarcodeScanned : undefined}
           barcodeScannerSettings={{
             barcodeTypes: [
               'aztec', 'ean13', 'ean8', 'qr', 'pdf417', 'upc_e', 'datamatrix',

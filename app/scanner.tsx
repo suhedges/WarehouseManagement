@@ -16,6 +16,7 @@ export default function BarcodeScanner() {
   const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState<boolean>(false);
   const [barcodeData, setBarcodeData] = useState<string>('');
+  const [isReady, setIsReady] = useState<boolean>(false);
 
   const [zoom, setZoom] = useState<number>(0);
   
@@ -31,6 +32,20 @@ export default function BarcodeScanner() {
       requestPermission();
     }
   }, [permission, requestPermission]);
+
+  useEffect(() => {
+    if (permission?.granted && !scanned) {
+      console.log('Scanner: starting 200ms focus delay');
+      setIsReady(false);
+      const t = setTimeout(() => {
+        console.log('Scanner: focus delay complete, enabling scanning');
+        setIsReady(true);
+      }, 200);
+      return () => {
+        clearTimeout(t);
+      };
+    }
+  }, [permission?.granted, scanned]);
 
   const handleBarCodeScanned = useCallback(({ type, data }: { type: string; data: string }) => {
     if (scanned) return; // Prevent multiple scans
@@ -86,6 +101,10 @@ export default function BarcodeScanner() {
   const handleScanAgain = () => {
     setScanned(false);
     setBarcodeData('');
+    setIsReady(false);
+    const t = setTimeout(() => setIsReady(true), 200);
+    // Return noop cleaner because this is called from a button
+    // Cleanup will naturally occur on unmount
   };
 
   if (!permission) {
@@ -114,7 +133,7 @@ export default function BarcodeScanner() {
             style={styles.scanner}
             facing={'back' as CameraType}
             zoom={zoom}
-            onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
+            onBarcodeScanned={scanned || !isReady ? undefined : handleBarCodeScanned}
             barcodeScannerSettings={{
               barcodeTypes: [
                 'code128',
@@ -187,6 +206,10 @@ export default function BarcodeScanner() {
           >
             <Text style={styles.controlLabel}>Lighting Tips: avoid glare</Text>
           </TouchableOpacity>
+
+          {!isReady && (
+            <Text style={styles.controlLabel} testID="focus-delay-indicator">Focusing…</Text>
+          )}
 
           <TouchableOpacity
             accessibilityRole="button"

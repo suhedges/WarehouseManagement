@@ -18,6 +18,7 @@ export default function MassBarcodeScanner() {
   const [barcodeData, setBarcodeData] = useState<string>('');
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [error, setError] = useState<string>('');
+  const [isReady, setIsReady] = useState<boolean>(false);
 
   const productsWithoutBarcode = useMemo(
     () => getProductsWithoutBarcode(params.warehouseId),
@@ -35,6 +36,18 @@ export default function MassBarcodeScanner() {
   }, [permission, requestPermission]);
 
   useEffect(() => {
+    if (permission?.granted && !scanned) {
+      console.log('[MassScanner] Starting 200ms focus delay');
+      setIsReady(false);
+      const t = setTimeout(() => {
+        console.log('[MassScanner] Focus delay complete');
+        setIsReady(true);
+      }, 200);
+      return () => clearTimeout(t);
+    }
+  }, [permission?.granted, scanned]);
+
+  useEffect(() => {
     if (productsWithoutBarcode.length === 0) {
       console.log('[MassScanner] No products left without barcode. Closing.');
       router.back();
@@ -49,17 +62,19 @@ export default function MassBarcodeScanner() {
   }, [productsWithoutBarcode.length, currentIndex]);
 
   const handleBarCodeScanned = useCallback(({ type, data }: { type: string; data: string }) => {
-    if (scanned) return;
+    if (scanned || !isReady) return;
     setScanned(true);
     setBarcodeData(data);
     setError('');
     console.log(`[MassScanner] Bar code scanned type=${type} data=${data}`);
-  }, [scanned]);
+  }, [scanned, isReady]);
 
   const goNext = useCallback(() => {
     setScanned(false);
     setBarcodeData('');
     setError('');
+    setIsReady(false);
+    setTimeout(() => setIsReady(true), 200);
     setCurrentIndex((prev) => prev + 1);
   }, []);
 
@@ -109,6 +124,8 @@ export default function MassBarcodeScanner() {
     setScanned(false);
     setBarcodeData('');
     setError('');
+    setIsReady(false);
+    setTimeout(() => setIsReady(true), 200);
   }, []);
 
   if (!permission) {
@@ -136,7 +153,7 @@ export default function MassBarcodeScanner() {
           <CameraView
             style={styles.scanner}
             facing={'back' as CameraType}
-            onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
+            onBarcodeScanned={scanned || !isReady ? undefined : handleBarCodeScanned}
             barcodeScannerSettings={{
               barcodeTypes: [
                 'aztec', 'ean13', 'ean8', 'qr', 'pdf417', 'upc_e', 'datamatrix',
