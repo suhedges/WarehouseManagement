@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Platform, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
@@ -11,75 +11,110 @@ import { X, ArrowRight } from 'lucide-react-native';
 export default function MassBarcodeScanner() {
   const params = useLocalSearchParams<{ warehouseId: string }>();
   const router = useRouter();
-  const { getProductsWithoutBarcode, updateProduct } = useWarehouse();
-  
+  const { getProductsWithoutBarcode, findProductByBarcode, updateProduct } = useWarehouse();
+
   const [permission, requestPermission] = useCameraPermissions();
-  const [scanned, setScanned] = useState(false);
-  const [barcodeData, setBarcodeData] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  
-  const productsWithoutBarcode = getProductsWithoutBarcode(params.warehouseId);
+  const [scanned, setScanned] = useState<boolean>(false);
+  const [barcodeData, setBarcodeData] = useState<string>('');
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [error, setError] = useState<string>('');
+
+  const productsWithoutBarcode = useMemo(
+    () => getProductsWithoutBarcode(params.warehouseId),
+    [getProductsWithoutBarcode, params.warehouseId]
+  );
+
   const currentProduct = productsWithoutBarcode[currentIndex];
   const isLastProduct = currentIndex === productsWithoutBarcode.length - 1;
 
   useEffect(() => {
     if (!permission) {
+      console.log('[MassScanner] Requesting camera permission');
       requestPermission();
     }
   }, [permission, requestPermission]);
 
   useEffect(() => {
     if (productsWithoutBarcode.length === 0) {
+      console.log('[MassScanner] No products left without barcode. Closing.');
       router.back();
     }
   }, [productsWithoutBarcode, router]);
 
-  const handleBarCodeScanned = ({ type, data }: { type: string; data: string }) => {
-    if (scanned) return; // Prevent multiple scans
-    
+  useEffect(() => {
+    if (productsWithoutBarcode.length > 0 && currentIndex >= productsWithoutBarcode.length) {
+      console.log('[MassScanner] Current index out of range after update, clamping to last');
+      setCurrentIndex(productsWithoutBarcode.length - 1);
+    }
+  }, [productsWithoutBarcode.length, currentIndex]);
+
+  const handleBarCodeScanned = useCallback(({ type, data }: { type: string; data: string }) => {
+    if (scanned) return;
     setScanned(true);
     setBarcodeData(data);
-    console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
-  };
+    setError('');
+    console.log(`[MassScanner] Bar code scanned type=${type} data=${data}`);
+  }, [scanned]);
 
-  const handleConfirm = () => {
-    if (currentProduct && barcodeData) {
-      console.log('Mass scanner updating product:', currentProduct.id, 'with barcode:', barcodeData);
-      updateProduct(currentProduct.id, { barcode: barcodeData });
-      
-      if (isLastProduct) {
-        router.back();
-      } else {
-        setCurrentIndex(currentIndex + 1);
-        setScanned(false);
-        setBarcodeData('');
+  const goNext = useCallback(() => {
+    setScanned(false);
+    setBarcodeData('');
+    setError('');
+    setCurrentIndex((prev) => prev + 1);
+  }, []);
+
+  const handleConfirm = useCallback(() => {
+    if (!currentProduct || !barcodeData) return;
+    console.log('[MassScanner] Confirm barcode for product', currentProduct.id, barcodeData);
+
+    const duplicate = findProductByBarcode(currentProduct.warehouseId, barcodeData);
+    if (duplicate && duplicate.id !== currentProduct.id) {
+      console.warn('[MassScanner] Duplicate barcode detected for product', duplicate.id);
+      setError('This barcode is already assigned to another product. Please scan a different one.');
+      if (Platform.OS !== 'web') {
+        Alert.alert('Duplicate barcode', 'This barcode is already assigned to another product.');
       }
+      return;
     }
-  };
 
-  const handleSkip = () => {
+    updateProduct(currentProduct.id, { barcode: barcodeData });
+
+    if (isLastProduct) {
+      console.log('[MassScanner] Last product updated. Closing.');
+      setScanned(false);
+      setBarcodeData('');
+      setError('');
+      router.back();
+    } else {
+      goNext();
+    }
+  }, [currentProduct, barcodeData, isLastProduct, findProductByBarcode, updateProduct, router, goNext]);
+
+  const handleSkip = useCallback(() => {
+    console.log('[MassScanner] Skip product at index', currentIndex);
     if (isLastProduct) {
       router.back();
     } else {
-      setCurrentIndex(currentIndex + 1);
-      setScanned(false);
-      setBarcodeData('');
+      goNext();
     }
-  };
+  }, [currentIndex, isLastProduct, router, goNext]);
 
-  const handleCancel = () => {
+  const handleCancel = useCallback(() => {
+    console.log('[MassScanner] Cancel scanning and go back');
     router.back();
-  };
+  }, [router]);
 
-  const handleScanAgain = () => {
+  const handleScanAgain = useCallback(() => {
+    console.log('[MassScanner] Scan again');
     setScanned(false);
     setBarcodeData('');
-  };
+    setError('');
+  }, []);
 
   if (!permission) {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={styles.text}>Requesting camera permission...</Text>
+        <Text style={styles.text} testID="permission-text">Requesting camera permission...</Text>
       </SafeAreaView>
     );
   }
@@ -88,8 +123,8 @@ export default function MassBarcodeScanner() {
     return (
       <SafeAreaView style={styles.container}>
         <Text style={styles.text}>We need your permission to show the camera</Text>
-        <Button title="Grant Permission" onPress={requestPermission} style={styles.button} />
-        <Button title="Go Back" onPress={handleCancel} style={styles.button} />
+        <Button title="Grant Permission" onPress={requestPermission} style={styles.button} testID="grant-permission" />
+        <Button title="Go Back" onPress={handleCancel} style={styles.button} testID="go-back" />
       </SafeAreaView>
     );
   }
@@ -124,11 +159,12 @@ export default function MassBarcodeScanner() {
                 }
               }}
               style={styles.manualButton}
+              testID="manual-entry"
             />
           </View>
         )}
         
-        <View style={styles.overlay}>
+        <View style={styles.overlay} testID="overlay">
           <View style={styles.scannerFrame} />
         </View>
         
@@ -146,7 +182,10 @@ export default function MassBarcodeScanner() {
           <View style={styles.resultContainer}>
             <View style={styles.resultCard}>
               <Text style={styles.resultTitle}>Barcode Detected</Text>
-              <Text style={styles.barcodeData}>{barcodeData}</Text>
+              <Text style={styles.barcodeData} testID="scanned-barcode">{barcodeData}</Text>
+              {error ? (
+                <Text style={styles.errorText} testID="error-text">{error}</Text>
+              ) : null}
               
               <View style={styles.resultButtons}>
                 <Button
@@ -154,11 +193,13 @@ export default function MassBarcodeScanner() {
                   onPress={handleScanAgain}
                   variant="outline"
                   style={styles.resultButton}
+                  testID="scan-again-button"
                 />
                 <Button
                   title={isLastProduct ? "Confirm & Finish" : "Confirm & Next"}
                   onPress={handleConfirm}
                   style={styles.resultButton}
+                  testID="confirm-button"
                 />
               </View>
             </View>
@@ -168,11 +209,11 @@ export default function MassBarcodeScanner() {
       
       {!scanned && (
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.cancelButton} onPress={handleCancel}>
+          <TouchableOpacity style={styles.cancelButton} onPress={handleCancel} testID="cancel-button">
             <X size={24} color="white" />
           </TouchableOpacity>
           
-          <TouchableOpacity style={styles.skipButton} onPress={handleSkip}>
+          <TouchableOpacity style={styles.skipButton} onPress={handleSkip} testID="skip-button">
             <ArrowRight size={24} color="white" />
           </TouchableOpacity>
         </View>
@@ -259,6 +300,12 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     width: '100%',
     textAlign: 'center',
+  },
+  errorText: {
+    color: colors.danger,
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 8,
   },
   resultButtons: {
     flexDirection: 'row',

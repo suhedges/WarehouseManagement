@@ -19,7 +19,8 @@ export default function ProductDetailScreen() {
     addProduct, 
     updateProduct, 
     deleteProduct, 
-    isLoading 
+    isLoading,
+    findProductByBarcode,
   } = useWarehouse();
   
   const isNewProduct = params.id === 'new';
@@ -112,6 +113,14 @@ export default function ProductDetailScreen() {
       warehouseId: isNewProduct ? params.warehouseId! : product!.warehouseId,
     };
     
+    if (productData.barcode) {
+      const existing = findProductByBarcode(productData.warehouseId, productData.barcode);
+      if (existing && (!isNewProduct ? existing.id !== params.id : true)) {
+        Alert.alert('Duplicate barcode', 'This barcode is already assigned to another product.');
+        return;
+      }
+    }
+
     if (isNewProduct) {
       addProduct(productData);
       router.back();
