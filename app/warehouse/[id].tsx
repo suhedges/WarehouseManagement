@@ -22,7 +22,10 @@ import {
   AlertCircle,
   Search,
   Settings,
-  ScanLine
+  ScanLine,
+  Filter,
+  ArrowUpDown,
+  ChevronDown
 } from 'lucide-react-native';
 
 export default function WarehouseDetailScreen() {
@@ -40,6 +43,11 @@ export default function WarehouseDetailScreen() {
   
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
+  const [activeFilter, setActiveFilter] = useState<'all' | 'location' | 'belowMin' | 'belowMax' | 'overstock'>('all');
+  const [sortBy, setSortBy] = useState<'location' | 'internalName' | 'customerName'>('location');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [showFilters, setShowFilters] = useState(false);
+  const [locationFilter, setLocationFilter] = useState('');
   
   const warehouse = getWarehouse(id);
   const products = getWarehouseProducts(id);
@@ -47,12 +55,70 @@ export default function WarehouseDetailScreen() {
   const productsBelowMin = getProductsBelowMin(id);
   const productsOverstock = getProductsOverstock(id);
   
-  const filteredProducts = products.filter(product => 
-    product.internalName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.customerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.barcode.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const getFilteredProducts = () => {
+    let filtered = products;
+
+    // Apply search filter
+    if (searchQuery) {
+      filtered = filtered.filter(product => 
+        product.internalName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.customerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.barcode.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Apply category filter
+    switch (activeFilter) {
+      case 'location':
+        if (locationFilter) {
+          filtered = filtered.filter(product => 
+            product.location.toLowerCase().includes(locationFilter.toLowerCase())
+          );
+        }
+        break;
+      case 'belowMin':
+        filtered = filtered.filter(product => product.quantity < product.minAmount);
+        break;
+      case 'belowMax':
+        filtered = filtered.filter(product => product.quantity < product.maxAmount);
+        break;
+      case 'overstock':
+        filtered = filtered.filter(product => product.quantity > product.maxAmount);
+        break;
+      default:
+        break;
+    }
+
+    // Apply sorting
+    filtered.sort((a, b) => {
+      let aValue: string;
+      let bValue: string;
+
+      switch (sortBy) {
+        case 'internalName':
+          aValue = a.internalName.toLowerCase();
+          bValue = b.internalName.toLowerCase();
+          break;
+        case 'customerName':
+          aValue = a.customerName.toLowerCase();
+          bValue = b.customerName.toLowerCase();
+          break;
+        case 'location':
+        default:
+          aValue = a.location.toLowerCase();
+          bValue = b.location.toLowerCase();
+          break;
+      }
+
+      const comparison = aValue.localeCompare(bValue, undefined, { numeric: true });
+      return sortOrder === 'asc' ? comparison : -comparison;
+    });
+
+    return filtered;
+  };
+
+  const filteredProducts = getFilteredProducts();
 
   useEffect(() => {
     if (!warehouse && !isLoading) {
@@ -194,6 +260,126 @@ export default function WarehouseDetailScreen() {
         </TouchableOpacity>
       )}
 
+      {/* Filter and Sort Controls */}
+      <View style={styles.controlsContainer}>
+        <View style={styles.controlsRow}>
+          <TouchableOpacity 
+            style={styles.controlButton}
+            onPress={() => setShowFilters(!showFilters)}
+          >
+            <Filter size={16} color={colors.primary} />
+            <Text style={styles.controlButtonText}>Filter</Text>
+            <ChevronDown 
+              size={16} 
+              color={colors.primary} 
+              style={[styles.chevron, showFilters && styles.chevronRotated]} 
+            />
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            style={styles.controlButton}
+            onPress={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+          >
+            <ArrowUpDown size={16} color={colors.primary} />
+            <Text style={styles.controlButtonText}>
+              Sort: {sortBy === 'location' ? 'Location' : sortBy === 'internalName' ? 'Internal' : 'Customer'} ({sortOrder.toUpperCase()})
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {showFilters && (
+          <View style={styles.filtersContainer}>
+            <View style={styles.filterRow}>
+              <TouchableOpacity
+                style={[styles.filterChip, activeFilter === 'all' && styles.filterChipActive]}
+                onPress={() => {
+                  setActiveFilter('all');
+                  setLocationFilter('');
+                }}
+              >
+                <Text style={[styles.filterChipText, activeFilter === 'all' && styles.filterChipTextActive]}>All</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity
+                style={[styles.filterChip, activeFilter === 'belowMin' && styles.filterChipActive]}
+                onPress={() => {
+                  setActiveFilter('belowMin');
+                  setLocationFilter('');
+                }}
+              >
+                <Text style={[styles.filterChipText, activeFilter === 'belowMin' && styles.filterChipTextActive]}>Below Min</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity
+                style={[styles.filterChip, activeFilter === 'belowMax' && styles.filterChipActive]}
+                onPress={() => {
+                  setActiveFilter('belowMax');
+                  setLocationFilter('');
+                }}
+              >
+                <Text style={[styles.filterChipText, activeFilter === 'belowMax' && styles.filterChipTextActive]}>Below Max</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity
+                style={[styles.filterChip, activeFilter === 'overstock' && styles.filterChipActive]}
+                onPress={() => {
+                  setActiveFilter('overstock');
+                  setLocationFilter('');
+                }}
+              >
+                <Text style={[styles.filterChipText, activeFilter === 'overstock' && styles.filterChipTextActive]}>Overstock</Text>
+              </TouchableOpacity>
+            </View>
+            
+            <View style={styles.filterRow}>
+              <TouchableOpacity
+                style={[styles.filterChip, activeFilter === 'location' && styles.filterChipActive]}
+                onPress={() => setActiveFilter('location')}
+              >
+                <Text style={[styles.filterChipText, activeFilter === 'location' && styles.filterChipTextActive]}>By Location</Text>
+              </TouchableOpacity>
+            </View>
+            
+            {activeFilter === 'location' && (
+              <View style={styles.locationFilterContainer}>
+                <Input
+                  placeholder="Enter location to filter..."
+                  value={locationFilter}
+                  onChangeText={setLocationFilter}
+                  containerStyle={styles.locationFilterInput}
+                />
+              </View>
+            )}
+            
+            <View style={styles.sortContainer}>
+              <Text style={styles.sortLabel}>Sort by:</Text>
+              <View style={styles.sortRow}>
+                <TouchableOpacity
+                  style={[styles.sortChip, sortBy === 'location' && styles.sortChipActive]}
+                  onPress={() => setSortBy('location')}
+                >
+                  <Text style={[styles.sortChipText, sortBy === 'location' && styles.sortChipTextActive]}>Location</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity
+                  style={[styles.sortChip, sortBy === 'internalName' && styles.sortChipActive]}
+                  onPress={() => setSortBy('internalName')}
+                >
+                  <Text style={[styles.sortChipText, sortBy === 'internalName' && styles.sortChipTextActive]}>Internal Name</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity
+                  style={[styles.sortChip, sortBy === 'customerName' && styles.sortChipActive]}
+                  onPress={() => setSortBy('customerName')}
+                >
+                  <Text style={[styles.sortChipText, sortBy === 'customerName' && styles.sortChipTextActive]}>Customer Name</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        )}
+      </View>
+
       {products.length === 0 ? (
         <EmptyState
           title="No Products"
@@ -203,6 +389,18 @@ export default function WarehouseDetailScreen() {
             pathname: '/product/[id]',
             params: { id: 'new', warehouseId: id }
           })}
+          icon={<Package size={48} color={colors.gray[400]} />}
+        />
+      ) : filteredProducts.length === 0 && products.length > 0 ? (
+        <EmptyState
+          title="No Products Found"
+          description="No products match your current filters"
+          buttonTitle="Clear Filters"
+          onButtonPress={() => {
+            setActiveFilter('all');
+            setLocationFilter('');
+            setSearchQuery('');
+          }}
           icon={<Package size={48} color={colors.gray[400]} />}
         />
       ) : (
@@ -218,6 +416,7 @@ export default function WarehouseDetailScreen() {
                 <View style={styles.productCard}>
                   <View style={styles.productInfo}>
                     <Text style={styles.productName}>{item.internalName}</Text>
+                    <Text style={styles.productCustomerName}>Customer: {item.customerName}</Text>
                     <Text style={styles.productLocation}>Location: {item.location}</Text>
                     <Text style={styles.productBarcode}>
                       {item.barcode ? `Barcode: ${item.barcode}` : 'No barcode assigned'}
@@ -428,5 +627,122 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
+  },
+  controlsContainer: {
+    backgroundColor: colors.card,
+    marginBottom: 8,
+  },
+  controlsRow: {
+    flexDirection: 'row',
+    padding: 16,
+    justifyContent: 'space-between',
+  },
+  controlButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    backgroundColor: colors.background,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: colors.border,
+    flex: 1,
+    marginHorizontal: 4,
+  },
+  controlButtonText: {
+    marginLeft: 8,
+    marginRight: 4,
+    fontSize: 14,
+    color: colors.primary,
+    fontWeight: '500',
+    flex: 1,
+  },
+  chevron: {
+    transform: [{ rotate: '0deg' }],
+  },
+  chevronRotated: {
+    transform: [{ rotate: '180deg' }],
+  },
+  filtersContainer: {
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+  },
+  filterRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: 8,
+  },
+  filterChip: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    backgroundColor: colors.background,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: colors.border,
+    marginRight: 8,
+    marginBottom: 8,
+  },
+  filterChipActive: {
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
+  },
+  filterChipText: {
+    fontSize: 12,
+    color: colors.text,
+    fontWeight: '500',
+  },
+  filterChipTextActive: {
+    color: 'white',
+  },
+  locationFilterContainer: {
+    marginTop: 8,
+  },
+  locationFilterInput: {
+    marginBottom: 0,
+  },
+  sortContainer: {
+    marginTop: 16,
+    paddingTop: 16,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+  },
+  sortLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.text,
+    marginBottom: 8,
+  },
+  sortRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  sortChip: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    backgroundColor: colors.background,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: colors.border,
+    marginRight: 8,
+    marginBottom: 8,
+  },
+  sortChipActive: {
+    backgroundColor: colors.secondary,
+    borderColor: colors.secondary,
+  },
+  sortChipText: {
+    fontSize: 12,
+    color: colors.text,
+    fontWeight: '500',
+  },
+  sortChipTextActive: {
+    color: 'white',
+  },
+  productCustomerName: {
+    fontSize: 14,
+    color: colors.gray[600],
+    marginBottom: 2,
   },
 });
