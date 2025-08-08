@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, ScrollView, Alert, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useLocalSearchParams, useRouter, useFocusEffect } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Input } from '@/components/Input';
@@ -11,7 +11,7 @@ import { useWarehouse } from '@/hooks/warehouse-store';
 import { ArrowLeft, Barcode, Save, Trash } from 'lucide-react-native';
 
 export default function ProductDetailScreen() {
-  const params = useLocalSearchParams<{ id: string; warehouseId?: string }>();
+  const params = useLocalSearchParams<{ id: string; warehouseId?: string; scannedBarcode?: string }>();
   const router = useRouter();
   const { 
     getProduct, 
@@ -150,19 +150,16 @@ export default function ProductDetailScreen() {
     });
   };
   
-  // Listen for navigation focus to check for scanned barcode
-  useFocusEffect(
-    React.useCallback(() => {
-      // Check if we have a scanned barcode in the route params
-      const currentParams = params as any;
-      if (currentParams?.scannedBarcode) {
-        console.log('Received scanned barcode:', currentParams.scannedBarcode);
-        setFormData(prev => ({ ...prev, barcode: currentParams.scannedBarcode }));
-        // Clear the scanned barcode from params by navigating without it
-        router.setParams({ scannedBarcode: undefined });
-      }
-    }, [params, router])
-  );
+  // Apply scanned barcode only once to avoid update loops
+  const appliedScannedRef = useRef<string | null>(null);
+  useEffect(() => {
+    const scanned = params.scannedBarcode;
+    if (scanned && appliedScannedRef.current !== scanned) {
+      console.log('Received scanned barcode:', scanned);
+      setFormData(prev => ({ ...prev, barcode: scanned }));
+      appliedScannedRef.current = scanned;
+    }
+  }, [params.scannedBarcode]);
 
   if (isLoading || (!isNewProduct && !product)) {
     return <LoadingIndicator message="Loading product..." />;
