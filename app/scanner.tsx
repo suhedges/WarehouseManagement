@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Platform, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { Button } from '@/components/Button';
 import { colors } from '@/constants/colors';
 import { useWarehouse } from '@/hooks/warehouse-store';
-import { X } from 'lucide-react-native';
+import { X, ZoomIn, ZoomOut } from 'lucide-react-native';
 
 export default function BarcodeScanner() {
   const params = useLocalSearchParams<{ productId: string; isNew: string; warehouseId?: string }>();
@@ -14,8 +14,10 @@ export default function BarcodeScanner() {
   const { getProduct, updateProduct } = useWarehouse();
   
   const [permission, requestPermission] = useCameraPermissions();
-  const [scanned, setScanned] = useState(false);
-  const [barcodeData, setBarcodeData] = useState('');
+  const [scanned, setScanned] = useState<boolean>(false);
+  const [barcodeData, setBarcodeData] = useState<string>('');
+
+  const [zoom, setZoom] = useState<number>(0);
   
   const isNewProduct = params.isNew === 'true';
   const product = params.productId && !isNewProduct ? getProduct(params.productId) : null;
@@ -30,31 +32,43 @@ export default function BarcodeScanner() {
     }
   }, [permission, requestPermission]);
 
-  const handleBarCodeScanned = ({ type, data }: { type: string; data: string }) => {
+  const handleBarCodeScanned = useCallback(({ type, data }: { type: string; data: string }) => {
     if (scanned) return; // Prevent multiple scans
     
-    setScanned(true);
-    setBarcodeData(data);
-    console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
-  };
+    try {
+      setScanned(true);
+      setBarcodeData(data);
+      console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
+    } catch (e) {
+      console.error('Error handling scanned barcode', e);
+      Alert.alert('Scan Error', 'There was a problem processing the scanned barcode. Please try again.');
+      setScanned(false);
+      setBarcodeData('');
+    }
+  }, [scanned]);
 
   const handleConfirm = () => {
     if (barcodeData) {
-      if (isNewProduct) {
-        // For new products, navigate back with the scanned barcode
-        router.navigate({
-          pathname: '/product/[id]',
-          params: { 
-            id: params.productId, 
-            warehouseId: params.warehouseId,
-            scannedBarcode: barcodeData 
-          }
-        });
-      } else if (product) {
-        // For existing products, update directly
-        console.log('Updating product with barcode:', barcodeData);
-        updateProduct(product.id, { barcode: barcodeData });
-        router.back();
+      try {
+        if (isNewProduct) {
+          router.navigate({
+            pathname: '/product/[id]',
+            params: { 
+              id: params.productId,
+              warehouseId: params.warehouseId,
+              scannedBarcode: barcodeData 
+            }
+          });
+        } else if (product) {
+          console.log('Updating product with barcode:', barcodeData);
+          updateProduct(product.id, { barcode: barcodeData });
+          router.back();
+        } else {
+          Alert.alert('Product Error', 'Product not found to update.');
+        }
+      } catch (e) {
+        console.error('Confirm scan error', e);
+        Alert.alert('Error', 'Failed to assign barcode.');
       }
     } else {
       router.back();
@@ -90,16 +104,18 @@ export default function BarcodeScanner() {
 
   return (
     <SafeAreaView style={styles.container} edges={['bottom']}>
-      <View style={styles.scannerContainer}>
+      <View style={styles.scannerContainer} testID="scanner-container">
         {Platform.OS !== 'web' ? (
           <CameraView
             style={styles.scanner}
             facing={'back' as CameraType}
+            zoom={zoom}
             onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
             barcodeScannerSettings={{
               barcodeTypes: [
-                'aztec', 'ean13', 'ean8', 'qr', 'pdf417', 'upc_e', 'datamatrix',
-                'code39', 'code93', 'itf14', 'codabar', 'code128', 'upc_a'
+                'code128',
+                'ean13', 'ean8', 'upc_a', 'upc_e', 'code39', 'code93', 'itf14', 'codabar',
+                'qr', 'pdf417', 'aztec', 'datamatrix'
               ],
             }}
           />
@@ -122,7 +138,7 @@ export default function BarcodeScanner() {
           </View>
         )}
         
-        <View style={styles.overlay}>
+        <View style={styles.overlay} pointerEvents="none">
           <View style={styles.scannerFrame} />
         </View>
         
@@ -157,13 +173,44 @@ export default function BarcodeScanner() {
         )}
       </View>
       
-      {!scanned && (
-        <View style={styles.footer}>
-          <TouchableOpacity style={styles.cancelButton} onPress={handleCancel}>
-            <X size={24} color="white" />
+      <View style={styles.footer}>
+        <View style={styles.controlsRow}>
+          <TouchableOpacity
+            accessibilityRole="button"
+            testID="torch-toggle"
+            style={[styles.controlButton]}
+            disabled
+          >
+            <Text style={styles.controlLabel}>Lighting Tips: avoid glare</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            accessibilityRole="button"
+            testID="zoom-out"
+            style={styles.controlButton}
+            onPress={() => setZoom(z => Math.max(0, Number((z - 0.1).toFixed(2))))}
+          >
+            <ZoomOut size={22} color="#000" />
+            <Text style={styles.controlLabel}>Zoom -</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            accessibilityRole="button"
+            testID="zoom-in"
+            style={styles.controlButton}
+            onPress={() => setZoom(z => Math.min(1, Number((z + 0.1).toFixed(2))))}
+          >
+            <ZoomIn size={22} color="#000" />
+            <Text style={styles.controlLabel}>Zoom +</Text>
+          </TouchableOpacity>
+
+          {!scanned && (
+            <TouchableOpacity style={styles.cancelButton} onPress={handleCancel} testID="cancel-scan">
+              <X size={24} color="white" />
+            </TouchableOpacity>
+          )}
         </View>
-      )}
+      </View>
     </SafeAreaView>
   );
 }
@@ -251,13 +298,40 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   footer: {
-    padding: 24,
+    padding: 16,
+    backgroundColor: colors.card,
+  },
+  controlsRow: {
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  controlButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8 as unknown as number,
+    backgroundColor: '#fff',
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    marginRight: 8,
+  },
+  controlActive: {
+    backgroundColor: colors.primary,
+  },
+  controlLabel: {
+    color: '#000',
+    fontSize: 14,
+    marginLeft: 6,
+  },
+  controlLabelActive: {
+    color: '#fff',
   },
   cancelButton: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
+    marginLeft: 'auto',
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     backgroundColor: colors.danger,
     justifyContent: 'center',
     alignItems: 'center',
