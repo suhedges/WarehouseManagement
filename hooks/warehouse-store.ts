@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import createContextHook from '@nkzw/create-context-hook';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { Product, Warehouse } from '@/types';
 import { generateId } from '@/utils/helpers';
 import { githubSync, GitHubConfig } from '@/utils/github-sync';
@@ -15,6 +15,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const [syncStatus, setSyncStatus] = useState<'synced' | 'pending' | 'syncing' | 'error'>('synced');
   const [githubConfig, setGithubConfig] = useState<GitHubConfig | null>(null);
   const [lastSyncTime, setLastSyncTime] = useState<string | null>(null);
+  const isPerformingSyncRef = useRef<boolean>(false);
 
   const initializeData = useCallback(async () => {
     try {
@@ -76,16 +77,26 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     }
 
     try {
+      isPerformingSyncRef.current = true;
       setSyncStatus('syncing');
       const syncedData = await githubSync.syncData(warehouses, products);
       
-      // Update local data with synced data
-      setWarehouses(syncedData.warehouses);
-      setProducts(syncedData.products);
+      // Update local data with synced data only if changed
+      const warehousesJson = JSON.stringify(warehouses);
+      const productsJson = JSON.stringify(products);
+      const newWarehousesJson = JSON.stringify(syncedData.warehouses);
+      const newProductsJson = JSON.stringify(syncedData.products);
+
+      if (warehousesJson !== newWarehousesJson) {
+        setWarehouses(syncedData.warehouses);
+      }
+      if (productsJson !== newProductsJson) {
+        setProducts(syncedData.products);
+      }
       
       // Save synced data locally
-      await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(syncedData.warehouses));
-      await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(syncedData.products));
+      await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, newWarehousesJson);
+      await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, newProductsJson);
       
       setLastSyncTime(new Date().toISOString());
       setSyncStatus('synced');
@@ -95,18 +106,22 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       console.error('Sync failed:', error);
       setSyncStatus('error');
       throw error;
+    } finally {
+      isPerformingSyncRef.current = false;
     }
   }, [githubConfig, warehouses, products]);
 
   const saveData = useCallback(async () => {
     try {
-      setSyncStatus('pending');
       await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(warehouses));
       await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
       
-      // If GitHub is configured, sync to GitHub
       if (githubConfig) {
-        await performSync();
+        if (isPerformingSyncRef.current) {
+          setSyncStatus('synced');
+        } else {
+          setSyncStatus('pending');
+        }
       } else {
         setSyncStatus('synced');
       }
@@ -114,13 +129,21 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       console.error('Failed to save data:', error);
       setSyncStatus('error');
     }
-  }, [warehouses, products, githubConfig, performSync]);
+  }, [warehouses, products, githubConfig]);
 
   useEffect(() => {
     if (!isLoading) {
       saveData();
     }
   }, [warehouses, products, isLoading, saveData]);
+
+  useEffect(() => {
+    if (githubConfig && syncStatus === 'pending' && !isPerformingSyncRef.current) {
+      performSync().catch((error) => {
+        console.error('Auto sync failed:', error);
+      });
+    }
+  }, [githubConfig, syncStatus, performSync]);
 
   // Warehouse operations
   const addWarehouse = (name: string) => {
