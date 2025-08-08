@@ -186,6 +186,10 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     return products.filter(p => p.warehouseId === warehouseId && p.quantity > p.maxAmount);
   };
 
+  const findProductByBarcode = (warehouseId: string, barcode: string) => {
+    return products.find(p => p.warehouseId === warehouseId && p.barcode === barcode);
+  };
+
   // GitHub sync functions
   const configureGitHub = async (config: GitHubConfig) => {
     try {
@@ -245,6 +249,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     getProductsWithoutBarcode,
     getProductsBelowMin,
     getProductsOverstock,
+    findProductByBarcode,
     importProducts,
     configureGitHub,
     performSync,

@@ -21,7 +21,8 @@ import {
   AlertTriangle, 
   AlertCircle,
   Search,
-  Settings
+  Settings,
+  ScanLine
 } from 'lucide-react-native';
 
 export default function WarehouseDetailScreen() {
@@ -248,6 +249,17 @@ export default function WarehouseDetailScreen() {
         />
       )}
 
+      {/* FAB Button */}
+      <TouchableOpacity
+        style={styles.fab}
+        onPress={() => router.push({
+          pathname: '/quick-scanner',
+          params: { warehouseId: id }
+        })}
+        testID="quick-scan-fab"
+      >
+        <ScanLine size={24} color="white" />
+      </TouchableOpacity>
 
     </SafeAreaView>
   );
@@ -397,5 +409,24 @@ const styles = StyleSheet.create({
   settingsButton: {
     marginRight: 12,
     padding: 4,
+  },
+  fab: {
+    position: 'absolute',
+    bottom: 24,
+    right: 24,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
   },
 });
