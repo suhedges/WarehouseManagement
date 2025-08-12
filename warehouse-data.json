@@ -4525,7 +4525,8 @@
       "maxAmount": 2,
       "quantity": 0,
       "id": "117u5v0gnp6jgq8ofoyajr",
-      "warehouseId": "z90qjp0rqufrfqqby67qh"
+      "warehouseId": "z90qjp0rqufrfqqby67qh",
+      "updatedAt": "2025-08-12T16:20:01.888Z"
     },
     {
       "internalName": "60BS19HT - 1 3/16\"",
@@ -4759,5 +4760,5 @@
       "warehouseId": "z90qjp0rqufrfqqby67qh"
     }
   ],
-  "lastSync": "2025-08-12T16:19:27.187Z"
+  "lastSync": "2025-08-12T16:20:02.778Z"
 }
