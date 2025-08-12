@@ -1,6 +1,8 @@
 export interface Warehouse {
   id: string;
   name: string;
+  updatedAt: string;
+  deleted?: boolean;
 }
 
 export interface Product {
@@ -13,6 +15,8 @@ export interface Product {
   maxAmount: number;
   quantity: number;
   warehouseId: string;
+  updatedAt: string;
+  deleted?: boolean;
 }
 
 export interface User {

@@ -150,23 +150,37 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     const newWarehouse: Warehouse = {
       id: generateId(),
       name,
+      updatedAt: new Date().toISOString(),
     };
     setWarehouses([...warehouses, newWarehouse]);
     return newWarehouse;
   };
 
   const updateWarehouse = (id: string, data: Partial<Warehouse>) => {
-    setWarehouses(warehouses.map(w => w.id === id ? { ...w, ...data } : w));
+    setWarehouses(
+      warehouses.map(w =>
+        w.id === id ? { ...w, ...data, updatedAt: new Date().toISOString() } : w
+      )
+    );
   };
 
   const deleteWarehouse = (id: string) => {
-    setWarehouses(warehouses.filter(w => w.id !== id));
-    // Also delete all products in this warehouse
-    setProducts(products.filter(p => p.warehouseId !== id));
+    const timestamp = new Date().toISOString();
+    setWarehouses(
+      warehouses.map(w =>
+        w.id === id ? { ...w, deleted: true, updatedAt: timestamp } : w
+      )
+    );
+    // Also mark all products in this warehouse as deleted
+    setProducts(
+      products.map(p =>
+        p.warehouseId === id ? { ...p, deleted: true, updatedAt: timestamp } : p
+      )
+    );
   };
 
   const getWarehouse = (id: string) => {
-    return warehouses.find(w => w.id === id);
+    return warehouses.find(w => w.id === id && !w.deleted);
   };
 
   // Product operations
@@ -174,43 +188,63 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     const newProduct: Product = {
       ...product,
       id: generateId(),
+      updatedAt: new Date().toISOString(),
     };
     setProducts([...products, newProduct]);
     return newProduct;
   };
 
   const updateProduct = (id: string, data: Partial<Product>) => {
-    setProducts(products.map(p => p.id === id ? { ...p, ...data } : p));
+    setProducts(
+      products.map(p =>
+        p.id === id ? { ...p, ...data, updatedAt: new Date().toISOString() } : p
+      )
+    );
   };
 
   const deleteProduct = (id: string) => {
-    setProducts(products.filter(p => p.id !== id));
+    setProducts(
+      products.map(p =>
+        p.id === id ? { ...p, deleted: true, updatedAt: new Date().toISOString() } : p
+      )
+    );
   };
 
   const getProduct = (id: string) => {
-    return products.find(p => p.id === id);
+    return products.find(p => p.id === id && !p.deleted);
   };
 
   const getWarehouseProducts = (warehouseId: string) => {
-    return products.filter(p => p.warehouseId === warehouseId);
+    return products.filter(p => p.warehouseId === warehouseId && !p.deleted);
   };
 
   const getProductsWithoutBarcode = (warehouseId: string) => {
     return products
-      .filter(p => p.warehouseId === warehouseId && !p.barcode)
-      .sort((a, b) => a.location.localeCompare(b.location, undefined, { numeric: true, sensitivity: 'base' }));
+      .filter(p => p.warehouseId === warehouseId && !p.barcode && !p.deleted)
+      .sort((a, b) =>
+        a.location.localeCompare(b.location, undefined, {
+          numeric: true,
+          sensitivity: 'base',
+        })
+      );
   };
 
   const getProductsBelowMin = (warehouseId: string) => {
-    return products.filter(p => p.warehouseId === warehouseId && p.quantity < p.minAmount);
+    return products.filter(
+      p => p.warehouseId === warehouseId && p.quantity < p.minAmount && !p.deleted
+    );
   };
 
   const getProductsOverstock = (warehouseId: string) => {
-    return products.filter(p => p.warehouseId === warehouseId && p.quantity > p.maxAmount);
+    return products.filter(
+      p => p.warehouseId === warehouseId && p.quantity > p.maxAmount && !p.deleted
+    );
   };
 
   const findProductByBarcode = (warehouseId: string, barcode: string) => {
-    return products.find(p => p.warehouseId === warehouseId && p.barcode === barcode);
+    return products.find(
+      p => p.warehouseId === warehouseId && p.barcode === barcode && !p.deleted
+    );
   };
 
   // GitHub sync functions
@@ -243,10 +277,12 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
 
   // Import/Export
   const importProducts = (warehouseId: string, csvData: Product[]) => {
+    const timestamp = new Date().toISOString();  
     const newProducts = csvData.map(product => ({
       ...product,
       id: generateId(),
-      warehouseId
+      warehouseId,
+      updatedAt: timestamp,
     }));
     
     setProducts([...products, ...newProducts]);
@@ -254,8 +290,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   };
 
   return {
-    warehouses,
-    products,
+    warehouses: warehouses.filter(w => !w.deleted),
+    products: products.filter(p => !p.deleted),
     isLoading,
     syncStatus,
     githubConfig,

@@ -1,10 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Product, Warehouse } from '@/types';
+import { mergeRecords } from './merge-records';
 
 const GITHUB_TOKEN_KEY = 'github_token';
 const GITHUB_REPO_KEY = 'github_repo';
 const GITHUB_OWNER_KEY = 'github_owner';
 const DATA_FILE_PATH = 'warehouse-data.json';
+const LAST_SYNC_KEY = 'github_last_sync';
 
 export interface GitHubConfig {
   token: string;
@@ -141,46 +143,61 @@ export class GitHubSyncService {
     }
   }
 
-  async syncData(warehouses: Warehouse[], products: Product[]): Promise<{ warehouses: Warehouse[], products: Product[] }> {
+  async syncData(
+    warehouses: Warehouse[],
+    products: Product[],
+  ): Promise<{ warehouses: Warehouse[]; products: Product[] }> {
     if (!this.config) {
       throw new Error('GitHub configuration not set');
     }
 
     try {
-      // Download current data from GitHub
+      const lastSync = await AsyncStorage.getItem(LAST_SYNC_KEY);
       const remoteData = await this.downloadData();
       
-      // Prepare local data
-      const localData: WarehouseData = {
-        warehouses,
-        products,
-        lastSync: new Date().toISOString(),
-      };
-
-      if (!remoteData) {
-        // No remote data exists, upload local data
-        await this.uploadData(localData);
-        return { warehouses, products };
-      }
-
-      // For now, we'll use a simple "last write wins" strategy
-      // In a more complex scenario, you might want to implement proper conflict resolution
-      const localLastSync = new Date(localData.lastSync);
-      const remoteLastSync = new Date(remoteData.lastSync);
-
-      if (remoteLastSync > localLastSync) {
-        // Remote data is newer, use it
-        console.log('Using remote data (newer)');
+      if (!lastSync && remoteData) {
+        await AsyncStorage.setItem(LAST_SYNC_KEY, remoteData.lastSync);
         return {
           warehouses: remoteData.warehouses,
           products: remoteData.products,
         };
-      } else {
-        // Local data is newer or same, upload it
-        console.log('Uploading local data (newer or same)');
-        await this.uploadData(localData);
+      }
+
+
+      if (remoteData && warehouses.length === 0 && products.length === 0) {
+        await AsyncStorage.setItem(LAST_SYNC_KEY, remoteData.lastSync);
+        return {
+          warehouses: remoteData.warehouses,
+          products: remoteData.products,
+        };
+      }
+
+      if (!remoteData) {
+        const newData: WarehouseData = {
+          warehouses,
+          products,
+          lastSync: new Date().toISOString(),
+        };
+        await this.uploadData(newData);
+        await AsyncStorage.setItem(LAST_SYNC_KEY, newData.lastSync);
         return { warehouses, products };
       }
+      const mergedWarehouses = mergeRecords(warehouses, remoteData.warehouses);
+      const mergedProducts = mergeRecords(products, remoteData.products);
+
+      const mergedData: WarehouseData = {
+        warehouses: mergedWarehouses,
+        products: mergedProducts,
+        lastSync: new Date().toISOString(),
+      };
+
+      await this.uploadData(mergedData);
+      await AsyncStorage.setItem(LAST_SYNC_KEY, mergedData.lastSync);
+
+      return {
+        warehouses: mergedWarehouses,
+        products: mergedProducts,
+      };
     } catch (error) {
       console.error('Sync failed:', error);
       throw error;

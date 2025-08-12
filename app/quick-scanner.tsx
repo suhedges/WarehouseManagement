@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Alert, TouchableOpacity, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { CameraView, useCameraPermissions } from 'expo-camera';
@@ -7,16 +7,19 @@ import { Button } from '@/components/Button';
 import { LoadingIndicator } from '@/components/LoadingIndicator';
 import { colors } from '@/constants/colors';
 import { useWarehouse } from '@/hooks/warehouse-store';
-import { ArrowLeft, X } from 'lucide-react-native';
+import { ArrowLeft, X, Plus, Minus } from 'lucide-react-native';
+import { Product } from '@/types';
 
 export default function QuickScannerScreen() {
   const { warehouseId } = useLocalSearchParams<{ warehouseId: string }>();
   const router = useRouter();
-  const { findProductByBarcode, getWarehouse } = useWarehouse();
+  const { findProductByBarcode, getWarehouse, updateProduct } = useWarehouse();
   const [permission, requestPermission] = useCameraPermissions();
   const [isScanning, setIsScanning] = useState<boolean>(true);
   const [scannedData, setScannedData] = useState<string>('');
   const [isReady, setIsReady] = useState<boolean>(false);
+  const [foundProduct, setFoundProduct] = useState<Product | null>(null);
+  const [quantity, setQuantity] = useState<number>(0);
   
   const warehouse = getWarehouse(warehouseId);
 
@@ -45,25 +48,8 @@ export default function QuickScannerScreen() {
     const product = findProductByBarcode(warehouseId, data);
     
     if (product) {
-      Alert.alert(
-        'Product Found',
-        `Found: ${product.internalName}\nLocation: ${product.location}`,
-        [
-          {
-            text: 'View Details',
-            onPress: () => {
-              router.replace(`/product/${product.id}`);
-            }
-          },
-          {
-            text: 'Scan Another',
-            onPress: () => {
-              setIsScanning(true);
-              setScannedData('');
-            }
-          }
-        ]
-      );
+      setFoundProduct(product);
+      setQuantity(product.quantity);
     } else {
       Alert.alert(
         'Product Not Found',
@@ -84,6 +70,18 @@ export default function QuickScannerScreen() {
       );
     }
   };
+  const handleSaveQuantity = () => {
+    if (foundProduct) {
+      updateProduct(foundProduct.id, { quantity });
+    }
+    handleScanAnother();
+  };
+
+  const handleScanAnother = () => {
+    setFoundProduct(null);
+    setIsScanning(true);
+    setScannedData('');
+  };  
 
   if (!permission) {
     return <LoadingIndicator message="Loading camera..." />;
@@ -169,6 +167,46 @@ export default function QuickScannerScreen() {
           icon={<X size={18} color={colors.primary} />}
         />
       </View>
+      {foundProduct && (
+        <Modal visible={true} transparent animationType="fade">
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Product Found</Text>
+              <Text style={styles.modalProductName}>{foundProduct.internalName}</Text>
+              <Text style={styles.modalLocation}>Location: {foundProduct.location}</Text>
+
+              <View style={styles.quantityAdjuster}>
+                <TouchableOpacity
+                  style={styles.adjustButton}
+                  onPress={() => setQuantity(q => Math.max(0, q - 1))}
+                >
+                  <Minus size={20} color="white" />
+                </TouchableOpacity>
+                <Text style={styles.quantityText}>{quantity}</Text>
+                <TouchableOpacity
+                  style={styles.adjustButton}
+                  onPress={() => setQuantity(q => q + 1)}
+                >
+                  <Plus size={20} color="white" />
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.modalButtons}>
+                <View style={styles.modalButton}>
+                  <Button title="Save" onPress={handleSaveQuantity} />
+                </View>
+                <View style={styles.modalButton}>
+                  <Button
+                    title="Scan Another"
+                    variant="outline"
+                    onPress={handleScanAnother}
+                  />
+                </View>
+              </View>
+            </View>
+          </View>
+        </Modal>
+      )}
     </SafeAreaView>
   );
 }
@@ -302,4 +340,57 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: colors.card,
   },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: '80%',
+    backgroundColor: colors.card,
+    padding: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    color: colors.text,
+  },
+  modalProductName: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 4,
+    color: colors.text,
+  },
+  modalLocation: {
+    fontSize: 14,
+    marginBottom: 16,
+    color: colors.text,
+  },
+  quantityAdjuster: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  adjustButton: {
+    backgroundColor: colors.primary,
+    borderRadius: 4,
+    padding: 8,
+  },
+  quantityText: {
+    fontSize: 18,
+    marginHorizontal: 16,
+    color: colors.text,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    width: '100%',
+  },
+  modalButton: {
+    flex: 1,
+    marginHorizontal: 4,
+  },  
 });

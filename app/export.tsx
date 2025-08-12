@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, Alert } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import { StyleSheet, Text, View, ScrollView, Alert, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Button } from '@/components/Button';
@@ -15,6 +15,25 @@ import {
   AlertCircle 
 } from 'lucide-react-native';
 
+type ProductLike = {
+  quantity?: number | string;
+  qty?: number | string;
+  onHand?: number | string;
+  min?: number | string;
+  minQty?: number | string;
+  minimum?: number | string;
+  max?: number | string;
+  maxQty?: number | string;
+  maximum?: number | string;
+  [key: string]: any;
+};
+
+const toNumber = (v: any): number => {
+  if (v === null || v === undefined) return NaN;
+  const n = Number(v);
+  return Number.isNaN(n) ? NaN : n;
+};
+
 export default function ExportScreen() {
   const params = useLocalSearchParams<{ warehouseId: string }>();
   const router = useRouter();
@@ -28,9 +47,20 @@ export default function ExportScreen() {
   const [isLoading, setIsLoading] = useState(false);
   
   const warehouse = getWarehouse(params.warehouseId);
-  const allProducts = getWarehouseProducts(params.warehouseId);
-  const productsBelowMin = getProductsBelowMin(params.warehouseId);
-  const productsOverstock = getProductsOverstock(params.warehouseId);
+  const allProducts: ProductLike[] = getWarehouseProducts(params.warehouseId) || [];
+  const productsBelowMin: ProductLike[] = getProductsBelowMin(params.warehouseId) || [];
+  const productsOverstock: ProductLike[] = getProductsOverstock(params.warehouseId) || [];
+
+  // Under Max = quantity >= min && quantity < max (excludes under-min and over-max)
+  const productsUnderMax: ProductLike[] = useMemo(() => {
+    return (allProducts || []).filter((p: ProductLike) => {
+      const qty = toNumber(p.quantity ?? p.qty ?? p.onHand);
+      const min = toNumber(p.min ?? p.minQty ?? p.minimum);
+      const max = toNumber(p.max ?? p.maxQty ?? p.maximum);
+      if ([qty, min, max].some(Number.isNaN)) return false;
+      return qty >= min && qty < max;
+    });
+  }, [allProducts]);
 
   const handleExportAll = async () => {
     await handleExport(allProducts, 'all-products');
@@ -40,26 +70,33 @@ export default function ExportScreen() {
     await handleExport(productsBelowMin, 'below-min-products');
   };
 
+  const handleExportUnderMax = async () => {
+    await handleExport(productsUnderMax, 'under-max-products');
+  };
+
   const handleExportOverstock = async () => {
     await handleExport(productsOverstock, 'overstock-products');
   };
 
-  const handleExport = async (products: any[], filePrefix: string) => {
-    if (products.length === 0) {
+  const handleExport = async (products: ProductLike[], filePrefix: string) => {
+    if (!products || products.length === 0) {
       Alert.alert('No Data', 'There are no products to export');
       return;
     }
     
     setIsLoading(true);
     try {
-      const warehouseName = warehouse?.name.replace(/\s+/g, '-').toLowerCase() || 'warehouse';
+      const warehouseName = warehouse?.name?.replace(/\s+/g, '-').toLowerCase() || 'warehouse';
       const timestamp = new Date().toISOString().split('T')[0];
       const filename = `${warehouseName}-${filePrefix}-${timestamp}.csv`;
       
       const success = await exportCSV(products, filename);
       
       if (success) {
-        Alert.alert('Export Successful', `Successfully exported ${products.length} products`);
+        const where = Platform.OS === 'android' 
+          ? 'Downloads (or the folder you chose)'
+          : 'your Files/Share target';
+        Alert.alert('Export Successful', `Saved ${products.length} items to ${where}.`);
       } else {
         Alert.alert('Export Failed', 'Failed to export products');
       }
@@ -103,7 +140,7 @@ export default function ExportScreen() {
               style={styles.exportButton}
             />
           </View>
-          
+
           <View style={styles.exportOption}>
             <View style={styles.exportInfo}>
               <AlertTriangle size={24} color={colors.warning} />
@@ -122,6 +159,27 @@ export default function ExportScreen() {
               icon={<Download size={18} color="white" />}
               style={styles.exportButton}
               variant={productsBelowMin.length > 0 ? 'primary' : 'outline'}
+            />
+          </View>
+
+          <View style={styles.exportOption}>
+            <View style={styles.exportInfo}>
+              <AlertCircle size={24} color={colors.primary} />
+              <View style={styles.exportTextContainer}>
+                <Text style={styles.exportTitle}>Under Max</Text>
+                <Text style={styles.exportDescription}>
+                  Export {productsUnderMax.length} products between min and max
+                </Text>
+              </View>
+            </View>
+            <Button
+              title="Export"
+              onPress={handleExportUnderMax}
+              loading={isLoading}
+              disabled={isLoading || productsUnderMax.length === 0}
+              icon={<Download size={18} color="white" />}
+              style={styles.exportButton}
+              variant={productsUnderMax.length > 0 ? 'primary' : 'outline'}
             />
           </View>
           

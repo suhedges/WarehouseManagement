@@ -315,6 +315,7 @@ const styles = StyleSheet.create({
     padding: 12,
     backgroundColor: colors.gray[100],
     borderRadius: 4,
+    color: 'black',
     width: '100%',
     textAlign: 'center',
   },

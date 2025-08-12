@@ -219,6 +219,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
     marginLeft: 12,
+    color: '#000',
   },
   listContent: {
     paddingBottom: 24,

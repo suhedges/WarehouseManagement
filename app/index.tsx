@@ -8,6 +8,8 @@ import { colors } from '@/constants/colors';
 import { useAuth } from '@/hooks/auth-store';
 import { Warehouse } from 'lucide-react-native';
 
+const VALID_USERNAMES = new Set(['TSB2108', 'JMH', 'SUH', 'TSB']);
+
 export default function LoginScreen() {
   const router = useRouter();
   const { login } = useAuth();
@@ -16,19 +18,21 @@ export default function LoginScreen() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
-    if (!username.trim()) {
+    const input = username.trim();
+
+    if (!input) {
       setError('Please enter your username');
       return;
     }
 
-    if (username.trim() !== 'TSB2108') {
+    if (!VALID_USERNAMES.has(input)) {
       setError('Invalid username');
       return;
     }
 
     setIsLoading(true);
     try {
-      await login(username.trim());
+      await login(input);
       router.replace('/warehouses');
     } catch (error) {
       console.error('Login error:', error);

@@ -12,6 +12,32 @@ import { useWarehouse } from '@/hooks/warehouse-store';
 import { parseCSV } from '@/utils/helpers';
 import { Upload, X, FileText } from 'lucide-react-native';
 
+const CSV_MIME_TYPES = [
+  // Common/expected
+  'text/csv',
+  'text/comma-separated-values',
+  'application/csv',
+  // Often mislabeled as Excel by some Android file providers
+  'application/vnd.ms-excel',
+  'application/msexcel',
+  'application/vnd.msexcel',
+  // Frequently mislabeled as generic text/binary
+  'text/plain',
+  'application/octet-stream',
+];
+
+function isCsvFilename(name?: string) {
+  if (!name) return false;
+  // Allow .csv (case-insensitive) and common double-extensions like .csv.txt
+  return /\.csv(\.[a-z0-9]+)?$/i.test(name.trim());
+}
+
+function isCsvMime(mime?: string) {
+  if (!mime) return false;
+  const normalized = mime.toLowerCase();
+  return CSV_MIME_TYPES.some(t => normalized === t || normalized.includes('csv'));
+}
+
 export default function ImportScreen() {
   const params = useLocalSearchParams<{ warehouseId: string }>();
   const router = useRouter();
@@ -26,50 +52,100 @@ export default function ImportScreen() {
 
   const handlePickDocument = async () => {
     try {
+      // IMPORTANT: on Android use a plain string '*/*' (not ['*/*']) to truly allow all files.
+      // We’ll validate name/MIME ourselves afterward.
+      const pickerType: DocumentPicker.DocumentPickerOptions['type'] =
+        Platform.OS === 'android'
+          ? '*/*'
+          : [
+              // iOS/web: be permissive but prefer CSV/text
+              'text/csv',
+              'public.comma-separated-values-text', // iOS UTI
+              'text/plain',
+              'application/csv',
+              '*/*', // final fallback so users can still pick oddly labeled CSVs
+            ];
+
       const result = await DocumentPicker.getDocumentAsync({
-        type: 'text/csv',
+        type: pickerType,
+        multiple: false,
         copyToCacheDirectory: true,
       });
-      
-      if (result.canceled) {
+
+      if (result.canceled) return;
+
+      const asset = result.assets?.[0];
+      if (!asset) {
+        Alert.alert('Error', 'No file selected');
         return;
       }
-      
-      const file = result.assets[0];
-      setFileName(file.name);
-      
+
+      const pickedName = asset.name ?? '';
+      const pickedMime = asset.mimeType ?? '';
+
+      // Basic validation: name or mime should indicate CSV; allow override with a warning.
+      if (!isCsvFilename(pickedName) && !isCsvMime(pickedMime)) {
+        const proceed = await new Promise<boolean>((resolve) => {
+          Alert.alert(
+            'File May Not Be CSV',
+            `The selected file "${pickedName || 'Unnamed file'}" doesn't look like a CSV.\n\nContinue anyway?`,
+            [
+              { text: 'Cancel', style: 'cancel', onPress: () => resolve(false) },
+              { text: 'Continue', style: 'default', onPress: () => resolve(true) },
+            ]
+          );
+        });
+        if (!proceed) return;
+      }
+
+      setFileName(pickedName || 'selected.csv');
+
+      // Read contents
       if (Platform.OS === 'web') {
-        // For web, we need to read the file content
-        const reader = new FileReader();
-        const response = await fetch(file.uri);
-        const blob = await response.blob();
-        
-        reader.onload = (e) => {
-          const content = e.target?.result as string;
-          setCsvContent(content);
-          try {
-            const parsed = parseCSV(content);
-            setPreviewData(parsed.slice(0, 5)); // Preview first 5 rows
-          } catch {
-            Alert.alert('Error', 'Failed to parse CSV file');
-          }
-        };
-        
-        reader.readAsText(blob);
-      } else {
-        // For mobile
         try {
-          const content = await FileSystem.readAsStringAsync(file.uri);
-          setCsvContent(content);
-          const parsed = parseCSV(content);
-          setPreviewData(parsed.slice(0, 5)); // Preview first 5 rows
-        } catch {
+          const response = await fetch(asset.uri);
+          const blob = await response.blob();
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const content = (e.target?.result as string) ?? '';
+            handleCsvContent(content);
+          };
+          reader.onerror = () => Alert.alert('Error', 'Failed to read CSV file');
+          reader.readAsText(blob);
+        } catch (e) {
+          console.error('Web read error:', e);
+          Alert.alert('Error', 'Failed to read CSV file');
+        }
+      } else {
+        // Native (Android/iOS)
+        try {
+          // Prefer UTF-8; most CSVs from spreadsheets/exporters use it.
+          // If you expect other encodings, consider detecting BOM or handling on backend.
+          const content = await FileSystem.readAsStringAsync(asset.uri, {
+            encoding: FileSystem.EncodingType.UTF8,
+          });
+          handleCsvContent(content);
+        } catch (e) {
+          console.error('Mobile read error:', e);
           Alert.alert('Error', 'Failed to read CSV file');
         }
       }
     } catch (error) {
       console.error('Document picker error:', error);
       Alert.alert('Error', 'Failed to pick document');
+    }
+  };
+
+  const handleCsvContent = (content: string) => {
+    setCsvContent(content);
+    try {
+      const parsed = parseCSV(content);
+      if (!Array.isArray(parsed)) throw new Error('Parse returned non-array');
+      setPreviewData(parsed.slice(0, 5)); // Preview first 5 rows
+    } catch (e) {
+      console.error('Parse error:', e);
+      setPreviewData([]);
+      Alert.alert('Error', 'Failed to parse CSV file');
     }
   };
 
@@ -83,16 +159,16 @@ export default function ImportScreen() {
       setIsLoading(true);
       const parsedData = parseCSV(csvContent);
       
-      if (parsedData.length === 0) {
+      if (!Array.isArray(parsedData) || parsedData.length === 0) {
         Alert.alert('Error', 'No data found in CSV file');
         setIsLoading(false);
         return;
       }
       
       // Validate required fields
-      const missingFields = [];
-      if (!parsedData[0].hasOwnProperty('internalName')) missingFields.push('internalName');
-      if (!parsedData[0].hasOwnProperty('location')) missingFields.push('location');
+      const missingFields: string[] = [];
+      if (!Object.prototype.hasOwnProperty.call(parsedData[0], 'internalName')) missingFields.push('internalName');
+      if (!Object.prototype.hasOwnProperty.call(parsedData[0], 'location')) missingFields.push('location');
       
       if (missingFields.length > 0) {
         Alert.alert('Error', `CSV is missing required fields: ${missingFields.join(', ')}`);
