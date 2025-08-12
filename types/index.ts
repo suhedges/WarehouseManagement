@@ -1,11 +1,16 @@
-export interface Warehouse {
+export interface BaseRecord {
   id: string;
-  name: string;
+  version: number;
   updatedAt: string;
+  updatedBy: string;
   deleted?: boolean;
 }
 
-export interface Product {
+export interface Warehouse extends BaseRecord {
+  name: string;
+}
+
+export interface Product extends BaseRecord {
   id: string;
   internalName: string;
   customerName: string;
@@ -15,8 +20,29 @@ export interface Product {
   maxAmount: number;
   quantity: number;
   warehouseId: string;
-  updatedAt: string;
-  deleted?: boolean;
+}
+
+export interface WarehouseFile {
+  meta: {
+    schemaVersion: number;
+    lastCompactedAt?: string | null;
+  };
+  warehouses: Warehouse[];
+  products: Product[];
+}
+
+export interface ConflictField {
+  name: string;
+  base: any;
+  local: any;
+  remote: any;
+}
+
+export interface RecordConflict {
+  recordId: string;
+  recordType: 'warehouse' | 'product';
+  warehouseId?: string;
+  fields: ConflictField[];
 }
 
 export interface User {
