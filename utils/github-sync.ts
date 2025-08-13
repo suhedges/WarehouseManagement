@@ -63,7 +63,7 @@ export class GitHubSyncService {
     }
   }
 
-  private async makeGitHubRequest(endpoint: string, options: RequestInit = {}): Promise<Response> {
+  private async makeGitHubRequest(endpoint: string, options: RequestInit = {}, attempt = 0): Promise<Response> {
     if (!this.config) throw new Error('GitHub configuration not set');
 
     const url = `https://api.github.com/repos/${this.config.owner}/${this.config.repo}/${endpoint}`;
@@ -77,6 +77,15 @@ export class GitHubSyncService {
         ...(options.headers || {}),
       },
     });
+    
+    const remaining = Number(response.headers.get('X-RateLimit-Remaining') || '1');
+    if ((response.status === 403 || response.status === 429 || remaining === 0) && attempt < 5) {
+      const retryAfterHeader = response.headers.get('Retry-After');
+      const retryAfter = retryAfterHeader ? Number(retryAfterHeader) * 1000 : 0;
+      const delay = retryAfter > 0 ? retryAfter : Math.pow(2, attempt) * 1000;
+      await new Promise(resolve => setTimeout(resolve, delay));
+      return this.makeGitHubRequest(endpoint, options, attempt + 1);
+    }    
 
     if (!response.ok) {
       const errorText = await response.text();

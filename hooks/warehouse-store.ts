@@ -7,6 +7,7 @@ import { githubSync, GitHubConfig } from '@/utils/github-sync';
 
 const WAREHOUSES_STORAGE_KEY = 'warehouses';
 const PRODUCTS_STORAGE_KEY = 'products';
+const SYNC_MIN_INTERVAL_MS = 5000; 
 
 export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
@@ -16,6 +17,9 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const [githubConfig, setGithubConfig] = useState<GitHubConfig | null>(null);
   const [lastSyncTime, setLastSyncTime] = useState<string | null>(null);
   const isPerformingSyncRef = useRef<boolean>(false);
+  const lastSyncRef = useRef<number>(0);
+  const pendingSyncTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingSyncPromise = useRef<Promise<void> | null>(null);
 
   const initializeData = useCallback(async () => {
     try {
@@ -65,12 +69,19 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   }, []);
 
   useEffect(() => {
-    initializeData();
+    // Kick off initial load (reads local storage, loads GitHub config, optional first sync)
+    void initializeData();
+
+    return () => {
+      if (pendingSyncTimeout.current) {
+        clearTimeout(pendingSyncTimeout.current);
+      }
+    };
   }, [initializeData]);
 
 
 
-  const performSync = useCallback(async () => {
+  const performSyncNow = useCallback(async () => {
     if (!githubConfig) {
       console.log('GitHub not configured, skipping sync');
       return;
@@ -110,6 +121,38 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       isPerformingSyncRef.current = false;
     }
   }, [githubConfig, warehouses, products]);
+  
+  const performSync = useCallback((): Promise<void> => {
+    if (pendingSyncPromise.current) {
+      return pendingSyncPromise.current;
+    }
+
+    const run = async () => {
+      if (pendingSyncTimeout.current) {
+        clearTimeout(pendingSyncTimeout.current);
+        pendingSyncTimeout.current = null;
+      }
+      await performSyncNow();
+      lastSyncRef.current = Date.now();
+    };
+
+    const now = Date.now();
+    const elapsed = now - lastSyncRef.current;
+    if (elapsed >= SYNC_MIN_INTERVAL_MS) {
+      pendingSyncPromise.current = run().finally(() => {
+        pendingSyncPromise.current = null;
+      });
+    } else {
+      pendingSyncPromise.current = new Promise<void>((resolve, reject) => {
+        pendingSyncTimeout.current = setTimeout(() => {
+          run().then(resolve).catch(reject);
+        }, SYNC_MIN_INTERVAL_MS - elapsed);
+      }).finally(() => {
+        pendingSyncPromise.current = null;
+      });
+    }
+    return pendingSyncPromise.current;
+  }, [performSyncNow]);  
 
   const saveData = useCallback(async () => {
     try {
