@@ -65,4 +65,12 @@
 # &nbsp; `If-Match` header; GitHub rejects outdated SHAs so we can pull, merge and retry
 
 # &nbsp; without clobbering remote changes.
-
+# \### Sync timing and rate limiting
+#
+# Sync attempts are throttled to run at most once every 5 seconds. Calls to
+# `performSync` queue up and execute after this interval to keep network traffic and
+# GitHub usage under control.
+#
+# GitHub requests inspect `X-RateLimit-Remaining` and `Retry-After` headers. When the
+# API responds with 403 or 429, requests pause and retry with exponential backoff,
+# honoring any server-provided `Retry-After` delay.
