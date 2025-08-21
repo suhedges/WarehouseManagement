@@ -1,9 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import createContextHook from '@nkzw/create-context-hook';
 import { useEffect, useState, useCallback, useRef } from 'react';
+import { useAuth } from '@/hooks/auth-store';
 import { Product, Warehouse } from '@/types';
 import { generateId } from '@/utils/helpers';
 import { githubSync, GitHubConfig } from '@/utils/github-sync';
+import * as Network from 'expo-network';
 
 const WAREHOUSES_STORAGE_KEY = 'warehouses';
 const PRODUCTS_STORAGE_KEY = 'products';
@@ -84,6 +86,12 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const performSyncNow = useCallback(async () => {
     if (!githubConfig) {
       console.log('GitHub not configured, skipping sync');
+      return;
+    }
+    const networkState = await Network.getNetworkStateAsync();
+    if (!networkState.isConnected || networkState.isInternetReachable === false) {
+      console.log('No network connection, sync postponed');
+      setSyncStatus('pending');
       return;
     }
 
@@ -187,12 +195,42 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       });
     }
   }, [githubConfig, syncStatus, performSync]);
+  
+  useEffect(() => {
+    const subscription = Network.addNetworkStateListener(state => {
+      if (
+        state.isConnected &&
+        state.isInternetReachable &&
+        syncStatus === 'pending' &&
+        githubConfig &&
+        !isPerformingSyncRef.current
+      ) {
+        performSync().catch(error => {
+          console.error('Auto sync failed:', error);
+        });
+      }
+    });
+    return () => subscription.remove();
+  }, [syncStatus, githubConfig, performSync]);
+
+  const { isLoggedIn } = useAuth();
+  const wasLoggedInRef = useRef(isLoggedIn);
+
+  useEffect(() => {
+    if (isLoggedIn && !wasLoggedInRef.current && githubConfig) {
+      performSync().catch(error => {
+        console.error('Sync on login failed:', error);
+      });
+    }
+    wasLoggedInRef.current = isLoggedIn;
+  }, [isLoggedIn, githubConfig, performSync]);
 
   // Warehouse operations
   const addWarehouse = (name: string) => {
     const newWarehouse: Warehouse = {
       id: generateId(),
       name,
+      qrOnly: false,
       updatedAt: new Date().toISOString(),
     };
     setWarehouses([...warehouses, newWarehouse]);

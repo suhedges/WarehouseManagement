@@ -22,6 +22,27 @@ export default function QuickScannerScreen() {
   const [quantity, setQuantity] = useState<number>(0);
   
   const warehouse = getWarehouse(warehouseId);
+  
+  const barcodeTypes = warehouse?.qrOnly
+    ? ['qr']
+    : [
+        'aztec',
+        'ean13',
+        'ean8',
+        'qr',
+        'pdf417',
+        'upc_e',
+        'datamatrix',
+        'code39',
+        'code93',
+        'itf14',
+        'codabar',
+        'code128',
+        'upc_a',
+      ];
+  const instruction = warehouse?.qrOnly
+    ? 'Point camera at QR code to find product'
+    : 'Point camera at barcode to find product';
 
   useEffect(() => {
     if (!warehouse) {
@@ -82,6 +103,14 @@ export default function QuickScannerScreen() {
     setIsScanning(true);
     setScannedData('');
   };  
+  
+  const handleViewDetails = () => {
+    if (foundProduct) {
+      const id = foundProduct.id;
+      handleScanAnother();
+      router.push(`/product/${id}`);
+    }
+  };  
 
   if (!permission) {
     return <LoadingIndicator message="Loading camera..." />;
@@ -131,10 +160,7 @@ export default function QuickScannerScreen() {
           facing="back"
           onBarcodeScanned={isScanning && isReady ? handleBarcodeScanned : undefined}
           barcodeScannerSettings={{
-            barcodeTypes: [
-              'aztec', 'ean13', 'ean8', 'qr', 'pdf417', 'upc_e', 'datamatrix',
-              'code39', 'code93', 'itf14', 'codabar', 'code128', 'upc_a'
-            ],
+            barcodeTypes,
           }}
         >
           <View style={styles.overlay}>
@@ -146,9 +172,7 @@ export default function QuickScannerScreen() {
             </View>
             
             <View style={styles.instructionContainer}>
-              <Text style={styles.instructionText}>
-                Point camera at barcode to find product
-              </Text>
+              <Text style={styles.instructionText}>{instruction}</Text>
               {scannedData && (
                 <Text style={styles.scannedText}>
                   Scanned: {scannedData}
@@ -195,6 +219,15 @@ export default function QuickScannerScreen() {
                 <View style={styles.modalButton}>
                   <Button title="Save" onPress={handleSaveQuantity} />
                 </View>
+                <View style={styles.modalButton}>
+                  <Button
+                    title="View Details"
+                    variant="secondary"
+                    onPress={handleViewDetails}
+                    testID="view-details-button"
+                  />
+                </View>
+                
                 <View style={styles.modalButton}>
                   <Button
                     title="Scan Another"

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, Switch } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Button } from '@/components/Button';
@@ -16,6 +17,23 @@ export default function LoginScreen() {
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+
+  useEffect(() => {
+    const loadSavedUsername = async () => {
+      try {
+        const savedUsername = await AsyncStorage.getItem('saved_username');
+        if (savedUsername) {
+          setUsername(savedUsername);
+          setRememberMe(true);
+        }
+      } catch (err) {
+        console.error('Failed to load saved username', err);
+      }
+    };
+
+    loadSavedUsername();
+  }, []);
 
   const handleLogin = async () => {
     const input = username.trim();
@@ -33,6 +51,11 @@ export default function LoginScreen() {
     setIsLoading(true);
     try {
       await login(input);
+      if (rememberMe) {
+        await AsyncStorage.setItem('saved_username', input);
+      } else {
+        await AsyncStorage.removeItem('saved_username');
+      }      
       router.replace('/warehouses');
     } catch (error) {
       console.error('Login error:', error);
@@ -51,7 +74,7 @@ export default function LoginScreen() {
         <View style={styles.content}>
           <View style={styles.logoContainer}>
             <Warehouse size={64} color={colors.primary} />
-            <Text style={styles.title}>Warehouse Manager</Text>
+            <Text style={styles.title}>VentX</Text>
             <Text style={styles.subtitle}>Inventory Management System</Text>
           </View>
 
@@ -61,15 +84,22 @@ export default function LoginScreen() {
               placeholder="Enter your username"
               value={username}
               onChangeText={(text) => {
-                setUsername(text);
+                setUsername(text.toUpperCase());
                 setError('');
               }}
-              autoCapitalize="none"
+              autoCapitalize="characters"
               autoCorrect={false}
               error={error}
               testID="username-input"
             />
-
+            <View style={styles.rememberContainer}>
+              <Text style={styles.rememberText}>Remember Username</Text>
+              <Switch
+                value={rememberMe}
+                onValueChange={setRememberMe}
+                testID="remember-switch"
+              />
+            </View>
             <Button
               title="Login"
               onPress={handleLogin}
@@ -119,4 +149,14 @@ const styles = StyleSheet.create({
   loginButton: {
     marginTop: 16,
   },
+  rememberContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 8,
+  },
+  rememberText: {
+    fontSize: 16,
+    color: colors.text,
+  },  
 });

@@ -8,6 +8,7 @@ export interface BaseRecord {
 
 export interface Warehouse extends BaseRecord {
   name: string;
+  qrOnly?: boolean;
 }
 
 export interface Product extends BaseRecord {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, Switch } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Button } from '@/components/Button';
@@ -38,7 +38,8 @@ export default function WarehouseDetailScreen() {
     syncStatus,
     getProductsWithoutBarcode,
     getProductsBelowMin,
-    getProductsOverstock
+    getProductsOverstock,
+    updateWarehouse,
   } = useWarehouse();
   
   const [searchQuery, setSearchQuery] = useState('');
@@ -227,6 +228,13 @@ export default function WarehouseDetailScreen() {
             icon={<Download size={18} color={colors.primary} />}
             variant="outline"
             style={styles.actionButton}
+          />
+        </View>
+        <View style={styles.qrToggleRow}>
+          <Text style={styles.qrToggleText}>QR</Text>
+          <Switch
+            value={!!warehouse?.qrOnly}
+            onValueChange={(value) => updateWarehouse(id, { qrOnly: value })}
           />
         </View>
       </View>
@@ -530,6 +538,17 @@ const styles = StyleSheet.create({
   actionButton: {
     flex: 1,
     marginHorizontal: 4,
+  },
+  qrToggleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginTop: 4,
+  },
+  qrToggleText: {
+    marginRight: 8,
+    color: colors.text,
+    fontSize: 16,
   },
   searchContainer: {
     flexDirection: 'row',

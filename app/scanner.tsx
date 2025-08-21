@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,7 +7,6 @@ import {
   Platform,
   Alert,
   useWindowDimensions,
-  InteractionManager,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -18,8 +17,7 @@ import { colors } from '@/constants/colors';
 import { useWarehouse } from '@/hooks/warehouse-store';
 import { X, ZoomIn, ZoomOut, Flashlight, FlashlightOff } from 'lucide-react-native';
 
-const SCAN_COOLDOWN_MS = 900;
-const READY_DELAY_MS = 220; // brief delay to let AF/AE settle
+
 const FRAME_SIZE = 260;
 
 const BARCODE_TYPES = [
@@ -38,12 +36,6 @@ const BARCODE_TYPES = [
   'upc_a',
 ] as const;
 
-type SimpleBarcode = { type?: string; data?: string } | null;
-type RawScanEvent =
-  | { type?: string; data?: string }
-  | { barcodes?: Array<{ type?: string; data?: string }> }
-  | any;
-
 export default function BarcodeScanner() {
   const params = useLocalSearchParams<{ productId: string; isNew: string; warehouseId?: string }>();
   const router = useRouter();
@@ -52,8 +44,8 @@ export default function BarcodeScanner() {
 
   const [permission, requestPermission] = useCameraPermissions();
 
-  const [isCameraReady, setIsCameraReady] = useState(false);
-  const [isScanningEnabled, setIsScanningEnabled] = useState(false);
+  const [isScanning, setIsScanning] = useState(true);
+  const [isReady, setIsReady] = useState(false);
 
   // Start at 0 to keep preview FPS high on more devices
   const [zoom, setZoom] = useState(0);
@@ -62,11 +54,6 @@ export default function BarcodeScanner() {
   const [scanned, setScanned] = useState(false);
   const [barcodeData, setBarcodeData] = useState('');
 
-  const enableTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const lastScanAtRef = useRef(0);
-  const lastValueRef = useRef('');
-  const busyRef = useRef(false);
-  const mountedRef = useRef(true);
 
   const isNewProduct = params.isNew === 'true';
   const product = params.productId && !isNewProduct ? getProduct(params.productId) : null;
@@ -89,95 +76,26 @@ export default function BarcodeScanner() {
     }
   }, [permission, requestPermission]);
 
-  // Cleanup
+
   useEffect(() => {
-    return () => {
-      mountedRef.current = false;
-      if (enableTimerRef.current) clearTimeout(enableTimerRef.current);
-    };
-  }, []);
-
-  // Centralized “enable scanning after a short delay” with InteractionManager
-  const scheduleEnableScanning = useCallback((why: string) => {
-    if (enableTimerRef.current) clearTimeout(enableTimerRef.current);
-    enableTimerRef.current = setTimeout(() => {
-      if (!mountedRef.current) return;
-      InteractionManager.runAfterInteractions(() => {
-        if (!mountedRef.current) return;
-        busyRef.current = false;
-        setIsScanningEnabled(true);
-      });
-    }, READY_DELAY_MS);
-  }, []);
-
-  // Camera lifecycle
-  const onCameraReady = useCallback(() => {
-    setIsCameraReady(true);
-    setIsScanningEnabled(false);
-    scheduleEnableScanning('camera-ready');
-  }, [scheduleEnableScanning]);
-
-  const onMountError = useCallback((e: unknown) => {
-    console.error('Camera mount error:', e);
-    Alert.alert('Camera Error', 'Unable to start the camera. Please try again.');
-  }, []);
-
-  // --- Fallback: some devices don’t call onCameraReady reliably ---
-  useEffect(() => {
-    if (permission?.granted && !isCameraReady && !isScanningEnabled) {
-      // If we’re clearly mounted with permission but never got onCameraReady,
-      // start scanning anyway after the brief ready delay.
-      scheduleEnableScanning('perm-granted-fallback');
+    if (permission?.granted && isScanning) {
+      setIsReady(false);
+      const t = setTimeout(() => setIsReady(true), 200);
+      return () => clearTimeout(t);
     }
-  }, [permission?.granted, isCameraReady, isScanningEnabled, scheduleEnableScanning]);
-
-  // Normalize event -> single {type,data}
-  const pickFirstBarcode = useCallback((evt: RawScanEvent): SimpleBarcode => {
-    if (!evt) return null;
-    if (typeof evt?.data === 'string') return { type: evt.type, data: evt.data };
-    const first = Array.isArray(evt?.barcodes) ? evt.barcodes[0] : null;
-    if (first && typeof first.data === 'string') return { type: first.type, data: first.data };
-    return null;
-  }, []);
+  }, [permission?.granted, isScanning]);
 
   const handleScanEvent = useCallback(
-    (evt: RawScanEvent) => {
-      if (!isScanningEnabled || scanned) return;
-      if (busyRef.current) return;
+    ({ type, data }: { type?: string; data?: string }) => {
+      if (!isScanning || !isReady || !data) return;
+      setIsScanning(false);
+      setScanned(true);
+      setBarcodeData(data);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
+      console.log(`Scanned [${type ?? 'unknown'}] ${data}`);
 
-      const b = pickFirstBarcode(evt);
-      if (!b?.data) return;
-
-      const now = Date.now();
-      if (now - lastScanAtRef.current < SCAN_COOLDOWN_MS) return;
-      if (b.data === lastValueRef.current && now - lastScanAtRef.current < SCAN_COOLDOWN_MS * 2) return;
-
-      busyRef.current = true;
-      lastScanAtRef.current = now;
-      lastValueRef.current = b.data;
-
-      try {
-        setIsScanningEnabled(false);
-        setScanned(true);
-        setBarcodeData(b.data);
-
-        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
-          .catch(() => {})
-          .finally(() => {
-            busyRef.current = false;
-          });
-
-        console.log(`Scanned [${b.type ?? 'unknown'}] ${b.data}`);
-      } catch (e) {
-        console.error('Scan handling error', e);
-        Alert.alert('Scan Error', 'There was a problem processing the scan.');
-        busyRef.current = false;
-        setScanned(false);
-        setBarcodeData('');
-        setIsScanningEnabled(true);
-      }
     },
-    [isScanningEnabled, scanned, pickFirstBarcode]
+    [isScanning, isReady]
   );
 
   const handleConfirm = useCallback(() => {
@@ -204,26 +122,12 @@ export default function BarcodeScanner() {
   const handleScanAgain = useCallback(() => {
     setScanned(false);
     setBarcodeData('');
-    setIsScanningEnabled(false);
-    scheduleEnableScanning('scan-again');
-  }, [scheduleEnableScanning]);
+    setIsScanning(true);
+  }, []);
 
   // Torch toggle with Expo SDK 51 workaround (re-apply to “wake” torch)
   const toggleTorch = useCallback(() => {
-    setTorchOn(prev => {
-      const next = !prev;
-      if (next) {
-        // Pulse off->on to overcome sporadic no-op enableTorch behavior
-        setTimeout(() => {
-          if (!mountedRef.current) return;
-          setTorchOn(false);
-          setTimeout(() => {
-            if (mountedRef.current) setTorchOn(true);
-          }, 80);
-        }, 0);
-      }
-      return next;
-    });
+    setTorchOn(prev => !prev);
   }, []);
 
   // --- Permission UI ---
@@ -245,7 +149,7 @@ export default function BarcodeScanner() {
     );
   }
 
-  const showFocusing = !isScanningEnabled && (isCameraReady || permission.granted);
+  const showFocusing = !isReady;
 
   return (
     <SafeAreaView style={styles.container} edges={['bottom']}>
@@ -256,9 +160,7 @@ export default function BarcodeScanner() {
             facing="back"
             zoom={zoom}
             enableTorch={torchOn}
-            onCameraReady={onCameraReady}
-            onMountError={onMountError}
-            onBarcodeScanned={scanned || !isScanningEnabled ? undefined : handleScanEvent}
+            onBarcodeScanned={scanned || !isReady ? undefined : handleScanEvent}
             barcodeScannerSettings={{
               barcodeTypes: BARCODE_TYPES as unknown as string[],
             }}
