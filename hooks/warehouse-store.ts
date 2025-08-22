@@ -219,7 +219,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     return () => subscription.remove();
   }, [syncStatus, githubConfig, performSync]);
 
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
   const wasLoggedInRef = useRef(isLoggedIn);
 
   useEffect(() => {
@@ -237,6 +237,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       id: generateId(),
       name,
       qrOnly: false,
+      version: 1,
+      updatedBy: user?.username ?? 'local',
       updatedAt: new Date().toISOString(),
     };
     setWarehouses([...warehouses, newWarehouse]);
@@ -246,9 +248,16 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const updateWarehouse = (id: string, data: Partial<Warehouse>) => {
     setWarehouses(prev => {
       const updated = prev.map(w =>
-        w.id === id ? { ...w, ...data, updatedAt: new Date().toISOString() } : w
+        w.id === id
+          ? {
+              ...w,
+              ...data,
+              version: (w.version ?? 0) + 1,
+              updatedBy: user?.username ?? 'local',
+              updatedAt: new Date().toISOString(),
+            }
+          : w
       );
-      // Persist immediately so settings like QR mode stick
       saveData(updated, products);
       return updated;
     });
@@ -258,13 +267,16 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     const timestamp = new Date().toISOString();
     setWarehouses(
       warehouses.map(w =>
-        w.id === id ? { ...w, deleted: true, updatedAt: timestamp } : w
+        w.id === id
+          ? { ...w, deleted: true, version: (w.version ?? 0) + 1, updatedBy: user?.username ?? 'local', updatedAt: timestamp }
+          : w
       )
     );
-    // Also mark all products in this warehouse as deleted
     setProducts(
       products.map(p =>
-        p.warehouseId === id ? { ...p, deleted: true, updatedAt: timestamp } : p
+        p.warehouseId === id
+          ? { ...p, deleted: true, version: (p.version ?? 0) + 1, updatedBy: user?.username ?? 'local', updatedAt: timestamp }
+          : p
       )
     );
   };
@@ -274,10 +286,13 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   };
 
   // Product operations
-  const addProduct = (product: Omit<Product, 'id'>) => {
+  type AddProductInput = Omit<Product, 'id' | 'version' | 'updatedAt' | 'updatedBy'>;
+  const addProduct = (product: AddProductInput) => {
     const newProduct: Product = {
       ...product,
       id: generateId(),
+      version: 1,
+      updatedBy: user?.username ?? 'local',
       updatedAt: new Date().toISOString(),
     };
     setProducts([...products, newProduct]);
@@ -287,7 +302,15 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const updateProduct = (id: string, data: Partial<Product>) => {
     setProducts(
       products.map(p =>
-        p.id === id ? { ...p, ...data, updatedAt: new Date().toISOString() } : p
+        p.id === id
+          ? {
+              ...p,
+              ...data,
+              version: (p.version ?? 0) + 1,
+              updatedBy: user?.username ?? 'local',
+              updatedAt: new Date().toISOString(),
+            }
+          : p
       )
     );
   };
@@ -295,7 +318,9 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const deleteProduct = (id: string) => {
     setProducts(
       products.map(p =>
-        p.id === id ? { ...p, deleted: true, updatedAt: new Date().toISOString() } : p
+        p.id === id
+          ? { ...p, deleted: true, version: (p.version ?? 0) + 1, updatedBy: user?.username ?? 'local', updatedAt: new Date().toISOString() }
+          : p
       )
     );
   };
@@ -372,6 +397,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       ...product,
       id: generateId(),
       warehouseId,
+      version: 1,
+      updatedBy: user?.username ?? 'local',
       updatedAt: timestamp,
     }));
     

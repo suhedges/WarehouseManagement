@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { StyleSheet, Text, View, ScrollView, Alert, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -28,7 +28,7 @@ export default function ProductDetailScreen() {
   const warehouse = params.warehouseId ? getWarehouse(params.warehouseId) : 
                    product ? getWarehouse(product.warehouseId) : null;
   
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{ internalName: string; customerName: string; barcode: string; location: string; minAmount: string; maxAmount: string; quantity: string }>({
     internalName: '',
     customerName: '',
     barcode: '',
@@ -39,9 +39,11 @@ export default function ProductDetailScreen() {
   });
   
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isDirty, setIsDirty] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!isNewProduct && product) {
+    if (!isNewProduct && product && !isDirty) {
+      console.log('Hydrating form from product store', product.id);
       setFormData({
         internalName: product.internalName,
         customerName: product.customerName,
@@ -52,7 +54,7 @@ export default function ProductDetailScreen() {
         quantity: product.quantity.toString(),
       });
     }
-  }, [product, isNewProduct]);
+  }, [product, isNewProduct, isDirty]);
 
   useEffect(() => {
     if (!isNewProduct && !product && !isLoading) {
@@ -98,6 +100,7 @@ export default function ProductDetailScreen() {
   };
 
   const handleSave = () => {
+    console.log('Saving product', { isNewProduct, id: params.id, formData });
     if (!validateForm()) {
       return;
     }
@@ -165,6 +168,7 @@ export default function ProductDetailScreen() {
     const scanned = params.scannedBarcode;
     if (scanned && appliedScannedRef.current !== scanned) {
       console.log('Received scanned barcode:', scanned);
+      setIsDirty(true);
       setFormData(prev => ({ ...prev, barcode: scanned }));
       appliedScannedRef.current = scanned;
     }
@@ -175,7 +179,7 @@ export default function ProductDetailScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']} testID="screen-product-edit">
       <View style={styles.header}>
         <View style={styles.headerContent}>
           <TouchableOpacity 
@@ -203,15 +207,17 @@ export default function ProductDetailScreen() {
               label="Internal Product Name"
               placeholder="Enter internal name"
               value={formData.internalName}
-              onChangeText={(text) => setFormData({ ...formData, internalName: text })}
+              onChangeText={(text) => { setIsDirty(true); setFormData({ ...formData, internalName: text }); }}
               error={errors.internalName}
+              testID="input-internalName"
             />
             
             <Input
               label="Customer Product Name"
               placeholder="Enter customer name (optional)"
               value={formData.customerName}
-              onChangeText={(text) => setFormData({ ...formData, customerName: text })}
+              onChangeText={(text) => { setIsDirty(true); setFormData({ ...formData, customerName: text }); }}
+              testID="input-customerName"
             />
             
             <View style={styles.barcodeContainer}>
@@ -219,15 +225,17 @@ export default function ProductDetailScreen() {
                 label="Barcode"
                 placeholder="No barcode assigned"
                 value={formData.barcode}
-                onChangeText={(text) => setFormData({ ...formData, barcode: text })}
+                onChangeText={(text) => { setIsDirty(true); setFormData({ ...formData, barcode: text }); }}
                 containerStyle={styles.barcodeInput}
                 editable={true}
+                testID="input-barcode"
               />
               <Button
                 title="Scan"
                 onPress={handleScanBarcode}
                 icon={<Barcode size={18} color="white" />}
                 style={styles.scanButton}
+                testID="button-scan-barcode"
               />
             </View>
             
@@ -235,8 +243,9 @@ export default function ProductDetailScreen() {
               label="Product Location"
               placeholder="Enter location (e.g., A1-B2)"
               value={formData.location}
-              onChangeText={(text) => setFormData({ ...formData, location: text })}
+              onChangeText={(text) => { setIsDirty(true); setFormData({ ...formData, location: text }); }}
               error={errors.location}
+              testID="input-location"
             />
             
             <View style={styles.row}>
@@ -244,20 +253,22 @@ export default function ProductDetailScreen() {
                 label="Min Amount"
                 placeholder="0"
                 value={formData.minAmount}
-                onChangeText={(text) => setFormData({ ...formData, minAmount: text })}
+                onChangeText={(text) => { setIsDirty(true); setFormData({ ...formData, minAmount: text }); }}
                 keyboardType="numeric"
                 containerStyle={styles.halfInput}
                 error={errors.minAmount}
+                testID="input-minAmount"
               />
               
               <Input
                 label="Max Amount"
                 placeholder="0"
                 value={formData.maxAmount}
-                onChangeText={(text) => setFormData({ ...formData, maxAmount: text })}
+                onChangeText={(text) => { setIsDirty(true); setFormData({ ...formData, maxAmount: text }); }}
                 keyboardType="numeric"
                 containerStyle={styles.halfInput}
                 error={errors.maxAmount}
+                testID="input-maxAmount"
               />
             </View>
             
@@ -265,9 +276,10 @@ export default function ProductDetailScreen() {
               label="Current Quantity"
               placeholder="0"
               value={formData.quantity}
-              onChangeText={(text) => setFormData({ ...formData, quantity: text })}
+              onChangeText={(text) => { setIsDirty(true); setFormData({ ...formData, quantity: text }); }}
               keyboardType="numeric"
               error={errors.quantity}
+              testID="input-quantity"
             />
           </Card>
         </ScrollView>
@@ -282,13 +294,15 @@ export default function ProductDetailScreen() {
               variant="danger"
               icon={<Trash size={18} color="white" />}
               style={styles.deleteButton}
+              testID="button-delete"
             />
           )}
           <Button
             title="Save"
-            onPress={handleSave}
+            onPress={() => { setIsDirty(false); handleSave(); }}
             icon={<Save size={18} color="white" />}
             style={styles.saveButton}
+            testID="button-save"
           />
         </View>
       </View>
