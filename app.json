@@ -12,17 +12,48 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.tristatebearing.warehousemanagement"
+      "bundleIdentifier": "com.tristatebearing.warehousemanagement",
+      "usesIcloudStorage": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access your camera",
+        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
+      }
     },
     "android": {
       "package": "com.tristatebearing.warehousemanagement",
       "versionCode": 1,
-      "permissions": []
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "INTERNET",
+        "CAMERA",
+        "RECORD_AUDIO",
+        "android.permission.VIBRATE",
+        "ACCESS_NETWORK_STATE",
+        "ACCESS_WIFI_STATE"
+      ]
     },
     "extra": {
       "eas": {
         "projectId": "c9bde9f0-4dd0-4a40-8d26-2193c89e2452"
       }
-    }
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "recordAudioAndroid": true
+        }
+      ]
+    ]
   }
 }
