@@ -1,6273 +1,1799 @@
 {
   "products": [
     {
-      "barcode": "S4290006",
-      "customerName": "S4290006",
       "id": "238037nw2m89bdrdox9drq",
-      "internalName": "\"MAG500R- 1 1/4\"\"\"",
-      "location": "O5F06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445099",
-      "customerName": "S9445099",
       "id": "849zwi9uc36k8qiu535vhc",
-      "internalName": "\"Boston FC15- 5/8\"\"\"",
-      "location": "O5F06",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471414",
-      "customerName": "S9471414",
       "id": "lgx56t3jctlcj77c62uo",
-      "internalName": "Lintech C100-375-375",
-      "location": "O5F06",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4211015",
-      "customerName": "S4211015",
       "id": "d1zugdfzcpaid0j3lnpdc",
-      "internalName": "DOD113615",
-      "location": "O5F05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471330",
-      "customerName": "S9471330",
       "id": "p84oy86shcc27rqjgmjhu",
-      "internalName": "\"MAGM500- 2 1/8\"\"\"",
-      "location": "O5F05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2939225",
-      "customerName": "S2939225",
       "id": "uz37fcc0odi8o8crg324us",
-      "internalName": "Bro26HP100",
-      "location": "O5F05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471211",
-      "customerName": "S9471211",
       "id": "e2qkfh6apbmjcj1otuyyd",
-      "internalName": "\"Bro14LF050X 1/2\"\"\"",
-      "location": "O5F05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471210",
-      "customerName": "S9471210",
       "id": "abeyyd37v6lyaz880ypioq",
-      "internalName": "\"Bro28LB050X 1/2\"\"\"",
-      "location": "O5F05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458174",
-      "customerName": "S9458174",
       "id": "1via0onll4duk02dhijza",
-      "internalName": "HAYES2A0-09-09-M",
-      "location": "O5F04",
-      "maxAmount": 3,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458193",
-      "customerName": "S9458193",
       "id": "oo2boiazqa7elpp0x1vf64",
-      "internalName": "HAYES20N-00-00-M",
-      "location": "O5F04",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 14,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2060302",
-      "customerName": "S2060302",
       "id": "j5yehtn5a87mu0ugo5waj",
-      "internalName": "Woods P32-8M-50QT",
-      "location": "O5F04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471327",
-      "customerName": "S9471327",
       "id": "ailygen6xnjvwjjipdrn",
-      "internalName": "Bro14HG150",
-      "location": "O5F04",
-      "maxAmount": 3,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458096",
-      "customerName": "S9458096",
       "id": "q0fht8cbfwk1zlj2r9vxhi",
-      "internalName": "BC160501601A50X160AT10",
-      "location": "O5F04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9528600",
-      "customerName": "S9528600",
       "id": "drxnfjindf8sdxnyq0s0m",
-      "internalName": "44H200SK (SK1 5/8)",
-      "location": "O5F04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429241",
-      "customerName": "S9429241",
       "id": "zwjlptye443jvk0m10dot",
-      "internalName": "\"MAGM500- 1 7/8\"\"\"",
-      "location": "O5F02",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429207",
-      "customerName": "S9429207",
       "id": "7psfzhe9sdui5pl7quffc7",
-      "internalName": "\"MAGM500- 1 3/8\"\"\"",
-      "location": "O5F02",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471293",
-      "customerName": "S9471293",
       "id": "hit9yncn9kz5sl47fug",
-      "internalName": "DOD113642",
-      "location": "O5F02",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424122",
-      "customerName": "S9424122",
       "id": "pntmdk7gd9eez7hwpmjdwc",
-      "internalName": "\"MAGM500- 7/8\"\"\"",
-      "location": "O5F02",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8400100",
-      "customerName": "S8400100",
       "id": "3v9bujc4sif34o73rbzka7",
-      "internalName": "Boston NH36",
-      "location": "06H12",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4280070",
-      "customerName": "S4280070",
       "id": "7rvfgdxcvchmxhq1eqvweq",
-      "internalName": "Bro YSS1632 X 1 1/4",
-      "location": "06H11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471063",
-      "customerName": "S9471063",
       "id": "xqvjprjjdwiedt19hvw3l",
-      "internalName": "Bro VPS-324",
-      "location": "06H10",
-      "maxAmount": 2,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4211014",
-      "customerName": "S4211014",
       "id": "z0boclh5rp5pz4v5vk903",
-      "internalName": "Boston PA5024DF150 X 1/2",
-      "location": "06H09",
-      "maxAmount": 3,
-      "minAmount": 2,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9442121",
-      "customerName": "S9442121",
       "id": "tgwdqp3amx7lauk8bisfh",
-      "internalName": "Bro AK28 5/8",
-      "location": "06H08",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9210003",
-      "customerName": "S9210003",
       "id": "1zbss2katb0jfefsqmpamaa",
-      "internalName": "Bro NSS6P21 14 1/2",
-      "location": "06H07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4280055",
-      "customerName": "S4280055",
       "id": "2ppry8hrg3v3moprcl50j9",
-      "internalName": "Boston GF20 1 1/4",
-      "location": "06H07",
-      "maxAmount": 2,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8380035",
-      "customerName": "S8380035",
       "id": "blqmibvbkjvxi4ijaphc58",
-      "internalName": "Masterlock 500KABRK",
-      "location": "06H07",
-      "maxAmount": 6,
-      "minAmount": 4,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418301",
-      "customerName": "S9418301",
       "id": "w7kn05aal0863fod63wogs",
-      "internalName": "MCG CFE3 SB",
-      "location": "06H06",
-      "maxAmount": 4,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458579",
-      "customerName": "S9458579",
       "id": "3bmrx3v33yabcj5iagqvg",
-      "internalName": "Bro P1-1 1/4",
-      "location": "06H05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030136",
-      "customerName": "S4030136",
       "id": "var490enibp2nk2hugwzoi",
-      "internalName": "Con KD 100 ARO",
-      "location": "06F10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458449",
-      "customerName": "S9458449",
       "id": "d1aq9yljq7u4biwqlbtqn8",
-      "internalName": "MOR RFB300C",
-      "location": "06F08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458144",
-      "customerName": "S9458144",
       "id": "gpzoi56gdnnonpnesg9vv",
-      "internalName": "MOR RFP300",
-      "location": "06F08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4480091",
-      "customerName": "S4480091",
       "id": "gnam4rv99ee1d0cqbzfth",
-      "internalName": "Link RG-PB22439",
-      "location": "06F08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474489",
-      "customerName": "S9474489",
       "id": "9fug0p4thosjws23mojcgf",
-      "internalName": "Bro VF4S-356",
-      "location": "06F07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9442101",
-      "customerName": "S9442101",
       "id": "41gt8fesend012g3ujnsuzpo",
-      "internalName": "DOD 126840",
-      "location": "06F07",
-      "maxAmount": 2,
-      "minAmount": 2,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471417",
-      "customerName": "S9471417",
       "id": "hd9fv8rk3p5mjv4rlcdxnp",
-      "internalName": "MCG MI96",
-      "location": "06F07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471416",
-      "customerName": "S9471416",
       "id": "ga5oxcheqxn2q4autk3a1o",
-      "internalName": "MCG MR116",
-      "location": "06F06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030062",
-      "customerName": "S4030062",
       "id": "e5m6rsctr3ix5ie8qw695l",
-      "internalName": "Tim HJ8010436",
-      "location": "06F06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9449040",
-      "customerName": "S9449040",
       "id": "xinz7wuyesf60xguq003",
-      "internalName": "MOR MP47",
-      "location": "06F06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030077",
-      "customerName": "S4030077",
       "id": "060hoqejn8q8g2sh5twqfsh",
-      "internalName": "Tim HJ10412848",
-      "location": "06F05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030121",
-      "customerName": "S4030121",
       "id": "hggg1mipsa8ra8he3caf8",
-      "internalName": "DOD 023021",
-      "location": "06D11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8240902",
-      "customerName": "S8240902",
       "id": "fka74v0vr1sod2qqv5ddro",
-      "internalName": "DOD 126812",
-      "location": "06D11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030140",
-      "customerName": "S4030140",
       "id": "piw8i56adegimq9s5uo8h",
-      "internalName": "MOR SF28",
-      "location": "06D10",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458505",
-      "customerName": "S9458505",
       "id": "y23c09gc4nmirb0cnfr01m",
-      "internalName": "B302100Fenner Bloc",
-      "location": "06D10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8240911",
-      "customerName": "S8240911",
       "id": "rw9kkdvlxukjzrgixfm2j",
-      "internalName": "DOD 037622",
-      "location": "06D10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8240002",
-      "customerName": "S8240002",
       "id": "ljsuvorattqd0f0uzosn",
-      "internalName": "MOR EMP 47",
-      "location": "06D09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S5700500",
-      "customerName": "S5700500",
       "id": "z3jd9fwfojvxmeos173v",
-      "internalName": "MCG GR48 RSS",
-      "location": "06D09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 7,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8240900",
-      "customerName": "S8240900",
       "id": "c1d25t47kvst96e58y04m",
-      "internalName": "DOD 126821",
-      "location": "06D09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8249030",
-      "customerName": "S8249030",
       "id": "eourh3t7bns7u1a4pjjf7v",
-      "internalName": "\"Tim RAS - 5/8\"\"\"",
-      "location": "06D08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9820001",
-      "customerName": "S9820001",
       "id": "p4z7o11b76sw2vp0so37o",
-      "internalName": "Bro VPS-212",
-      "location": "06D08",
-      "maxAmount": 4,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458059",
-      "customerName": "S9458059",
       "id": "efkgd9vd3mo5rxhv5gsy",
-      "internalName": "Dod 123611",
-      "location": "06D08",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4480055",
-      "customerName": "S4480055",
       "id": "2m77a71x662n0t175d5v8m",
-      "internalName": "MOR NP23",
-      "location": "06D08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030036",
-      "customerName": "S4030036",
       "id": "8xxphjhdrrg7bvbv3jiwrh",
-      "internalName": "Bro VF2S-120S",
-      "location": "06D07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030027",
-      "customerName": "S4030027",
       "id": "iuivsripynonve1bqgo0qp",
-      "internalName": "Tor IR607236",
-      "location": "06D07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030002",
-      "customerName": "S4030002",
       "id": "1b05molc4vn4n9e0loerya",
-      "internalName": "Bro VF2E-216",
-      "location": "06D07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424709",
-      "customerName": "S9424709",
       "id": "hpawy2wgr69hl6cqgjtogf",
-      "internalName": "SKF 6205 - 2RS - NR-JEM - C3",
-      "location": "06D07",
-      "maxAmount": 8,
-      "minAmount": 4,
-      "quantity": 9,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8241100",
-      "customerName": "S8241100",
       "id": "u7xh9h9pnp8ziglwsnsa7",
-      "internalName": "MOR NP-16",
-      "location": "06D07",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030104",
-      "customerName": "S4030104",
       "id": "18u8gz81yiooi74c6ccogs",
-      "internalName": "Bro VPS-219",
-      "location": "06D06",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445089",
-      "customerName": "S9445089",
       "id": "9esdlolm05qpsvrt3oujd",
-      "internalName": "Bro VF2E-210",
-      "location": "06D06",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9461119",
-      "customerName": "S9461119",
       "id": "k9eweknl0l8xpvvj20t82n",
-      "internalName": "MOR MP16",
-      "location": "06D06",
-      "maxAmount": 2,
-      "minAmount": 0,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9401406",
-      "customerName": "S9401406",
       "id": "vz649o54ylfhi6qvo1gkp6",
-      "internalName": "Tim 3980/3920 Assy",
-      "location": "06D06",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 7,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030086",
-      "customerName": "S4030086",
       "id": "3kercdv32176pgef8thhbb",
-      "internalName": "Bro VPS-231",
-      "location": "06D06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471218",
-      "customerName": "S9471218",
       "id": "g6e3970kf55g7v9mly4vms",
-      "internalName": "BRO VPS-208",
-      "location": "06D05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424400",
-      "customerName": "S9424400",
       "id": "3cac4a203xir5y5tek1ef",
-      "internalName": "Bro VFCS-328",
-      "location": "06D05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8240905",
-      "customerName": "S8240905",
       "id": "bvqm5u3cynh93evh4zt3v",
-      "internalName": "Bro VF4E-232",
-      "location": "06D05",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030031",
-      "customerName": "S4030031",
       "id": "fktduxes5spe4s0v6oxjm",
-      "internalName": "\"HUB FB250x 1 3/4\"\"\"",
-      "location": "06D04",
-      "maxAmount": 8,
-      "minAmount": 2,
-      "quantity": 8,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S7940079",
-      "customerName": "S7940079",
       "id": "72rsxhy7v68lsi2uly3b4r",
-      "internalName": "MCG TBC-25-34",
-      "location": "06D04",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4480131",
-      "customerName": "S4480131",
       "id": "fhpkc6j3s6btn5k6gbuj5g",
-      "internalName": "\"SKF SY - 1 3/16\"\" FM\"",
-      "location": "06D04",
-      "maxAmount": 4,
-      "minAmount": 1,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9477006",
-      "customerName": "S9477006",
       "id": "sn0wzi7sa090ctlb0jhuq3",
-      "internalName": "THO Super 16",
-      "location": "06D03",
-      "maxAmount": 12,
-      "minAmount": 8,
-      "quantity": 11,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458149",
-      "customerName": "S9458149",
       "id": "fveqv2lt9fp936ljjqu13r",
-      "internalName": "THO Super 32",
-      "location": "06D03",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458290",
-      "customerName": "S9458290",
       "id": "ypfsmxj94fjq495d4zdvr",
-      "internalName": "THO Super 20OPN",
-      "location": "06D03",
-      "maxAmount": 8,
-      "minAmount": 4,
-      "quantity": 12,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030032",
-      "customerName": "S4030032",
       "id": "2sm5meuixiltc2penfvrs",
-      "internalName": "THO TWN-16",
-      "location": "06D02",
-      "maxAmount": 8,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471168",
-      "customerName": "S9471168",
       "id": "ywhmnhwf59xonxxyb0948",
-      "internalName": "HIW HRW50+280L",
-      "location": "06C12",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1210704",
-      "customerName": "S1210704",
       "id": "pkjwap9nnch98usjr5jeg",
-      "internalName": "Dod 123810",
-      "location": "06C11",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445219",
-      "customerName": "S9445219",
       "id": "tinqc7w1g2rjbzlck9bjb",
-      "internalName": "Dod 038110",
-      "location": "06C11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445218",
-      "customerName": "S9445218",
       "id": "f1qld1h6jqoyaghqsjjk4r",
-      "internalName": "Dod 125155",
-      "location": "06C11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8240165",
-      "customerName": "S8240165",
       "id": "ksgvq94709n6v9t9l1e60b",
-      "internalName": "MCG GR56 RSS",
-      "location": "06C11",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445105",
-      "customerName": "S9445105",
       "id": "x9kbw20wfag74wsaaw53xs",
-      "internalName": "DOD 135107",
-      "location": "06C10",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4160020",
-      "customerName": "S4160020",
       "id": "m59n6h2ftlf7cr5prptel",
-      "internalName": "Bro VF2S 208",
-      "location": "06C10",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9794072",
-      "customerName": "S9794072",
       "id": "3owjcah7c09orcjzslaxtg",
-      "internalName": "DOD 124217",
-      "location": "06C10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474313",
-      "customerName": "S9474313",
       "id": "ozi192n8q9deygtxhz8hk6",
-      "internalName": "Tim 15251D",
-      "location": "06C10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445127",
-      "customerName": "S9445127",
       "id": "r87dtbrsehpv7d7gaa3xk",
-      "internalName": "Tim RAL103RR",
-      "location": "06C09",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429148",
-      "customerName": "S9429148",
       "id": "2nyqkmjn4ueltg8ued3klb",
-      "internalName": "Bro VF2S-223",
-      "location": "06C09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8230403",
-      "customerName": "S8230403",
       "id": "mlw95dwekg871cw45e0d1",
-      "internalName": "Link U22-4NL W/ SS",
-      "location": "06C09",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8240001",
-      "customerName": "S8240001",
       "id": "3zxgx0e62xbsgu58aj28g",
-      "internalName": "MOR ST31",
-      "location": "06C08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030097",
-      "customerName": "S4030097",
       "id": "ncpb87one5ek7oz8m0jvg",
-      "internalName": "MOR MFC-43",
-      "location": "06C08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030141",
-      "customerName": "S4030141",
       "id": "ugv0xzrnk0o3ttn6ifq5jh",
-      "internalName": "MCG MI40N",
-      "location": "06C08",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471629",
-      "customerName": "S9471629",
       "id": "8krl97ljmrln6k81t6b0ss",
-      "internalName": "GAT 8MX-22S-12",
-      "location": "06C07",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9441239",
-      "customerName": "S9441239",
       "id": "ztq49xinfgq0w0007v12v3g",
-      "internalName": "Tim UCFL 206-20",
-      "location": "06C07",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471042",
-      "customerName": "S9471042",
       "id": "exk9525siq99kohc7oz8d",
-      "internalName": "SKF 7305",
-      "location": "06C07",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9215600",
-      "customerName": "S9215600",
       "id": "qdos5vpt5xnqws60ikqt0l",
-      "internalName": "MCG SB22210W33SS",
-      "location": "06C07",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030066",
-      "customerName": "S4030066",
       "id": "s6w6fq7hupvibdwyz3ny",
-      "internalName": "SKF 6205 - 2RS JEM",
-      "location": "06C06",
-      "maxAmount": 5,
-      "minAmount": 2,
-      "quantity": 10,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030066",
-      "customerName": "S4030066",
       "id": "ey9526f04w72ov3a7uqyym",
-      "internalName": "Tim W204PPZ22-P",
-      "location": "06C06",
-      "maxAmount": 5,
-      "minAmount": 2,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030061",
-      "customerName": "S4030061",
       "id": "n39a6w98oghcd36r19jwm",
-      "internalName": "SKF 6204 -2RS",
-      "location": "06C06",
-      "maxAmount": 5,
-      "minAmount": 2,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030033",
-      "customerName": "S4030033",
       "id": "21wfltuj9yiydo1unj451f",
-      "internalName": "MCG SB22207SSC3W33",
-      "location": "06C06",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030118",
-      "customerName": "S4030118",
       "id": "3sxmsa5f7mb8qfgcsirhh",
-      "internalName": "MCG GR-40-RS",
-      "location": "06C06",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9409904",
-      "customerName": "S9409904",
       "id": "3tupjk6s62tn9s054e2hhd",
-      "internalName": "SKF 6314 JEM",
-      "location": "06C05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458050",
-      "customerName": "S9458050",
       "id": "vv16dthx8dt0y9s3iuoa",
-      "internalName": "Bro VF2S-119",
-      "location": "06C05",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429429",
-      "customerName": "S9429429",
       "id": "pddimfcd3zlii50x37qg7",
-      "internalName": "Tim HJ 324116",
-      "location": "06C05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9457101",
-      "customerName": "S9457101",
       "id": "tzg2wvrmsatkpdvgu3yewh",
-      "internalName": "Bosch Rexroth   R987144726 #12",
-      "location": "06C05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1210705",
-      "customerName": "S1210705",
       "id": "j8k5b4rdaekseyweexig",
-      "internalName": "Bro VPB-224AH (VPS)",
-      "location": "06C05",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8230200",
-      "customerName": "S8230200",
       "id": "fjhyncsn5p80ltlsvwo4ia",
-      "internalName": "Bro VF2S-216",
-      "location": "06C04",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9409794",
-      "customerName": "S9409794",
       "id": "vycsw60bvlq5fc722ffpq",
-      "internalName": "DOD 123627 F4B-VSC-103",
-      "location": "06C04",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9727024",
-      "customerName": "S9727024",
       "id": "bdgsk86f99qnielhkhyn4",
-      "internalName": "Bro VF4S-235",
-      "location": "06C04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8230115",
-      "customerName": "S8230115",
       "id": "pcdpkoqb8lc1y7ackpwgb6",
-      "internalName": "\"HUB TPB250 - 1 3/16\"\"\"",
-      "location": "06C04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9794070",
-      "customerName": "S9794070",
       "id": "0qv5mt2b82xm9x29ftnespu",
-      "internalName": "DOD 124275",
-      "location": "06C04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8240912",
-      "customerName": "S8240912",
       "id": "jnctgyo053n6j5h68hc21l",
-      "internalName": "Bro VF4S-231",
-      "location": "06C03",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 10,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030003",
-      "customerName": "S4030003",
       "id": "9dc5w1orxqaxenx01talu",
-      "internalName": "Bro VF4S-127",
-      "location": "06C03",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9447101",
-      "customerName": "S9447101",
       "id": "p9gawljt4wj7grtfnlnuc",
-      "internalName": "Tim 495A",
-      "location": "06C03",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9447100",
-      "customerName": "S9447100",
       "id": "moj90y2yat9oqsq5w9dws",
-      "internalName": "Tim 492A",
-      "location": "06C03",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458259",
-      "customerName": "S9458259",
       "id": "rpt4zcev6k98eo4zv5lk6n",
-      "internalName": "THO SPB12OPN",
-      "location": "06C03",
-      "maxAmount": 8,
-      "minAmount": 4,
-      "quantity": 8,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418022",
-      "customerName": "S9418022",
       "id": "64dflc53blm1mm2mx6k9sb",
-      "internalName": "MCG MR48N",
-      "location": "06C02",
-      "maxAmount": 8,
-      "minAmount": 4,
-      "quantity": 8,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418023",
-      "customerName": "S9418023",
       "id": "kd46hrc7a2ex6zf072igns",
-      "internalName": "MCG MR56N",
-      "location": "06C02",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474673",
-      "customerName": "S9474673",
       "id": "luzq6spp4nsmif8srwms3",
-      "internalName": "THO Super 12",
-      "location": "06C02",
-      "maxAmount": 8,
-      "minAmount": 8,
-      "quantity": 8,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8222001",
-      "customerName": "S8222001",
       "id": "g6dqoxd9cqqcphqtg7hux6",
-      "internalName": "MCG MR80/MI68",
-      "location": "06C02",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458291",
-      "customerName": "S9458291",
       "id": "3oefyrd1s3t91attcenv16",
-      "internalName": "THOA203242",
-      "location": "06C01",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 9,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458321",
-      "customerName": "S9458321",
       "id": "26yxnmyrom648sklhb4fe4",
-      "internalName": "THO Super 20 Closed",
-      "location": "06C01",
-      "maxAmount": 8,
-      "minAmount": 6,
-      "quantity": 8,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474405",
-      "customerName": "S9474405",
       "id": "fb3y9jdf9fg0vihmezs94",
-      "internalName": "THO SSU160PN-WW",
-      "location": "06C01",
-      "maxAmount": 8,
-      "minAmount": 4,
-      "quantity": 7,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445231",
-      "customerName": "S9445231",
       "id": "rzs9egi57amc1i32s34z7p",
-      "internalName": "DOD 038114 Takeup",
-      "location": "06B13",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429131",
-      "customerName": "S9429131",
       "id": "o0k3geb4sqosmpuo9y2ki",
-      "internalName": "Tim 313K",
-      "location": "06B12",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474544",
-      "customerName": "S9474544",
       "id": "u6ta5dzk8q1qjyfwoyj9d",
-      "internalName": "550241000001 Rotex",
-      "location": "06B12",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474010",
-      "customerName": "S9474010",
       "id": "9cejkr25x1axvnbbu4x6r",
-      "internalName": "BA550247152849 Rotex",
-      "location": "06B12",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474009",
-      "customerName": "S9474009",
       "id": "7vfmz73k85kns1flpvjrh",
-      "internalName": "BA550247152049 Rotex",
-      "location": "06B12",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429130",
-      "customerName": "S9429130",
       "id": "12vfb9ywv2llr3inbmm26jc",
-      "internalName": "SKF 6217 JEM C3",
-      "location": "06B12",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471425",
-      "customerName": "S9471425",
       "id": "uip9fjtb9jrimmlk4wv5c",
-      "internalName": "THK RSR9WVMUU+110LHM",
-      "location": "06B11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471170",
-      "customerName": "S9471170",
       "id": "qmzksc8egvyz1wv9v2ed",
-      "internalName": "THK RSR15W-285MM DWG-HA-31",
-      "location": "06B11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471058",
-      "customerName": "S9471058",
       "id": "i5c0pulcgtz6we4qov11m",
-      "internalName": "THK RSR9WZMUU+110LM",
-      "location": "06B11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030106",
-      "customerName": "S4030106",
       "id": "93dqxmqufeqwknxcjy2hg",
-      "internalName": "MCG YCRS44",
-      "location": "06B10",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9441222",
-      "customerName": "S9441222",
       "id": "vwimuu0utmhvia1t8dpo",
-      "internalName": "Con R24-2RS",
-      "location": "06B10",
-      "maxAmount": 10,
-      "minAmount": 5,
-      "quantity": 7,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445053",
-      "customerName": "S9445053",
       "id": "8zw9tfby7m3xw2lk4d0t1l",
-      "internalName": "BCA NPS103RRC",
-      "location": "06B10",
-      "maxAmount": 2,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458265",
-      "customerName": "S9458265",
       "id": "bgbuqvs4sts50zz5ec2as",
-      "internalName": "MRC 211SZZG",
-      "location": "06B10",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471407",
-      "customerName": "S9471407",
       "id": "pzwhjtjqxwmudvfd57dndq",
-      "internalName": "THK RSR15WVUU+310L RailOnly",
-      "location": "06B10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471050",
-      "customerName": "S9471050",
       "id": "lvcakyq1goeyge49yrgk7",
-      "internalName": "THK HSR35HA1SS",
-      "location": "06B10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8249545",
-      "customerName": "S8249545",
       "id": "vdjq3xavrnh5so5l8rcbxo",
-      "internalName": "SKF 22210C3",
-      "location": "06B09",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030125",
-      "customerName": "S4030125",
       "id": "minao4hlar895oi76x5qi",
-      "internalName": "THO SB32",
-      "location": "06B09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030115",
-      "customerName": "S4030115",
       "id": "ntjifwwjyu84gsii0qhjct",
-      "internalName": "Parker 008-1919B D Slide Roller",
-      "location": "06B09",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030114",
-      "customerName": "S4030114",
       "id": "44kymka5w8i8j4yo3a88nu",
-      "internalName": "Parker 008-1918C D Slide Roller",
-      "location": "06B09",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030030",
-      "customerName": "S4030030",
       "id": "g9cncvmg13xx43kgir97",
-      "internalName": "SKF 6207 ZZ",
-      "location": "06B08",
-      "maxAmount": 3,
-      "minAmount": 1,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9520012",
-      "customerName": "S9520012",
       "id": "f38189nlunwu4isxo19b4l",
-      "internalName": "SKF 6010-2RS",
-      "location": "06B08",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471214",
-      "customerName": "S9471214",
       "id": "283se9azpi2tleose9ov",
-      "internalName": "THK5016UU+760LP2HASO",
-      "location": "06B08",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458163",
-      "customerName": "S9458163",
       "id": "bltkmlmk41bvhys87pl6n",
-      "internalName": "Tim 7206WNSU",
-      "location": "06B07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471503",
-      "customerName": "S9471503",
       "id": "2t7vnzt3h0q14k8igpqitu",
-      "internalName": "MRC R20 ZZ",
-      "location": "06B07",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458164",
-      "customerName": "S9458164",
       "id": "mfhhoomsj4qm4wnp9u20gr",
-      "internalName": "MOR ER23C",
-      "location": "06B07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030024",
-      "customerName": "S4030024",
       "id": "v0pjd8y0aboihtz1zowqd",
-      "internalName": "MRC 118KR",
-      "location": "06B07",
-      "maxAmount": 5000,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4020097",
-      "customerName": "S4020097",
       "id": "wlazqscf9cs94o7o2kallo",
-      "internalName": "Bro VF4S232",
-      "location": "06B06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9447089",
-      "customerName": "S9447089",
       "id": "zd1g1yfw7py23dd80wq1d",
-      "internalName": "MOR NP27",
-      "location": "06B06",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030094",
-      "customerName": "S4030094",
       "id": "ykot8cezba7w2hij7ikwl",
-      "internalName": "SKF 6011-2RS NR",
-      "location": "06B05",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 8,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030092",
-      "customerName": "S4030092",
       "id": "1svjpeom5veysafdeymlx",
-      "internalName": "SKF 6010-2RS NR",
-      "location": "06B05",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 7,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8220020",
-      "customerName": "S8220020",
       "id": "fglywgyst9e8h8c5y3t4ka",
-      "internalName": "SKF 6008Z",
-      "location": "06B05",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 13,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458439",
-      "customerName": "S9458439",
       "id": "1l1uoclufquiom8qf40uja",
-      "internalName": "SKF 61905-2RS",
-      "location": "06B05",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471618",
-      "customerName": "S9471618",
       "id": "a63u04kr3tnjj9g3hj2wh",
-      "internalName": "THK HR2555UU",
-      "location": "06B05",
-      "maxAmount": 4,
-      "minAmount": 1,
-      "quantity": 7,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8240146",
-      "customerName": "S8240146",
       "id": "ba3whxarrgom5ik5w9xo6",
-      "internalName": "MCG MR36SS",
-      "location": "06B05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030143",
-      "customerName": "S4030143",
       "id": "yaafr2ipslfgpvgru4vwlk",
-      "internalName": "Bro VF4S123",
-      "location": "06B04",
-      "maxAmount": 6,
-      "minAmount": 2,
-      "quantity": 12,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474149",
-      "customerName": "S9474149",
       "id": "m6zypt5691jvjsbcxcclm",
-      "internalName": "NSK 6304VV",
-      "location": "06B04",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474423",
-      "customerName": "S9474423",
       "id": "lwcbhztoc49ci0342p2fq",
-      "internalName": "Seal NP32RTC",
-      "location": "06B04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474273",
-      "customerName": "S9474273",
       "id": "yum6pjkzwed5a2ocw8vzft",
-      "internalName": "Tim 19150",
-      "location": "06B04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474274",
-      "customerName": "S9474274",
       "id": "mzhc0y9exochr6lp1qox6w",
-      "internalName": "Tim 19283X",
-      "location": "06B04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9457032",
-      "customerName": "S9457032",
       "id": "xnef91opbm9nedu7rhsd",
-      "internalName": "SKF 58760",
-      "location": "06B03",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9461219",
-      "customerName": "S9461219",
       "id": "cudj4vobwm7gjj46vjzpuk",
-      "internalName": "NSK 6205DD",
-      "location": "06B03",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9461218",
-      "customerName": "S9461218",
       "id": "7i04og979o85vor4d05ow9",
-      "internalName": "NSK 6906DD",
-      "location": "06B03",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9461217",
-      "customerName": "S9461217",
       "id": "xbr4dxjw8vat6mjel2g2v",
-      "internalName": "HIW HGW35CC-20-C",
-      "location": "06B03",
-      "maxAmount": 3,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030117",
-      "customerName": "S4030117",
       "id": "2u7nr8h467jccbgr32n62c",
-      "internalName": "MCG GR28SS",
-      "location": "06B03",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1210726",
-      "customerName": "S1210726",
       "id": "xdyziji4sux6lo5r1mqr",
-      "internalName": "SFC 47 Sealmaster",
-      "location": "06B03",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9457033",
-      "customerName": "S9457033",
       "id": "dbra7gojcc9ltkubj0nhh",
-      "internalName": "22224K SKF",
-      "location": "06B02",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9457034",
-      "customerName": "S9457034",
       "id": "drurbzs601uf4bt1o27e0w",
-      "internalName": "Tim 64700",
-      "location": "06B02",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9457035",
-      "customerName": "S9457035",
       "id": "133k5vu27ueql052o55cq6e",
-      "internalName": "Tim 64450",
-      "location": "06B02",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418145",
-      "customerName": "S9418145",
       "id": "qy2wtvu9ryu5n9q9ru1bq",
-      "internalName": "Bro 6SF31",
-      "location": "06B01",
-      "maxAmount": 2,
-      "minAmount": 0,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418144",
-      "customerName": "S9418144",
       "id": "k9vvllpok495pvkfygqfz",
-      "internalName": "Bro VTWE231",
-      "location": "06B01",
-      "maxAmount": 2,
-      "minAmount": 0,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418146",
-      "customerName": "S9418146",
       "id": "yf3xg9wrxeimtrwkv0xnq",
-      "internalName": "Bro VE231",
-      "location": "06B01",
-      "maxAmount": 2,
-      "minAmount": 0,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2993598",
-      "customerName": "S2993598",
       "id": "nnss2izihpwzh300fu9x",
-      "internalName": "AXLE KIT (BIG)",
-      "location": "06A12",
-      "maxAmount": 60,
-      "minAmount": 40,
-      "quantity": 80,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2993596",
-      "customerName": "S2993596",
       "id": "712cpvz5lbhdi4qf1zxzu",
-      "internalName": "AXEL KIT (small)",
-      "location": "06A11",
-      "maxAmount": 60,
-      "minAmount": 40,
-      "quantity": 36,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474016",
-      "customerName": "S9474016",
       "id": "pzvblixnutdamifqfyoea",
-      "internalName": "MOR TB20",
-      "location": "06A11",
-      "maxAmount": 8,
-      "minAmount": 4,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030113",
-      "customerName": "S4030113",
       "id": "bg85reninmi4324wmsuxjg",
-      "internalName": "TIM HM926740",
-      "location": "06A10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474142",
-      "customerName": "S9474142",
       "id": "snp9f59jkzpb4blahc6xfn",
-      "internalName": "DOD 128747",
-      "location": "06A10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471072",
-      "customerName": "S9471072",
       "id": "ic7ydbpjp5ij7p8hhmms5m",
-      "internalName": "TIM 30308",
-      "location": "06A10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471073",
-      "customerName": "S9471073",
       "id": "amhsell1718ixgtegm4c4a",
-      "internalName": "TIM 30309",
-      "location": "06A10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8230405",
-      "customerName": "S8230405",
       "id": "rst36nix88oucb69hrqegh",
-      "internalName": "TIM L814710/49",
-      "location": "06A09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030018",
-      "customerName": "S4030018",
       "id": "1gycjb4vfrr4ixba9w5ceo",
-      "internalName": "TIM RAK1",
-      "location": "06A09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9215604",
-      "customerName": "S9215604",
       "id": "4oahgbd8c2d2sh3x60n385",
-      "internalName": "TIM 382A",
-      "location": "06A09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9401312",
-      "customerName": "S9401312",
       "id": "y9vn5uw32bnh3i87yucn1f",
-      "internalName": "TIM 28580",
-      "location": "06A09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8230404",
-      "customerName": "S8230404",
       "id": "30ldrkt13zrvcphnpyfy7l",
-      "internalName": "SRP16 - Split Cast Boston Gear",
-      "location": "06A09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9641704",
-      "customerName": "S9641704",
       "id": "684jz8epp4fxmv7l9x24xp",
-      "internalName": "DOD 124214 F4BSC200",
-      "location": "06A09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8220615",
-      "customerName": "S8220615",
       "id": "vw2ob4jq58dhb0shaujdw",
-      "internalName": "TIM 472A",
-      "location": "06A08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458302",
-      "customerName": "S9458302",
       "id": "hwc1jrh2t6k9hxv935zqxt",
-      "internalName": "NTN 1219S",
-      "location": "06A08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4030064",
-      "customerName": "S4030064",
       "id": "izya369566ghguxzg3nmxu",
-      "internalName": "TIM 220WDN",
-      "location": "06A08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458433",
-      "customerName": "S9458433",
       "id": "kpyhf8kqi2wx938kfg37",
-      "internalName": "MOR TBI6",
-      "location": "06A08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8230410",
-      "customerName": "S8230410",
       "id": "bgtoa5xz46t1n7g3wp5r3s",
-      "internalName": "TIM L217849/13",
-      "location": "06A07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8220015",
-      "customerName": "S8220015",
       "id": "bopysg6hmqg8vrckl90gmw",
-      "internalName": "TIM 33462",
-      "location": "06A07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8220010",
-      "customerName": "S8220010",
       "id": "40r185gk57ig1jfyl1avv",
-      "internalName": "TIM 33275",
-      "location": "06A07",
-      "maxAmount": 3,
-      "minAmount": 2,
-      "quantity": 8,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9441261",
-      "customerName": "S9441261",
       "id": "21j32bm2tn46ubw039pa33",
-      "internalName": "MRC R12ZZ",
-      "location": "06A07",
-      "maxAmount": 4,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9441259",
-      "customerName": "S9441259",
       "id": "m6eto1gne5pj470pfqyfe",
-      "internalName": "TIM SET6",
-      "location": "06A07",
-      "maxAmount": 3,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418137",
-      "customerName": "S9418137",
       "id": "cofw92zejyi2qsmgxgng8o",
-      "internalName": "Bro VF2S224",
-      "location": "06A07",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9811175",
-      "customerName": "S9811175",
       "id": "ixzxuc64ncq1gxec8luc9y",
-      "internalName": "TIM 758",
-      "location": "06A06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418090",
-      "customerName": "S9418090",
       "id": "a3c9nb8qu1kmmh6arw0qoi",
-      "internalName": "MCG MR32N",
-      "location": "06A06",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9811173",
-      "customerName": "S9811173",
       "id": "svitjstsak9bsl6tn5oojl",
-      "internalName": "TIM 752",
-      "location": "06A06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9811174",
-      "customerName": "S9811174",
       "id": "84sr0nrzgvg35nqmr0jgze",
-      "internalName": "TIM 759",
-      "location": "06A06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9401802",
-      "customerName": "S9401802",
       "id": "1dh2rsbi3ffcz8lvsefwrm",
-      "internalName": "TIM 52618",
-      "location": "06A05",
-      "maxAmount": 2,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9401801",
-      "customerName": "S9401801",
       "id": "ok3a8w9kjh9kzvo95t9eim",
-      "internalName": "TIM 52400",
-      "location": "06A05",
-      "maxAmount": 2,
-      "minAmount": 2,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418101",
-      "customerName": "S9418101",
       "id": "v8swhafk9xci7g495qugre",
-      "internalName": "NTN 6316 ZZ C3",
-      "location": "06A05",
-      "maxAmount": 2,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9215608",
-      "customerName": "S9215608",
       "id": "ye3bbuoefkf4fkutrqvuph",
-      "internalName": "TIM 387A",
-      "location": "06A05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418028",
-      "customerName": "S9418028",
       "id": "z4vksf6tbkq7q12xybwbcl",
-      "internalName": "DOD128852 (F48-DLM-204)",
-      "location": "06A04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9215602",
-      "customerName": "S9215602",
       "id": "2omzftud58z7h2uj3q3mst",
-      "internalName": "TIM 2735X",
-      "location": "06A04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8230448",
-      "customerName": "S8230448",
       "id": "b52vb7lxmp5dsvwckwotq",
-      "internalName": "TIM 33217",
-      "location": "06A04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424316",
-      "customerName": "S9424316",
       "id": "aj66jzfkwifvf0tuduydy",
-      "internalName": "TIM 39433",
-      "location": "06A03",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418103",
-      "customerName": "S9418103",
       "id": "1fobc5m05fg63rr5198iy",
-      "internalName": "DOD 006128",
-      "location": "06A03",
-      "maxAmount": 2,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8230459",
-      "customerName": "S8230459",
       "id": "oys57alhx2a0nqu08qjd25",
-      "internalName": "TIM 6580/35",
-      "location": "06A03",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471625",
-      "customerName": "S9471625",
       "id": "6dzvc0onccd29jvl3w53fc",
-      "internalName": "THK HRA35120UU",
-      "location": "06A02",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424314",
-      "customerName": "S9424314",
       "id": "qhvi2npmyceecf4b902jb",
-      "internalName": "39236 TIM",
-      "location": "06A02",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471624",
-      "customerName": "S9471624",
       "id": "lob8ssgorlcpsfpeccbm5m",
-      "internalName": "32016X TIM",
-      "location": "06A02",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8221000",
-      "customerName": "S8221000",
       "id": "2es0bsyfkxpdv8xwb6lif",
-      "internalName": "P3U247N REX (LNK)",
-      "location": "06A01",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9455012",
-      "customerName": "S9455012",
       "id": "xitq7g61c4p5polecz6j3t",
-      "internalName": "SFC24 MOR",
-      "location": "06A01",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458232",
-      "customerName": "S9458232",
       "id": "y7f8d98ftcqfskfhekt24t",
-      "internalName": "Parker MC4550-3",
-      "location": "05H10",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458007",
-      "customerName": "S9458007",
       "id": "g1urt4yy3i98xl0ietx0jr",
-      "internalName": "\"Enertrol SALD 3/4\"\" x 1P\"",
-      "location": "05H07",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4480063",
-      "customerName": "S4480063",
       "id": "ttcc6bojajqw0bjlrjbtga",
-      "internalName": "Enidine Eco 25MC-3B",
-      "location": "05H07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471037",
-      "customerName": "S9471037",
       "id": "lq7tcdqqp9n5p7zzjzgq8c",
-      "internalName": "Enidine SFM85x2",
-      "location": "05H07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2931021",
-      "customerName": "S2931021",
       "id": "6nf31a6w0m24mzdh0uyx3f",
-      "internalName": "\"LOV L150 - 1 5/8\"\"\"",
-      "location": "05H06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2931025",
-      "customerName": "S2931025",
       "id": "wox4ewj6mlfpl6mbo6brcs",
-      "internalName": "\"LOV L150 - 1 1/2\"\"\"",
-      "location": "05H06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379100",
-      "customerName": "S1379100",
       "id": "xpfjfek2rar0le9k3ew4q",
-      "internalName": "\"LOV L110 - 1 7/16\"\"\"",
-      "location": "05H06",
-      "maxAmount": 5000,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379110",
-      "customerName": "S1379110",
       "id": "tcggs59tzo96l9r01v3f2s",
-      "internalName": "\"LOV L110 - 1 1/4\"\"\"",
-      "location": "05H06",
-      "maxAmount": 5000,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471344",
-      "customerName": "S9471344",
       "id": "xi7819589jaech1i2hcgc",
-      "internalName": "\"Jam Nut 2\"\"-12\"",
-      "location": "05H06",
-      "maxAmount": 5000,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1327041",
-      "customerName": "S1327041",
       "id": "qnj5dimh70adra03903r29",
-      "internalName": "\"LOV LO90 - 7/8\"\"\"",
-      "location": "05H06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418113",
-      "customerName": "S9418113",
       "id": "83xekutjpw8sclyx9ntw7h",
-      "internalName": "REX 7300963",
-      "location": "05H04",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418116",
-      "customerName": "S9418116",
       "id": "nt2pr8i0q6pxufn9fpo47r",
-      "internalName": "\"MAG M700 - 1 1/2\"\"\"",
-      "location": "05H04",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418114",
-      "customerName": "S9418114",
       "id": "rvjdwlwf94oj56lqcklm4",
-      "internalName": "MAG M770 H5 insert",
-      "location": "05H04",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418117",
-      "customerName": "S9418117",
       "id": "2bkbwaom6wuu7movbdlu1k",
-      "internalName": "\"MAG M700 - 2 1/8\"\"\"",
-      "location": "05H04",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418115",
-      "customerName": "S9418115",
       "id": "w2cf6rh87j1jakezr9fvz",
-      "internalName": "\"MAG M700 - 1 1/4\"\"\"",
-      "location": "05H04",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418119",
-      "customerName": "S9418119",
       "id": "ukawq81fvuvbe2pf9yb8o",
-      "internalName": "REX E20HCB-0.875",
-      "location": "05H03",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418125",
-      "customerName": "S9418125",
       "id": "2f9890caunjfjiksjtwjy8",
-      "internalName": "REX E20-0.875C",
-      "location": "05H03",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429216",
-      "customerName": "S9429216",
       "id": "gx9zok1ox1b1tpikm89lh7",
-      "internalName": "\"MAG 500R - 1 1/2\"\"\"",
-      "location": "05H01",
-      "maxAmount": 3,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429215",
-      "customerName": "S9429215",
       "id": "x6jim4bbdsvepxyxgirva",
-      "internalName": "\"MAG 500R - 1 1/4 \"\"\"",
-      "location": "05H01",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4180071",
-      "customerName": "S4180071",
       "id": "o07o8fszgcju7qqv6n2iz",
-      "internalName": "MAG M870 H5 Hytrel",
-      "location": "05G08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4180072",
-      "customerName": "S4180072",
       "id": "vuvincoweyp5odvaabzxym",
-      "internalName": "MAG M670 H5 Hytrel",
-      "location": "05G08",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424209",
-      "customerName": "S9424209",
       "id": "rcj1awr02b86ogbbrdfaa",
-      "internalName": "MAG M570H5 Hytrel",
-      "location": "05G08",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424213",
-      "customerName": "S9424213",
       "id": "ao8783w96djzivt8hiwlwj",
-      "internalName": "MAG M470 H5 Hytrel",
-      "location": "05G08",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4180012",
-      "customerName": "S4180012",
       "id": "b1htj56raaei3wq5flalyk",
-      "internalName": "MAG M370 H5 Hytrel",
-      "location": "05G08",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424214",
-      "customerName": "S9424214",
       "id": "6y5nqnk9r5yufym37jazh",
-      "internalName": "MAG M270 H5",
-      "location": "05G08",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458228",
-      "customerName": "S9458228",
       "id": "aq45lx06pmwzibho2flgm",
-      "internalName": "Ace Stop Collar 2.50-0.045",
-      "location": "05G07",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458058",
-      "customerName": "S9458058",
       "id": "i9cwr6oxqig1vhnp69iljy",
-      "internalName": "Parker MC3350-1",
-      "location": "05G05",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458230",
-      "customerName": "S9458230",
       "id": "zspp1to7flji5kthhulho",
-      "internalName": "Enidine eco 220IF-2",
-      "location": "05G05",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458226",
-      "customerName": "S9458226",
       "id": "s98nipk933s5wqdyolybb",
-      "internalName": "Ace PP314 250-0001",
-      "location": "05G05",
-      "maxAmount": 4,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458120",
-      "customerName": "S9458120",
       "id": "b5othgkhd2hor1vt6vu9x",
-      "internalName": "Enertrol Stopcollar 3141-34010",
-      "location": "05G04",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474134",
-      "customerName": "S9474134",
       "id": "1r3ygv92olze4y2m7heorr",
-      "internalName": "Boston FC15 7/8",
-      "location": "05G04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474135",
-      "customerName": "S9474135",
       "id": "3u5uib30x8q8cqcop3lzs6",
-      "internalName": "XFCA 15 Polyurethane Boston Gear",
-      "location": "05G04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474136",
-      "customerName": "S9474136",
       "id": "0u2nt1r7sjr6wbd04qlrxo",
-      "internalName": "Bro HN40B19 Idler",
-      "location": "05G04",
-      "maxAmount": 5000,
-      "minAmount": 1,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4251006",
-      "customerName": "S4251006",
       "id": "gcqlv2k3bz4mn2l79m0ba",
-      "internalName": "ACE SALD 3/4 x 2P",
-      "location": "05G03",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4251002",
-      "customerName": "S4251002",
       "id": "ubrjl3u2f4aua6mzxehwbi",
-      "internalName": "Parker MA4525",
-      "location": "05G03",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471294",
-      "customerName": "S9471294",
       "id": "3vqc8fmnsvwtxcxi8smg6",
-      "internalName": "DOD 113617",
-      "location": "05G02",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9461114",
-      "customerName": "S9461114",
       "id": "x25kgj2e6kjvar2qll8ne",
-      "internalName": "\"Lov L110 - 1 1/8\"\"\"",
-      "location": "05F14",
-      "maxAmount": 1,
-      "minAmount": 0,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9461115",
-      "customerName": "S9461115",
       "id": "emdmo0qw5kl9z2d96za7nu",
-      "internalName": "\"Lov L110 3/4\"\"\"",
-      "location": "05F14",
-      "maxAmount": 1,
-      "minAmount": 0,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1329030",
-      "customerName": "S1329030",
       "id": "7h7vil322zrrptqkf2i0mp",
-      "internalName": "\"Lov L095 - 1\"\"\"",
-      "location": "05F13",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 10,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1329130",
-      "customerName": "S1329130",
       "id": "6ie4skmxrdbyqbv8tty9he",
-      "internalName": "\"Lov L075 - 5/8\"\"\"",
-      "location": "05F13",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1329031",
-      "customerName": "S1329031",
       "id": "l2z14kudb96g61rl0kws4",
-      "internalName": "BRO JS4U insert",
-      "location": "05F13",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1329135",
-      "customerName": "S1329135",
       "id": "648c9c80so09o994877xbb",
-      "internalName": "\"Lov L075 - 1/2\"\"\"",
-      "location": "05F13",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2930100",
-      "customerName": "S2930100",
       "id": "n55ahx8g6cjz8aczvxazib",
-      "internalName": "Lov L150 SOX",
-      "location": "05F12",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1329131",
-      "customerName": "S1329131",
       "id": "ialffjcd45svyt83p2tywj",
-      "internalName": "\"Lov L075 - 3/4\"\"\"",
-      "location": "05F12",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 9,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2930101",
-      "customerName": "S2930101",
       "id": "iwrfe6jgonolqlgfrwy9a",
-      "internalName": "Lov L075 SOX",
-      "location": "05F12",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2930102",
-      "customerName": "S2930102",
       "id": "6klqb0ec6mfnv3lw2barxs",
-      "internalName": "Lov L099/100 SOX",
-      "location": "05F12",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2930103",
-      "customerName": "S2930103",
       "id": "ubbgnvqqc6is49gg2h8",
-      "internalName": "Lov L110 Hytrel",
-      "location": "05F12",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1329136",
-      "customerName": "S1329136",
       "id": "cvxcvdj53cap86ri4vh6g",
-      "internalName": "Lov L090/95 SOX",
-      "location": "05F12",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1329125",
-      "customerName": "S1329125",
       "id": "an6nvigddat6y40evvannp",
-      "internalName": "Lov L070 RSB x RSB",
-      "location": "05F12",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2930215",
-      "customerName": "S2930215",
       "id": "fhexgqqjqzehp1cqail2vw",
-      "internalName": "Rockwell845-FC-A-B",
-      "location": "05F11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424450",
-      "customerName": "S9424450",
       "id": "tq3hmblghwrs2noctclp3",
-      "internalName": "\"LO95 3/4 x 1 1/8\"\"\"",
-      "location": "05F11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9457004",
-      "customerName": "S9457004",
       "id": "xwht7wlwqjfezji1s5b22b",
-      "internalName": "\"TimQF55303 X 1/2\"\"\"",
-      "location": "05F11",
-      "maxAmount": 1,
-      "minAmount": 0,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1329032",
-      "customerName": "S1329032",
       "id": "4hqng1v72e5seb08s1u44j",
-      "internalName": "\"Lov L090/AL090 7/8\"\"\"",
-      "location": "05F11",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4280920",
-      "customerName": "S4280920",
       "id": "2hye5fo7mx64v9ltln4f0i",
-      "internalName": "Lov L075 RSB XRSB",
-      "location": "05F11",
-      "maxAmount": 3,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379080",
-      "customerName": "S1379080",
       "id": "zichnftutcw58r3a0lash",
-      "internalName": "\"Lov L099 - 1?\"\"\"",
-      "location": "05F11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1329121",
-      "customerName": "S1329121",
       "id": "ss1fvrn8ztetl7yilu62dg",
-      "internalName": "\"Lov L075 - 7/16\"\"\"",
-      "location": "05F11",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9528602",
-      "customerName": "S9528602",
       "id": "6oachaqesma7d1lx6vwr2n",
-      "internalName": "Mar 32 H200 (SK)",
-      "location": "05F10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1309056",
-      "customerName": "S1309056",
       "id": "4k87q6y5jfziojogv38k",
-      "internalName": "W4-20-20",
-      "location": "05F10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2060309",
-      "customerName": "S2060309",
       "id": "ymgz9agokycg91bexypu5",
-      "internalName": "Woods P64-8M-50 (SK)",
-      "location": "05F10",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2930185",
-      "customerName": "S2930185",
       "id": "swsk7b7r1mn7rln5fmbp9h",
-      "internalName": "Schmidt FO11A 3/8 x 3/8",
-      "location": "05F10",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1309057",
-      "customerName": "S1309057",
       "id": "ucnme9ee20b3wc6sqwfr9y",
-      "internalName": "W61-20-20",
-      "location": "05F10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1309058",
-      "customerName": "S1309058",
       "id": "rgn3v8k9dmaeckvtzbqq8g",
-      "internalName": "W61-16-16",
-      "location": "05F09",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1309053",
-      "customerName": "S1309053",
       "id": "rhyc3k05yar1lpgty79af5",
-      "internalName": "W4-40-40U",
-      "location": "05F09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 8,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471339",
-      "customerName": "S9471339",
       "id": "qm3gt1hdjzj4anyg45amfr",
-      "internalName": "Lantech AT0125-C.625 -C.500",
-      "location": "05F09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471364",
-      "customerName": "S9471364",
       "id": "5gdjgvyoacas6n0lupqqh",
-      "internalName": "Lov HD-6 U Joint",
-      "location": "05F09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1309059",
-      "customerName": "S1309059",
       "id": "vvf1nkzfo5rq0s4zud0zls",
-      "internalName": "W3-16-16",
-      "location": "05F09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1309055",
-      "customerName": "S1309055",
       "id": "eq645wds14n04tl6ucukiig",
-      "internalName": "W4-48-48",
-      "location": "05F08",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1301012",
-      "customerName": "S1301012",
       "id": "fg2gdlm47qiltdc00rz8vg",
-      "internalName": "W46-20-20",
-      "location": "05F08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1309054",
-      "customerName": "S1309054",
       "id": "t5oqmp4fbslcofe0rsom",
-      "internalName": "W61-48-48",
-      "location": "05F08",
-      "maxAmount": 5000,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1301004",
-      "customerName": "S1301004",
       "id": "bjgv5ue53jwzyz6by4x4zi",
-      "internalName": "W43-24-24U",
-      "location": "05F07",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1309010",
-      "customerName": "S1309010",
       "id": "9ik9jdr86poq5c3n6i9zfn",
-      "internalName": "W4-32-32",
-      "location": "05F07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1309020",
-      "customerName": "S1309020",
       "id": "hixq1ot05tbzcyxqi5myxr",
-      "internalName": "W61-47-24",
-      "location": "05F07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1309030",
-      "customerName": "S1309030",
       "id": "jca8w1z3d48kuwyklfb1",
-      "internalName": "W4-24-24",
-      "location": "05F07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1301000",
-      "customerName": "S1301000",
       "id": "rxoertyk8ystia69lr4hzq",
-      "internalName": "W46-20-20",
-      "location": "05F07",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1301008",
-      "customerName": "S1301008",
       "id": "rgjknyhguedx8638frmdk",
-      "internalName": "W43-12-12U",
-      "location": "05F07",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1329132",
-      "customerName": "S1329132",
       "id": "xdvwg0c9mvo9ib1p3842m",
-      "internalName": "Lov L075 x 7/8",
-      "location": "05F06",
-      "maxAmount": 3,
-      "minAmount": 3,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429211",
-      "customerName": "S9429211",
       "id": "yi876sqxkz9qh0ntfxm2l",
-      "internalName": "MAG 500R Blank Bore",
-      "location": "05F02",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S5410045",
-      "customerName": "S5410045",
       "id": "qzod4qgvjt9w352t2dj5ok",
-      "internalName": "McMaster 3/4 NPT x 12",
-      "location": "05F01",
-      "maxAmount": 6,
-      "minAmount": 3,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424210",
-      "customerName": "S9424210",
       "id": "9o4rmig6j1he5kepgfz50u",
-      "internalName": "MAG 500R 2 3/8",
-      "location": "05F01",
-      "maxAmount": 5000,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424211",
-      "customerName": "S9424211",
       "id": "jti0l4d29vh94tuxo996ca",
-      "internalName": "MAG 400R Blank Bore",
-      "location": "05F01",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424212",
-      "customerName": "S9424212",
       "id": "ux9i05uom31hia0pizm1s",
-      "internalName": "MAG M300R 1/2",
-      "location": "05F01",
-      "maxAmount": 3,
-      "minAmount": 1,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424215",
-      "customerName": "S9424215",
       "id": "j4qcrscdea4y8iuxihlk",
-      "internalName": "MAG 200R Blank Bore",
-      "location": "05F01",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418194",
-      "customerName": "S9418194",
       "id": "226p58rzse6b757kppzat",
-      "internalName": "MAG M40002806 7/8",
-      "location": "05F01",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9461290",
-      "customerName": "S9461290",
       "id": "i8jec1sf5tp7vqi4a6e5i",
-      "internalName": "DOD 011114",
-      "location": "05D12",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4010000",
-      "customerName": "S4010000",
       "id": "ooiklt1qfzpuoyyh5mter",
-      "internalName": "1347570075",
-      "location": "05D10",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9402342",
-      "customerName": "S9402342",
       "id": "hogg56xznise23ags7uybe",
-      "internalName": "1347570044",
-      "location": "05D10",
-      "maxAmount": 3,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4010001",
-      "customerName": "S4010001",
       "id": "psy95yud3to55iq71espou",
-      "internalName": "1347570088",
-      "location": "05D10",
-      "maxAmount": 3,
-      "minAmount": 1,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4010003",
-      "customerName": "S4010003",
       "id": "sc3cplbwq2qssowxg44fwi",
-      "internalName": "MAG M040-10812",
-      "location": "05D10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4211013",
-      "customerName": "S4211013",
       "id": "15l961txcygafs4lzyh2e",
-      "internalName": "\"Bro 2012 - 5/8\"\"\"",
-      "location": "05D08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 7,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9477003",
-      "customerName": "S9477003",
       "id": "9kddtber2lnkj0509ykqj",
-      "internalName": "MAR 50A36H",
-      "location": "05D08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429436",
-      "customerName": "S9429436",
       "id": "a8hndslkbzurln52pct7pf",
-      "internalName": "\"MAR 50BS13HT - 1?\"\"\"",
-      "location": "05D08",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474494",
-      "customerName": "S9474494",
       "id": "u94jtydohxd1l2e6kvi8",
-      "internalName": "\"MAR 40BB17H - 5/8\"\"\"",
-      "location": "05D08",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418012",
-      "customerName": "S9418012",
       "id": "kwy2mj4wv5mvsk8ak6eqm",
-      "internalName": "DOD 117120",
-      "location": "05D08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9522102",
-      "customerName": "S9522102",
       "id": "1brprvcy079s84oz7vlsd",
-      "internalName": "DOD117124",
-      "location": "05D07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9418010",
-      "customerName": "S9418010",
       "id": "6wrnls5gtmubinb0tsgcm",
-      "internalName": "DOD117114",
-      "location": "05D07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2060305",
-      "customerName": "S2060305",
       "id": "zo0ov0rnhchzaixjyi7x8",
-      "internalName": "DOD117122",
-      "location": "05D07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9461207",
-      "customerName": "S9461207",
       "id": "tnyjiwq68srxcg9ox8icsj",
-      "internalName": "DOD117327",
-      "location": "05D07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2939050",
-      "customerName": "S2939050",
       "id": "fwm2xsgipjohdvt6ln8l8i",
-      "internalName": "DOD117117",
-      "location": "05D07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9511271",
-      "customerName": "S9511271",
       "id": "m9f3qdyqob2c2pykr1fu8",
-      "internalName": "DOD117352",
-      "location": "05D06",
-      "maxAmount": 2,
-      "minAmount": 2,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2930059",
-      "customerName": "S2930059",
       "id": "axkm8itoznfdqzzphrpo3o",
-      "internalName": "DOD117110",
-      "location": "05D06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9447480",
-      "customerName": "S9447480",
       "id": "vwmd1smn05rbyd3yxlmrin",
-      "internalName": "DOD120411",
-      "location": "05D06",
-      "maxAmount": 3,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4211009",
-      "customerName": "S4211009",
       "id": "fhnkyya8xxbhq94f3kzh47",
-      "internalName": "Bro CSQ SLV CPLNG",
-      "location": "05D06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9230060",
-      "customerName": "S9230060",
       "id": "ks5z9m846ljocg6st9xxb",
-      "internalName": "DOD117328",
-      "location": "05D05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9230061",
-      "customerName": "S9230061",
       "id": "p1cq8kmtkaz7nkfy3wau",
-      "internalName": "DOD117337",
-      "location": "05D05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379021",
-      "customerName": "S1379021",
       "id": "lqzu7fcd08uyoqpsu8aj",
-      "internalName": "TBW 6H",
-      "location": "05D05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379031",
-      "customerName": "S1379031",
       "id": "p53lk7o22o9guwitturm69",
-      "internalName": "TBW 7H",
-      "location": "05D05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379041",
-      "customerName": "S1379041",
       "id": "9mtspyhn9etv6edu1vu5i",
-      "internalName": "TBW 8H",
-      "location": "05D05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2060825",
-      "customerName": "S2060825",
       "id": "gk1nnzc256wu7y2xg9lyte",
-      "internalName": "G-32-28",
-      "location": "05D02",
-      "maxAmount": 6,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2060830",
-      "customerName": "S2060830",
       "id": "y69r2gunfgjwfrt1rzv19",
-      "internalName": "G-32-32",
-      "location": "05D02",
-      "maxAmount": 6,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S3920000",
-      "customerName": "S3920000",
       "id": "w691qm3bcbckbha1i9169l",
-      "internalName": "Parker HC-32-12",
-      "location": "05D02",
-      "maxAmount": 6,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S3920025",
-      "customerName": "S3920025",
       "id": "3qazam7qjfizmrnflzmbo",
-      "internalName": "W-32 Weld adapter",
-      "location": "05D02",
-      "maxAmount": 10,
-      "minAmount": 5,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S3920101",
-      "customerName": "S3920101",
       "id": "5tt2dfhelcn776z462fgrt",
-      "internalName": "C-SN-32",
-      "location": "05D02",
-      "maxAmount": 10,
-      "minAmount": 5,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2060835",
-      "customerName": "S2060835",
       "id": "xlyozgcr8agc9ogllyb055",
-      "internalName": "P-HC-SB-32-6",
-      "location": "05D01",
-      "maxAmount": 6,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2060800",
-      "customerName": "S2060800",
       "id": "35rblh8bfqsp0nmy7r1qpb",
-      "internalName": "G-32-8",
-      "location": "05D01",
-      "maxAmount": 6,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2060805",
-      "customerName": "S2060805",
       "id": "832h5u7unmwycwzveuo6w9",
-      "internalName": "G-32-12",
-      "location": "05D01",
-      "maxAmount": 6,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2060810",
-      "customerName": "S2060810",
       "id": "kkyiot250ei3hw5cbxowmy",
-      "internalName": "G-32-16",
-      "location": "05D01",
-      "maxAmount": 6,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2060815",
-      "customerName": "S2060815",
       "id": "inun5tkehw2qbttx83j7v",
-      "internalName": "G-32-20",
-      "location": "05D01",
-      "maxAmount": 6,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2060820",
-      "customerName": "S2060820",
       "id": "i8lnc3jgccexqkn8ko3x99",
-      "internalName": "G-32-24",
-      "location": "05D01",
-      "maxAmount": 6,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379145",
-      "customerName": "S1379145",
       "id": "6y25ai0uc0iy4411kez8m",
-      "internalName": "\"Woods 3J - 1/2\"\"\"",
-      "location": "05C09",
-      "maxAmount": 4,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9570066",
-      "customerName": "S9570066",
       "id": "kfxt9agbs2ohir7ghvt7l6",
-      "internalName": "\"Woods 6S - 1 1/8\"\"\"",
-      "location": "05C09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379010",
-      "customerName": "S1379010",
       "id": "zk0x9qbxw55n4zdhzqeaq",
-      "internalName": "Lov 5JE",
-      "location": "05C09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379000",
-      "customerName": "S1379000",
       "id": "xj8ll0xp8esw2aijtyfe",
-      "internalName": "Woods 4JE",
-      "location": "05C09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379150",
-      "customerName": "S1379150",
       "id": "3e7901u5xon91htwi6xtle",
-      "internalName": "Woods 3JE",
-      "location": "05C09",
-      "maxAmount": 3,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379020",
-      "customerName": "S1379020",
       "id": "kgzy1sqqr8c9is47skyuyn",
-      "internalName": "MAR 6JE",
-      "location": "05C08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379040",
-      "customerName": "S1379040",
       "id": "4qbw5cloinuw5hsz5hnj3m",
-      "internalName": "Lov 8JE",
-      "location": "05C08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9441005",
-      "customerName": "S9441005",
       "id": "7o9rqy8xr5a1gwifib3801",
-      "internalName": "\"Lov L090 - 3/4\"\"\"",
-      "location": "05C08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2930146",
-      "customerName": "S2930146",
       "id": "vp04gy7kkkfg6evyqxsh7",
-      "internalName": "Woods 9JE",
-      "location": "05C08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2931005",
-      "customerName": "S2931005",
       "id": "xmxu01lifwjaol9c4nm1y",
-      "internalName": "\"Guardian M24 - 5/8\"\"\"",
-      "location": "05C07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2931015",
-      "customerName": "S2931015",
       "id": "my6velbh8nbnd867dkxff",
-      "internalName": "\"Guardian M24 - 1/4\"\"\"",
-      "location": "05C07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2931020",
-      "customerName": "S2931020",
       "id": "lvmhmed4uo0ssjn4cj7rmm",
-      "internalName": "\"Guardian M24 - 3/8\"\"\"",
-      "location": "05C07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9476023",
-      "customerName": "S9476023",
       "id": "zqp4ne7ncdq2q1k594nna",
-      "internalName": "411629-06-A",
-      "location": "05C07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379115",
-      "customerName": "S1379115",
       "id": "e8563wrdjo6sm8hkglnkni",
-      "internalName": "\"MAR 7S - 1 1/4\"\"\"",
-      "location": "05C07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9570067",
-      "customerName": "S9570067",
       "id": "8pj8mam2osnuzkaqdt40t",
-      "internalName": "\"6S - 1 3/8\"\"x32mm Woods\"",
-      "location": "05C07",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9794048",
-      "customerName": "S9794048",
       "id": "s4yx1hz3norn94ydavz81",
-      "internalName": "\"D40B14H - 3/4\"\"\"",
-      "location": "05C06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130467",
-      "customerName": "S8130467",
       "id": "vozlz9tctfwxhs3hdyy5m",
-      "internalName": "Bro 60A40",
-      "location": "05C06",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445196",
-      "customerName": "S9445196",
       "id": "5qg4v3ojap39tfewlaoib",
-      "internalName": "CLI 2C-075",
-      "location": "05C06",
-      "maxAmount": 10,
-      "minAmount": 5,
-      "quantity": 10,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9460003",
-      "customerName": "S9460003",
       "id": "iuj8trw041b2bxv63zr0t5",
-      "internalName": "\"MAR 80BS15 - 1 3/4\"\"\"",
-      "location": "05C06",
-      "maxAmount": 3,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4060000",
-      "customerName": "S4060000",
       "id": "en7ob4wejpvdxccvl516yb",
-      "internalName": "FLG 7570",
-      "location": "05C05",
-      "maxAmount": 2,
-      "minAmount": 2,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4060001",
-      "customerName": "S4060001",
       "id": "i0rqpl8wnd1qse4p22826i",
-      "internalName": "Nook WKB 2647",
-      "location": "05C05",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130126",
-      "customerName": "S8130126",
       "id": "cmbekp7jxnahw80mxsu2gh",
-      "internalName": "\"60BS21HT - 1\"\"\"",
-      "location": "05C05",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445187",
-      "customerName": "S9445187",
       "id": "li4h8gvv2slfahb97sk5d",
-      "internalName": "CLI 2C-143",
-      "location": "05C04",
-      "maxAmount": 8,
-      "minAmount": 4,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445186",
-      "customerName": "S9445186",
       "id": "ve5n8lnnvxdtytuq6zw8e",
-      "internalName": "CLI2C-218",
-      "location": "05C04",
-      "maxAmount": 2,
-      "minAmount": 2,
-      "quantity": 11,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445244",
-      "customerName": "S9445244",
       "id": "n7ft0ja2hfbu4zm1xj6kdq",
-      "internalName": "\"MAR 2012 - 3/4\"\"\"",
-      "location": "05C01",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4000012",
-      "customerName": "S4000012",
       "id": "7xb9i4uiwo7mzdkj9wdmr",
-      "internalName": "\"MAR 35BS18 - 1 3/8\"\"\"",
-      "location": "05B12",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9409853",
-      "customerName": "S9409853",
       "id": "w0di8koy83vf4cwlhvrmc",
-      "internalName": "\"Morse FB5016 x 1\"\"\"",
-      "location": "05B12",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130010",
-      "customerName": "S8130010",
       "id": "kp2d43fxkend8kj5zrougq",
-      "internalName": "MAR 60A20",
-      "location": "05B11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130030",
-      "customerName": "S8130030",
       "id": "agtb1m790up48e5ymp2mr9",
-      "internalName": "\"MAR 50BS14 - 1 1/8\"\"\"",
-      "location": "05B11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9457050",
-      "customerName": "S9457050",
       "id": "ruo0a311r9s7yivomvziwo",
-      "internalName": "\"MAR 50BS15HT - 1 3/16\"\"\"",
-      "location": "05B11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9461109",
-      "customerName": "S9461109",
       "id": "clofb27tsxpaqeztri87tm",
-      "internalName": "\"MAR 50BS14HT - 1 3/16\"\"\"",
-      "location": "05B11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458282",
-      "customerName": "S9458282",
       "id": "d5fgetnehr5f74fz3j8pr7",
-      "internalName": "MAR 60B23",
-      "location": "05B11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9801300",
-      "customerName": "S9801300",
       "id": "1434fii0wivhmy0t52fywq",
-      "internalName": "MAR D40B16H",
-      "location": "05B10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130470",
-      "customerName": "S8130470",
       "id": "s2xku7jr5hk9epl6tqy95u",
-      "internalName": "\"MAR 60BS15 - 1\"\"\"",
-      "location": "05B10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130457",
-      "customerName": "S8130457",
       "id": "hwd6bdpu40csdjrdz1vbp",
-      "internalName": "MAR 40B20",
-      "location": "05B10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4000014",
-      "customerName": "S4000014",
       "id": "vsmpf85lulk1z2c2krnfuo",
-      "internalName": "MAR 35A18",
-      "location": "05B10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4000013",
-      "customerName": "S4000013",
       "id": "6qgrfhjqiy51xf8zzt0zdz",
-      "internalName": "\"LinGear 35BS51HT - 1\"\"\"",
-      "location": "05B10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429029",
-      "customerName": "S9429029",
       "id": "0iffgk0mkcksqduhff9vojn",
-      "internalName": "\"MAR 50BS13 - 1 1/8\"\"\"",
-      "location": "05B09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474001",
-      "customerName": "S9474001",
       "id": "ki3uzqxho23nu9mcbrwn4",
-      "internalName": "\"MAR 40BS38HT - 1\"\"\"",
-      "location": "05B09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130440",
-      "customerName": "S8130440",
       "id": "19yzscwsaf20mb8zppn1i2b",
-      "internalName": "MAR 60B18",
-      "location": "05B09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9529300",
-      "customerName": "S9529300",
       "id": "adrt5l9wvbktfnwqxzylsf",
-      "internalName": "MAR 25B24",
-      "location": "05B08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "A9794000",
-      "customerName": "A9794000",
       "id": "mvyh353mtsmnaj7kgpubl",
-      "internalName": "\"MAR 40BS11HT - 5/8\"\"\"",
-      "location": "05B08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471324",
-      "customerName": "S9471324",
       "id": "hm76buwbe5aqwtttegzfw",
-      "internalName": "\"MAR 50BS12HT - 1\"\"\"",
-      "location": "05B08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130011",
-      "customerName": "S8130011",
       "id": "izkghma4htb66b856r2y16",
-      "internalName": "\"MAR 50BS12HT - 1 1/4\"\"\"",
-      "location": "05B08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424435",
-      "customerName": "S9424435",
       "id": "56yqtallba4e3ddm8jbjvm",
-      "internalName": "\"MAR 41BS11 - 3/4\"\"\"",
-      "location": "05B08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445120",
-      "customerName": "S9445120",
       "id": "6ke9x88q8jlzlpye40urp",
-      "internalName": "\"MAR 50BS22HT - 1 3/8\"\"\"",
-      "location": "05B07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445243",
-      "customerName": "S9445243",
       "id": "ex5vjsle9nic9f2ka02zcb",
-      "internalName": "\"MAR 50BS19 - 1\"\"\"",
-      "location": "05B07",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130025",
-      "customerName": "S8130025",
       "id": "r5717rfigun09ql4iqpp4pc",
-      "internalName": "\"50BS38HT - 1 7/16\"\"\"",
-      "location": "05B07",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130020",
-      "customerName": "S8130020",
       "id": "3r06cw7c6d4tbg3a31yp5",
-      "internalName": "\"50BS22HT - 1 3/8\"\"\"",
-      "location": "05B07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S7250001",
-      "customerName": "S7250001",
       "id": "a336flykju52imdp4135tx",
-      "internalName": "35935 Valve Breaker",
-      "location": "05B07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445104",
-      "customerName": "S9445104",
       "id": "p2fox1jsuems68v2xp54t9",
-      "internalName": "Cambridge SKFW-134",
-      "location": "05B06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "V3C/03 SS Flat Wire Sprocket",
-      "customerName": "V3C/03 SS Flat Wire Sprocket",
       "id": "q95f2kdl0n7g0o1mx5j3e",
-      "internalName": "V3C/03 SS Flat Wire Sprocket",
-      "location": "05B06",
-      "maxAmount": 5000,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "\"MAR40BS12HT - 3/4 \"\"\"",
-      "customerName": "\"MAR40BS12HT - 3/4 \"\"\"",
       "id": "v6zxmb4tbdpnqg38kpp1w",
-      "internalName": "\"MAR40BS12HT - 3/4 \"\"\"",
-      "location": "05B06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471200",
-      "customerName": "S9471200",
       "id": "n5bbgpebv8iimvp8zagila",
-      "internalName": "\"MAR 60BS12 - 3/4\"\"\"",
-      "location": "05B06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130006",
-      "customerName": "S8130006",
       "id": "8mspppvmcvhgkngtjl7i2p",
-      "internalName": "\"Bro H60P15 - 1 3/8\"\"\"",
-      "location": "05B06",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130003",
-      "customerName": "S8130003",
       "id": "ycmylysz88aoe59950qe",
-      "internalName": "\"MAR 40BS18 - 1\"\"\"",
-      "location": "05B06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471133",
-      "customerName": "S9471133",
       "id": "v4wcb5zcbyhomynq3t2pu",
-      "internalName": "Bro H40SH22",
-      "location": "05B06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429440",
-      "customerName": "S9429440",
       "id": "mrxlxg11ah8hgzkb3zdia",
-      "internalName": "MAR 50TTA32-50",
-      "location": "05B05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424S95",
-      "customerName": "S9424S95",
       "id": "lvcypudha759vpeo3ixg",
-      "internalName": "DOD 096019",
-      "location": "05B05",
-      "maxAmount": 6,
-      "minAmount": 3,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9429441",
-      "customerName": "S9429441",
       "id": "vytis3lcw6hhp0o7z7vrd",
-      "internalName": "DOD 096067",
-      "location": "05B05",
-      "maxAmount": 6,
-      "minAmount": 3,
-      "quantity": 6,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9747009",
-      "customerName": "S9747009",
       "id": "dd70tx6knfl7mkap7v01vn",
-      "internalName": "Bro 2BK62H",
-      "location": "05B05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445152",
-      "customerName": "S9445152",
       "id": "lyt77uvlnwr6ce52vuyh8",
-      "internalName": "\"MAR 60BS15 - 1 3/8\"\"\"",
-      "location": "05B04",
-      "maxAmount": 3,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474548",
-      "customerName": "S9474548",
       "id": "68rlyrwv4snbimtolp4lj",
-      "internalName": "GAT P8MX-25S-36",
-      "location": "05B04",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474314",
-      "customerName": "S9474314",
       "id": "idkwn5tej3irv12n7r34n",
-      "internalName": "GAT 8MX-90S-12",
-      "location": "05B04",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474467",
-      "customerName": "S9474467",
       "id": "47y9ruu7n168mtyglnle5c",
-      "internalName": "\"60BS12HT - 1 1/4\"\"\"",
-      "location": "05B04",
-      "maxAmount": 3,
-      "minAmount": 2,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130393",
-      "customerName": "S8130393",
       "id": "hqxubnl8mobon86gx04b38",
-      "internalName": "MAR100B15",
-      "location": "05B04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445106",
-      "customerName": "S9445106",
       "id": "srpva1139ebr3u7ni19ivk",
-      "internalName": "MAR 50Q48",
-      "location": "05B03",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2060009",
-      "customerName": "S2060009",
       "id": "w6uvci6expm5gqu0g39og",
-      "internalName": "\"BRO P1 - 1 5/8\"\"\"",
-      "location": "05B03",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9708013",
-      "customerName": "S9708013",
       "id": "1mgykua9t72zbvyettxc1",
-      "internalName": "BRO 3TB46",
-      "location": "05B02",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9449094",
-      "customerName": "S9449094",
       "id": "qwihqdk9pcpvakztkg9h",
-      "internalName": "\"DOD 2B036H (H1 3/16\"\")\"",
-      "location": "05B02",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130398",
-      "customerName": "S8130398",
       "id": "0lbi5kk8k7q7ud8v0g0zwf",
-      "internalName": "MAR100B15",
-      "location": "05B02",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9708014",
-      "customerName": "S9708014",
       "id": "zawlj1ijrge061b6a4gw5ga",
-      "internalName": "\"BRO BK67 - 1 3/16\"\"\"",
-      "location": "05B01",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9441002",
-      "customerName": "S9441002",
       "id": "ymnh9efbhg2qofw7jjtnw",
-      "internalName": "DS60ATB19H",
-      "location": "05A11",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458241",
-      "customerName": "S9458241",
       "id": "elctegcpe6cl8bkow3pp2a",
-      "internalName": "\"40BS60 - 1\"\"\"",
-      "location": "05A11",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9794069",
-      "customerName": "S9794069",
       "id": "mxmzujk5zdrbhfrn3wn8h",
-      "internalName": "\"80BS18 - 1 3/16\"\"\"",
-      "location": "05A11",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9441003",
-      "customerName": "S9441003",
       "id": "hc25idqgj7ihsp19nnvp9n",
-      "internalName": "\"60BS19 - 1 3/16\"\"\"",
-      "location": "05A10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9441004",
-      "customerName": "S9441004",
       "id": "9h41j2sk9m5orjy6mg7erl",
-      "internalName": "\"40BS14 - 1\"\"\"",
-      "location": "05A10",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9474531",
-      "customerName": "S9474531",
       "id": "4d2h3f40ibpwyrk7y1tap",
-      "internalName": "\"60BS13 - 1\"\"\"",
-      "location": "05A09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9794054",
-      "customerName": "S9794054",
       "id": "2fehehrc7a356j3usdle1q",
-      "internalName": "\"50BS17 - 1\"\"\"",
-      "location": "05A09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9471325",
-      "customerName": "S9471325",
       "id": "bg0ao2k511iuygedb7e8a",
-      "internalName": "44HQ150",
-      "location": "05A08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130430",
-      "customerName": "S8130430",
       "id": "x5g2aol0u6i60sicdye8",
-      "internalName": "\"100BS19 - 2 7/16\"\"\"",
-      "location": "05A08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S4130000",
-      "customerName": "S4130000",
       "id": "0r5pik9gtcvozfyxhrjy2gs",
-      "internalName": "\"50BS15HT - 1\"\"\"",
-      "location": "05A08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130458",
-      "customerName": "S8130458",
       "id": "xlgjwwy991rdbec2ny0mbr",
-      "internalName": "D60Q22",
-      "location": "05A08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445941",
-      "customerName": "S9445941",
       "id": "l8crcei7oy9ks48nz5tu",
-      "internalName": "\"60BS19HT - 1 3/16\"\"\"",
-      "location": "05A07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130469",
-      "customerName": "S8130469",
       "id": "tew71nojun93iweq5j8r8i",
-      "internalName": "60P21H",
-      "location": "05A07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9409883",
-      "customerName": "S9409883",
       "id": "dydc8kzpv9rqaiin0avy",
-      "internalName": "\"60BS30 - 2 1/2\"\"\"",
-      "location": "05A07",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458238",
-      "customerName": "S9458238",
       "id": "tcg32n7elg7h7fmja5ngv",
-      "internalName": "\"60BS17 - 1 3/16\"\"\"",
-      "location": "05A06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9458239",
-      "customerName": "S9458239",
       "id": "11wtu0uvhedi623ho3c87f",
-      "internalName": "\"60BS12 - 1 3/16\"\"\"",
-      "location": "05A06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445242",
-      "customerName": "S9445242",
       "id": "0qjmow2hml1acn027t8i08",
-      "internalName": "\"50BS17 - 1 3/16\"\"\"",
-      "location": "05A06",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445067",
-      "customerName": "S9445067",
       "id": "9rm6c5kiph67z50zxn53v",
-      "internalName": "MAR 60BS19HT-1",
-      "location": "05A05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445066",
-      "customerName": "S9445066",
       "id": "gy4xn85jkwpxf0r1oj6ozr",
-      "internalName": "\"MAR 60BS16 - 1\"\"\"",
-      "location": "05A05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445103",
-      "customerName": "S9445103",
       "id": "yocq3is1iro02pdayw9o9",
-      "internalName": "\"MAR 60BS16HT - 1\"\"\"",
-      "location": "05A05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9641716",
-      "customerName": "S9641716",
       "id": "xmdxsi5v5yehrace9ac99q",
-      "internalName": "\"MAR 60BS17 - 1 1/4\"\"\"",
-      "location": "05A05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130105",
-      "customerName": "S8130105",
       "id": "zc1gcko7r2zg3l7gxdl3m",
-      "internalName": "\"60BS12HT - 1\"\"\"",
-      "location": "05A05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445245",
-      "customerName": "S9445245",
       "id": "jz1khx4udetkh05y18nl",
-      "internalName": "\"MAR 50BS18 - 1\"\"\"",
-      "location": "05A03",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445246",
-      "customerName": "S9445246",
       "id": "lzqp6pk33cphxkodagjmn",
-      "internalName": "\"50BS18 - 1 1/4\"\"\"",
-      "location": "05A03",
-      "maxAmount": 5000,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445248",
-      "customerName": "S9445248",
       "id": "9nc1gb5h0sqjcmq626jz5",
-      "internalName": "\"50BS18HT - 1\"\"\"",
-      "location": "05A03",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445249",
-      "customerName": "S9445249",
       "id": "7tkshrq63bsb6lntwsqss",
-      "internalName": "\"MAR P1 - 7/8\"\"\"",
-      "location": "05A03",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445250",
-      "customerName": "S9445250",
       "id": "dw71gipeby41v4ay1ijual",
-      "internalName": "\"MAR SK - 1 1/2\"\"\"",
-      "location": "05A03",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130001",
-      "customerName": "S8130001",
       "id": "vvhi5vjc6hjivuguyj3yrd",
-      "internalName": "MAR 50A20",
-      "location": "05A02",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445171",
-      "customerName": "S9445171",
       "id": "wppomd3k3fh1l4fuvozr1h",
-      "internalName": "MAR DS50A17",
-      "location": "05A02",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445241",
-      "customerName": "S9445241",
       "id": "r0zk3t49sh5el3ow2dsgy",
-      "internalName": "\"MAR 50BS14 - 3/4\"\"\"",
-      "location": "05A02",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 1,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445247",
-      "customerName": "S9445247",
       "id": "srh3a6t1dcktwli9afzgc",
-      "internalName": "\"MAR 50BS30 - 1 7/16\"\"\"",
-      "location": "05A01",
-      "maxAmount": 1,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2930006",
-      "customerName": "S2930006",
       "id": "ibqa9vjjh2dewzmn6258r",
-      "internalName": "\"Coupling Pipe PVC Fencco 8\"\" PVC-PV\"",
-      "location": "",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 0,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2993597",
-      "customerName": "S2993597",
       "id": "is2da1n68qovgrl8zbm5q",
-      "internalName": "3112-3 ROLLER",
-      "location": "06A12",
-      "maxAmount": 60,
-      "minAmount": 40,
-      "quantity": 82,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8249901",
-      "customerName": "S8249901",
       "id": "02a4tq1fygjoyfvhhduqgi",
-      "internalName": "\"405920 CORNER TURN ROLLER 1/2\"\"\"",
-      "location": "06A11",
-      "maxAmount": 60,
-      "minAmount": 40,
-      "quantity": 27,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9747063",
-      "customerName": "S9747063",
       "id": "df9h1fncpt1y3289su127i",
-      "internalName": "REX10287336 E20 ELEMENT",
-      "location": "05A14",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 7,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9445076",
-      "customerName": "S9445076",
       "id": "98yjcfp9cwelrjv8f887n",
-      "internalName": "MAR50BS22 1-3/8",
-      "location": "05A04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 5,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9459024",
-      "customerName": "S9459024",
       "id": "6awjk7ujaf6kexp93q02c",
-      "internalName": "MAR60B25H",
-      "location": "05A04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1210159",
-      "customerName": "S1210159",
       "id": "wsp4vph44tqcjoxo027zy",
-      "internalName": "MAR60BS13-7/8",
-      "location": "05A04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9477007",
-      "customerName": "S9477007",
       "id": "vk0wzuje6i7td3jg6685r",
-      "internalName": "BROH80Q14",
-      "location": "05A04",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9794001",
-      "customerName": "S9794001",
       "id": "d32jivdznggbqfilrf7xrb",
-      "internalName": "MAE50BS38H-1",
-      "location": "05B09",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9794000",
-      "customerName": "S9794000",
       "id": "h07k6wm7d454z3gsei6qsw",
-      "internalName": "MAR40BS11H-5/8",
-      "location": "05B08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 3,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S8130035",
-      "customerName": "S8130035",
       "id": "xwrrlp67hafmn52vcm36nk",
-      "internalName": "MAR40BS12HT-3/4",
-      "location": "05B06",
-      "maxAmount": 3,
-      "minAmount": 2,
-      "quantity": 4,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424611",
-      "customerName": "S9424611",
       "id": "y7lj38infm7gj051o3g3k",
-      "internalName": "DOD391380",
-      "location": "05B05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S9424595",
-      "customerName": "S9424595",
       "id": "rahakuzbmtp5lh10q9j036",
-      "internalName": "DOD096019",
-      "location": "05B05",
-      "maxAmount": 3,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S1379030",
-      "customerName": "S1379030",
       "id": "7ni11oft8fpfpkbwiu3gc",
-      "internalName": "TBW7JE SURE FLEX",
-      "location": "05C08",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2930061",
-      "customerName": "S2930061",
       "id": "yz3l9e6yyidu03nq7xwk9",
-      "internalName": "MAR4040 3-5/8",
-      "location": "05D05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     },
     {
-      "barcode": "S2930060",
-      "customerName": "S2930060",
       "id": "w3p9yk3lxyhci53fzr2yj",
-      "internalName": "MAR4040 2-15/16",
-      "location": "05D05",
-      "maxAmount": 2,
-      "minAmount": 1,
-      "quantity": 2,
-      "updatedAt": "2025-08-22T17:08:17.489Z",
-      "updatedBy": "TSB",
-      "version": 4,
-      "warehouseId": "4h32srl39jeomj87vb3lfh"
+      "version": 5
     }
   ],
-  "updatedAt": "2025-08-22T18:18:04.266Z",
+  "updatedAt": "2025-08-22T18:19:05.660Z",
   "warehouses": [
     {
       "id": "4h32srl39jeomj87vb3lfh",
-      "name": "ACCURIDE",
-      "qrOnly": false,
-      "updatedAt": "2025-08-22T17:08:05.505Z",
-      "updatedBy": "TSB",
-      "version": 4
+      "version": 5
     }
   ]
 }
