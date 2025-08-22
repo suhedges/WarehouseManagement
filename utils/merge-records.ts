@@ -3,6 +3,7 @@ import { RecordConflict, ConflictField } from '@/types';
 export interface MergeableRecord {
   id: string;
   version: number;
+  updatedAt?: string;
   deleted?: boolean;
   [key: string]: any;
 }
@@ -12,10 +13,7 @@ export interface MergeResult<T extends MergeableRecord> {
   conflicts: RecordConflict[];
 }
 
-// Three-way merge for arrays of records.
-// BASE: last snapshot pulled by this client
-// LOCAL: client working copy
-// REMOTE: latest fetched from server
+// Three-way merge preferring the most recently updated value on conflicting fields
 export function mergeRecords<T extends MergeableRecord>(
   base: T[],
   local: T[],
@@ -35,7 +33,6 @@ export function mergeRecords<T extends MergeableRecord>(
     const l = local.find((r) => r.id === id);
     const r = remote.find((r) => r.id === id);
 
-    // Tombstone logic
     const tombstone = chooseTombstone(b, l, r);
     if (tombstone) {
       merged.push(tombstone);
@@ -53,9 +50,9 @@ export function mergeRecords<T extends MergeableRecord>(
     keys.delete('id');
 
     keys.forEach((key) => {
-      const baseVal = b ? b[key] : undefined;
-      const localVal = l ? l[key] : undefined;
-      const remoteVal = r ? r[key] : undefined;
+      const baseVal = b ? (b as any)[key] : undefined;
+      const localVal = l ? (l as any)[key] : undefined;
+      const remoteVal = r ? (r as any)[key] : undefined;
 
       if (baseVal === remoteVal && localVal !== baseVal) {
         record[key] = localVal;
@@ -67,23 +64,33 @@ export function mergeRecords<T extends MergeableRecord>(
         remoteVal !== baseVal &&
         localVal !== remoteVal
       ) {
-        record[key] = baseVal;
-        recordConflicts.push({ name: key, base: baseVal, local: localVal, remote: remoteVal });
+        const localUpdated = l.updatedAt ? Date.parse(l.updatedAt) : 0;
+        const remoteUpdated = r.updatedAt ? Date.parse(r.updatedAt) : 0;
+        if (localUpdated === remoteUpdated) {
+          record[key] = localVal; // prefer local on exact tie
+          recordConflicts.push({ name: key, base: baseVal, local: localVal, remote: remoteVal });
+        } else if (localUpdated > remoteUpdated) {
+          record[key] = localVal;
+        } else {
+          record[key] = remoteVal;
+        }
       } else {
-        // default - prefer local then remote then base
         record[key] = localVal ?? remoteVal ?? baseVal;
       }
     });
 
     const finalVersion = Math.max(b?.version || 0, l?.version || 0, r?.version || 0) + 1;
     record.version = finalVersion;
+    record.updatedAt = (l?.updatedAt && r?.updatedAt)
+      ? (Date.parse(l.updatedAt) > Date.parse(r.updatedAt) ? l.updatedAt : r.updatedAt)
+      : (l?.updatedAt ?? r?.updatedAt ?? b?.updatedAt);
 
     merged.push(record as T);
     if (recordConflicts.length > 0) {
       conflicts.push({
         recordId: id,
         recordType,
-        warehouseId: record.warehouseId,
+        warehouseId: (record as any).warehouseId,
         fields: recordConflicts,
       });
     }
@@ -100,12 +107,10 @@ function chooseTombstone<T extends MergeableRecord>(
   const candidates = [b, l, r].filter(Boolean) as T[];
   if (candidates.length === 0) return null;
 
-  // pick record with highest version
   const winner = candidates.reduce((acc, cur) =>
     cur.version > acc.version ? cur : acc
   );
 
-  // if winner is deleted and has higher version than any non-deleted record, tombstone wins
   if (winner.deleted) {
     const anyNewerAlive = candidates.some(
       (rec) => !rec.deleted && rec.version > winner.version
