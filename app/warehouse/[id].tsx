@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
+import { ExpandableCard } from '@/components/ExpandableCard';
 import { Input } from '@/components/Input';
 import { EmptyState } from '@/components/EmptyState';
 import { LoadingIndicator } from '@/components/LoadingIndicator';
@@ -188,7 +189,15 @@ export default function WarehouseDetailScreen() {
         </View>
       </View>
 
-      <View style={styles.actionsContainer}>
+      <View style={styles.qrToggleRow}>
+        <Text style={styles.qrToggleText}>QR</Text>
+        <Switch
+          value={!!warehouse?.qrOnly}
+          onValueChange={(value) => updateWarehouse(id, { qrOnly: value })}
+        />
+      </View>
+
+      <ExpandableCard title="Actions">
         <View style={styles.actionRow}>
           <Button
             title="Add Product"
@@ -230,14 +239,7 @@ export default function WarehouseDetailScreen() {
             style={styles.actionButton}
           />
         </View>
-        <View style={styles.qrToggleRow}>
-          <Text style={styles.qrToggleText}>QR</Text>
-          <Switch
-            value={!!warehouse?.qrOnly}
-            onValueChange={(value) => updateWarehouse(id, { qrOnly: value })}
-          />
-        </View>
-      </View>
+      </ExpandableCard>
 
       {showSearch ? (
         <View style={styles.searchContainer}>
@@ -526,11 +528,6 @@ const styles = StyleSheet.create({
   infoText: {
     color: colors.primary,
   },
-  actionsContainer: {
-    padding: 16,
-    backgroundColor: colors.card,
-    marginBottom: 8,
-  },
   actionRow: {
     flexDirection: 'row',
     marginBottom: 8,
@@ -544,6 +541,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     marginTop: 4,
+    marginBottom: 8,
   },
   qrToggleText: {
     marginRight: 8,

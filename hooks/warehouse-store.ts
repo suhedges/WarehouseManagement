@@ -161,26 +161,32 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     }
     return pendingSyncPromise.current;
   }, [performSyncNow]);  
+  
+  const saveData = useCallback(
+    async (
+      w: Warehouse[] = warehouses,
+      p: Product[] = products
+    ) => {
+      try {
+        await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(w));
+        await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(p));
 
-  const saveData = useCallback(async () => {
-    try {
-      await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(warehouses));
-      await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
-      
-      if (githubConfig) {
-        if (isPerformingSyncRef.current) {
-          setSyncStatus('synced');
+        if (githubConfig) {
+          if (isPerformingSyncRef.current) {
+            setSyncStatus('synced');
+          } else {
+            setSyncStatus('pending');
+          }
         } else {
-          setSyncStatus('pending');
+          setSyncStatus('synced');
         }
-      } else {
-        setSyncStatus('synced');
+      } catch (error) {
+        console.error('Failed to save data:', error);
+        setSyncStatus('error');
       }
-    } catch (error) {
-      console.error('Failed to save data:', error);
-      setSyncStatus('error');
-    }
-  }, [warehouses, products, githubConfig]);
+    },
+    [warehouses, products, githubConfig]
+  );
 
   useEffect(() => {
     if (!isLoading) {
@@ -238,11 +244,14 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   };
 
   const updateWarehouse = (id: string, data: Partial<Warehouse>) => {
-    setWarehouses(
-      warehouses.map(w =>
+    setWarehouses(prev => {
+      const updated = prev.map(w =>
         w.id === id ? { ...w, ...data, updatedAt: new Date().toISOString() } : w
-      )
-    );
+      );
+      // Persist immediately so settings like QR mode stick
+      saveData(updated, products);
+      return updated;
+    });
   };
 
   const deleteWarehouse = (id: string) => {
