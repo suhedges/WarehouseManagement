@@ -41,8 +41,11 @@ export default function ProductDetailScreen() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isDirty, setIsDirty] = useState<boolean>(false);
 
+  // Track if we've initialized the form to prevent overwriting user changes
+  const [isFormInitialized, setIsFormInitialized] = useState<boolean>(false);
+  
   useEffect(() => {
-    if (!isNewProduct && product && !isDirty) {
+    if (!isNewProduct && product && !isFormInitialized) {
       console.log('Hydrating form from product store', product.id);
       setFormData({
         internalName: product.internalName,
@@ -53,8 +56,9 @@ export default function ProductDetailScreen() {
         maxAmount: product.maxAmount.toString(),
         quantity: product.quantity.toString(),
       });
+      setIsFormInitialized(true);
     }
-  }, [product, isNewProduct, isDirty]);
+  }, [product, isNewProduct, isFormInitialized]);
 
   useEffect(() => {
     if (!isNewProduct && !product && !isLoading) {
@@ -299,7 +303,7 @@ export default function ProductDetailScreen() {
           )}
           <Button
             title="Save"
-            onPress={() => { setIsDirty(false); handleSave(); }}
+            onPress={() => { setIsDirty(false); setIsFormInitialized(false); handleSave(); }}
             icon={<Save size={18} color="white" />}
             style={styles.saveButton}
             testID="button-save"
