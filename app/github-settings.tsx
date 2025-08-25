@@ -13,6 +13,7 @@ import { ArrowLeft, Github, Trash2, RefreshCw, RotateCcw } from 'lucide-react-na
 import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { useWarehouse } from '@/hooks/warehouse-store';
+import { useAuth } from '@/hooks/auth-store';
 import { SyncStatus } from '@/components/SyncStatus';
 
 export default function GitHubSettingsScreen() {
@@ -25,6 +26,7 @@ export default function GitHubSettingsScreen() {
     lastSyncTime,
     resetSyncSnapshot,
   } = useWarehouse();
+  const { user } = useAuth();
   
   const [token, setToken] = useState<string>(githubConfig?.token || '');
   const [owner, setOwner] = useState<string>(githubConfig?.owner || '');
@@ -203,7 +205,7 @@ export default function GitHubSettingsScreen() {
             <Text style={styles.helpItem}>1. Create a GitHub repository</Text>
             <Text style={styles.helpItem}>2. Generate a Personal Access Token with &apos;repo&apos; permissions</Text>
             <Text style={styles.helpItem}>3. Enter your token, username, and repository name above</Text>
-            <Text style={styles.helpItem}>4. Data will be saved as &apos;warehouse-data.json&apos; in your repo</Text>
+            <Text style={styles.helpItem}>4. Data file per user: &apos;warehouse-data-{username}.json&apos; (current: &apos;warehouse-data-&apos; + {(user?.username ?? 'local')} + &apos;.json&apos;)</Text>
           </View>
         </View>
 

@@ -23,6 +23,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const pendingSyncTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pendingSyncPromise = useRef<Promise<void> | null>(null);
 
+  const { isLoggedIn, user } = useAuth();
+
   const initializeData = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -30,6 +32,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       // Load GitHub config first
       const config = await githubSync.loadConfig();
       setGithubConfig(config);
+
+      githubSync.setUser(user?.username ?? 'local');
       
       // Load local data first
       const storedWarehouses = await AsyncStorage.getItem(WAREHOUSES_STORAGE_KEY);
@@ -55,7 +59,10 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       // If GitHub is configured, try to sync
       if (config) {
         try {
-          const syncedData = await githubSync.syncData(normalizedLocalWarehouses, normalizedLocalProducts);
+          const syncedData = await githubSync.syncData(
+            normalizedLocalWarehouses.filter(w => (w.storeId ?? 'local') === (user?.username ?? 'local')),
+            normalizedLocalProducts.filter(p => (p.storeId ?? 'local') === (user?.username ?? 'local')),
+          );
           const normalizedRemoteWarehouses = syncedData.warehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
           const normalizedRemoteProducts = syncedData.products.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
           setWarehouses(normalizedRemoteWarehouses);
@@ -87,6 +94,10 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     };
   }, [initializeData]);
 
+  useEffect(() => {
+    githubSync.setUser(user?.username ?? 'local');
+  }, [user?.username]);
+
 
 
   const performSyncNow = useCallback(async () => {
@@ -104,7 +115,10 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     try {
       isPerformingSyncRef.current = true;
       setSyncStatus('syncing');
-      const syncedData = await githubSync.syncData(warehouses, products);
+      const syncedData = await githubSync.syncData(
+        warehouses.filter(w => (w.storeId ?? 'local') === (user?.username ?? 'local')),
+        products.filter(p => (p.storeId ?? 'local') === (user?.username ?? 'local')),
+      );
       
       // Normalize storeId on incoming data
       const normalizedRemoteWarehouses = syncedData.warehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
@@ -229,7 +243,6 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     return () => subscription.remove();
   }, [syncStatus, githubConfig, performSync]);
 
-  const { isLoggedIn, user } = useAuth();
   const wasLoggedInRef = useRef(isLoggedIn);
 
   useEffect(() => {
@@ -383,6 +396,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     try {
       await githubSync.saveConfig(config);
       setGithubConfig(config);
+
+      githubSync.setUser(user?.username ?? 'local');
       
       // Perform initial sync after configuration
       await performSync();

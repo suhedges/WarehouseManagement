@@ -5,8 +5,6 @@ import { mergeRecords } from './merge-records';
 const GITHUB_TOKEN_KEY = 'github_token';
 const GITHUB_REPO_KEY = 'github_repo';
 const GITHUB_OWNER_KEY = 'github_owner';
-const DATA_FILE_PATH = 'warehouse-data.json';
-const BASE_SNAPSHOT_KEY = 'github_base_snapshot';
 
 export interface GitHubConfig {
   token: string;
@@ -56,6 +54,19 @@ function safeParseJson<T>(text: string | null | undefined, fallback: T): T {
 
 export class GitHubSyncService {
   private config: GitHubConfig | null = null;
+  private username: string = 'local';
+
+  setUser(username: string | null) {
+    this.username = (username && username.trim().length > 0) ? username.trim() : 'local';
+  }
+
+  private get dataFilePath(): string {
+    return `warehouse-data-${this.username}.json`;
+  }
+
+  private get baseSnapshotKey(): string {
+    return `github_base_snapshot_${this.username}`;
+  }
 
   async loadConfig(): Promise<GitHubConfig | null> {
     try {
@@ -129,7 +140,7 @@ export class GitHubSyncService {
 
   async downloadData(): Promise<{ data: WarehouseFile; sha: string } | null> {
     try {
-      const response = await this.makeGitHubRequest(`contents/${DATA_FILE_PATH}`);
+      const response = await this.makeGitHubRequest(`contents/${this.dataFilePath}`);
       const file = await response.json();
       if (file?.content) {
         const decoded = atob(String(file.content).replace(/\n/g, ''));
@@ -164,7 +175,7 @@ export class GitHubSyncService {
 
     const defaultFile: WarehouseFile = { meta: { schemaVersion: 1 }, warehouses: [], products: [] };
 
-    const baseRaw = await AsyncStorage.getItem(BASE_SNAPSHOT_KEY);
+    const baseRaw = await AsyncStorage.getItem(this.baseSnapshotKey);
     const parsedBase = safeParseJson<WarehouseFile | null>(baseRaw, null);
     const base: WarehouseFile = isWarehouseFile(parsedBase) ? parsedBase : defaultFile;
 
@@ -183,14 +194,14 @@ export class GitHubSyncService {
 
     const conflicts = [...w.conflicts, ...p.conflicts];
 
-    await AsyncStorage.setItem(BASE_SNAPSHOT_KEY, JSON.stringify(sanitizeForJson(remoteData)));
+    await AsyncStorage.setItem(this.baseSnapshotKey, JSON.stringify(sanitizeForJson(remoteData)));
 
     if (conflicts.length > 0) {
       return { warehouses: merged.warehouses, products: merged.products, conflicts };
     }
 
     await this.uploadData(merged, remoteSha);
-    await AsyncStorage.setItem(BASE_SNAPSHOT_KEY, JSON.stringify(sanitizeForJson(merged)));
+    await AsyncStorage.setItem(this.baseSnapshotKey, JSON.stringify(sanitizeForJson(merged)));
 
     return { warehouses: merged.warehouses, products: merged.products, conflicts: [] };
   }
@@ -204,7 +215,7 @@ export class GitHubSyncService {
   }
 
   private async getRemoteFile(): Promise<{ sha: string; text: string } | null> {
-    const res = await this.makeGitHubRequest(`contents/${DATA_FILE_PATH}`, { method: 'GET' });
+    const res = await this.makeGitHubRequest(`contents/${this.dataFilePath}`, { method: 'GET' });
     const json = await res.json();
     if (!json?.content || !json?.sha) return null;
     const remoteBytes = atob(String(json.content).replace(/\n/g, ''));
@@ -226,7 +237,7 @@ export class GitHubSyncService {
     };
     if (remote?.sha || currentSha) body.sha = remote?.sha ?? currentSha;
 
-    const res = await this.makeGitHubRequest(`contents/${DATA_FILE_PATH}`, {
+    const res = await this.makeGitHubRequest(`contents/${this.dataFilePath}`, {
       method: 'PUT',
       body: JSON.stringify(body),
     });
@@ -236,8 +247,8 @@ export class GitHubSyncService {
 
   async resetBaseSnapshot(): Promise<void> {
     try {
-      await AsyncStorage.removeItem(BASE_SNAPSHOT_KEY);
-      console.log('GitHubSyncService: BASE_SNAPSHOT reset');
+      await AsyncStorage.removeItem(this.baseSnapshotKey);
+      console.log('GitHubSyncService: BASE_SNAPSHOT reset for', this.username);
     } catch (e) {
       console.error('GitHubSyncService: Failed to reset BASE_SNAPSHOT', e);
       throw e as Error;
