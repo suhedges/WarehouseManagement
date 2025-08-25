@@ -18,13 +18,13 @@ function stableStringify(v: any): string {
   if (v === undefined) return 'null';
   if (v === null || typeof v !== 'object') return JSON.stringify(v);
   if (Array.isArray(v)) return '[' + v.map((item) => (item === undefined ? 'null' : stableStringify(item))).join(',') + ']';
-  const keys = Object.keys(v).filter((k) => v[k] !== undefined).sort();
-  return '{' + keys.map(k => JSON.stringify(k) + ':' + stableStringify(v[k])).join(',') + '}';
+  const keys = Object.keys(v).filter((k) => (v as any)[k] !== undefined).sort();
+  return '{' + keys.map(k => JSON.stringify(k) + ':' + stableStringify((v as any)[k])).join(',') + '}';
 }
 
 function sanitizeForJson<T = any>(value: T): T {
   if (value === undefined) return null as unknown as T;
-  if (value === null || typeof value !== 'object') return value;
+  if (value === null || typeof value !== 'object') return value as T;
   if (Array.isArray(value)) return value.map((item) => (item === undefined ? null : sanitizeForJson(item))) as unknown as T;
   const out: Record<string, any> = {};
   Object.keys(value as Record<string, any>).forEach((k) => {
@@ -34,6 +34,24 @@ function sanitizeForJson<T = any>(value: T): T {
     }
   });
   return out as T;
+}
+
+function isWarehouseFile(v: unknown): v is WarehouseFile {
+  const obj = v as WarehouseFile | null;
+  return !!obj && typeof obj === 'object' && !!(obj as any).meta && Array.isArray((obj as any).warehouses) && Array.isArray((obj as any).products);
+}
+
+function safeParseJson<T>(text: string | null | undefined, fallback: T): T {
+  try {
+    if (!text) return fallback;
+    const trimmed = text.trim();
+    if (trimmed.length === 0 || trimmed === 'undefined') return fallback;
+    const parsed = JSON.parse(trimmed) as unknown;
+    return (parsed ?? fallback) as T;
+  } catch (e) {
+    console.warn('safeParseJson failed, using fallback', e);
+    return fallback;
+  }
 }
 
 export class GitHubSyncService {
@@ -85,9 +103,9 @@ export class GitHubSyncService {
     const response = await fetch(url, {
       ...options,
       headers: {
-        'Authorization': `Bearer ${this.config.token}`,
-        'Accept': 'application/vnd.github+json',         // recommended
-        'X-GitHub-Api-Version': '2022-11-28',            // recommended
+        Authorization: `Bearer ${this.config.token}`,
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
         'Content-Type': 'application/json',
         ...(options.headers || {}),
       },
@@ -100,7 +118,7 @@ export class GitHubSyncService {
       const delay = retryAfter > 0 ? retryAfter : Math.pow(2, attempt) * 1000;
       await new Promise(resolve => setTimeout(resolve, delay));
       return this.makeGitHubRequest(endpoint, options, attempt + 1);
-    }    
+    }
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -113,16 +131,18 @@ export class GitHubSyncService {
     try {
       const response = await this.makeGitHubRequest(`contents/${DATA_FILE_PATH}`);
       const file = await response.json();
-      if (file.content) {
+      if (file?.content) {
         const decoded = atob(String(file.content).replace(/\n/g, ''));
         try {
           const json = JSON.parse(decoded);
-          return { data: json, sha: file.sha };
+          if (!isWarehouseFile(json)) throw new Error('Invalid shape');
+          return { data: json, sha: String(file.sha) };
         } catch (e) {
           console.warn('downloadData: JSON parse failed, attempting to repair', e);
           const repaired = decoded.replace(/\bundefined\b/g, 'null');
           const json = JSON.parse(repaired);
-          return { data: json, sha: file.sha };
+          if (!isWarehouseFile(json)) throw new Error('Invalid shape after repair');
+          return { data: json, sha: String(file.sha) };
         }
       }
     } catch (error) {
@@ -134,7 +154,6 @@ export class GitHubSyncService {
     return null;
   }
 
-
   async syncData(
     localWarehouses: Warehouse[],
     localProducts: Product[],
@@ -143,11 +162,14 @@ export class GitHubSyncService {
       throw new Error('GitHub configuration not set');
     }
 
+    const defaultFile: WarehouseFile = { meta: { schemaVersion: 1 }, warehouses: [], products: [] };
+
     const baseRaw = await AsyncStorage.getItem(BASE_SNAPSHOT_KEY);
-    const base: WarehouseFile = baseRaw ? JSON.parse(baseRaw) : { meta: { schemaVersion: 1 }, warehouses: [], products: [] };
+    const parsedBase = safeParseJson<WarehouseFile | null>(baseRaw, null);
+    const base: WarehouseFile = isWarehouseFile(parsedBase) ? parsedBase : defaultFile;
 
     const remote = await this.downloadData();
-    const remoteData: WarehouseFile = remote?.data || { meta: { schemaVersion: 1 }, warehouses: [], products: [] };
+    const remoteData: WarehouseFile = remote?.data || defaultFile;
     const remoteSha = remote?.sha || null;
 
     const w = mergeRecords(base.warehouses, localWarehouses, remoteData.warehouses, 'warehouse');
@@ -189,7 +211,6 @@ export class GitHubSyncService {
     return { sha: String(json.sha), text: remoteBytes };
   }
 
-  // Only PUT when different
   async uploadData(data: WarehouseFile, currentSha: string | null): Promise<string> {
     const sanitized = sanitizeForJson<WarehouseFile>(data);
     const desiredText = stableStringify(sanitized);
@@ -199,7 +220,7 @@ export class GitHubSyncService {
       return remote.sha;
     }
 
-    const body: any = {
+    const body: Record<string, any> = {
       message: 'Update warehouse data',
       content: btoa(desiredText),
     };
@@ -210,9 +231,8 @@ export class GitHubSyncService {
       body: JSON.stringify(body),
     });
     const result = await res.json();
-    return result.content.sha as string;
+    return (result?.content?.sha ?? '') as string;
   }
-  
 }
 
 export const githubSync = new GitHubSyncService();
