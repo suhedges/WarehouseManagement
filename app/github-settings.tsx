@@ -205,7 +205,7 @@ export default function GitHubSettingsScreen() {
             <Text style={styles.helpItem}>1. Create a GitHub repository</Text>
             <Text style={styles.helpItem}>2. Generate a Personal Access Token with &apos;repo&apos; permissions</Text>
             <Text style={styles.helpItem}>3. Enter your token, username, and repository name above</Text>
-            <Text style={styles.helpItem}>4. Data file per user: &apos;warehouse-data-{username}.json&apos; (current: &apos;warehouse-data-&apos; + {(user?.username ?? 'local')} + &apos;.json&apos;)</Text>
+            <Text style={styles.helpItem}>4. Data file per user: &apos;warehouse-data-{'{username}'}.json&apos; (current: &apos;warehouse-data-&apos; + {(user?.username ?? 'local')} + &apos;.json&apos;)</Text>
           </View>
         </View>
 
