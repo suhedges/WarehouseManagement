@@ -9,7 +9,7 @@ import { colors } from '@/constants/colors';
 import { useAuth } from '@/hooks/auth-store';
 import { Warehouse } from 'lucide-react-native';
 
-const VALID_USERNAMES = new Set(['TSB2108', 'JMH', 'SUH', 'TSB']);
+const VALID_USERNAMES = new Set(['TSB2108', 'TSB414', 'TSB211', 'TSB1609', 'TSB5117', 'TSB1800', 'TSB2205', 'TSB1115', 'TSB1216', 'TSB716']);
 
 export default function LoginScreen() {
   const router = useRouter();
