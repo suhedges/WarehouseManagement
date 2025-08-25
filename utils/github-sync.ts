@@ -15,10 +15,25 @@ export interface GitHubConfig {
 }
 
 function stableStringify(v: any): string {
+  if (v === undefined) return 'null';
   if (v === null || typeof v !== 'object') return JSON.stringify(v);
-  if (Array.isArray(v)) return '[' + v.map(stableStringify).join(',') + ']';
-  const keys = Object.keys(v).sort();
+  if (Array.isArray(v)) return '[' + v.map((item) => (item === undefined ? 'null' : stableStringify(item))).join(',') + ']';
+  const keys = Object.keys(v).filter((k) => v[k] !== undefined).sort();
   return '{' + keys.map(k => JSON.stringify(k) + ':' + stableStringify(v[k])).join(',') + '}';
+}
+
+function sanitizeForJson<T = any>(value: T): T {
+  if (value === undefined) return null as unknown as T;
+  if (value === null || typeof value !== 'object') return value;
+  if (Array.isArray(value)) return value.map((item) => (item === undefined ? null : sanitizeForJson(item))) as unknown as T;
+  const out: Record<string, any> = {};
+  Object.keys(value as Record<string, any>).forEach((k) => {
+    const v = (value as Record<string, any>)[k];
+    if (v !== undefined) {
+      out[k] = sanitizeForJson(v);
+    }
+  });
+  return out as T;
 }
 
 export class GitHubSyncService {
@@ -99,12 +114,18 @@ export class GitHubSyncService {
       const response = await this.makeGitHubRequest(`contents/${DATA_FILE_PATH}`);
       const file = await response.json();
       if (file.content) {
-        const decoded = atob(file.content.replace(/\n/g, ''));
-        const json = JSON.parse(decoded);
-        return { data: json, sha: file.sha };
+        const decoded = atob(String(file.content).replace(/\n/g, ''));
+        try {
+          const json = JSON.parse(decoded);
+          return { data: json, sha: file.sha };
+        } catch (e) {
+          console.warn('downloadData: JSON parse failed, attempting to repair', e);
+          const repaired = decoded.replace(/\bundefined\b/g, 'null');
+          const json = JSON.parse(repaired);
+          return { data: json, sha: file.sha };
+        }
       }
     } catch (error) {
-
       if (error instanceof Error && error.message.includes('404')) {
         return null;
       }
@@ -113,21 +134,6 @@ export class GitHubSyncService {
     return null;
   }
 
-  async uploadData(data: WarehouseFile, sha: string | null): Promise<string> {
-    const content = btoa(JSON.stringify(data, null, 2));
-    const body: any = {
-      message: `Update warehouse data - ${new Date().toISOString()}`,
-      content,
-    };
-    if (sha) body.sha = sha; // ← this is the supported way
-  
-    const res = await this.makeGitHubRequest(`contents/${DATA_FILE_PATH}`, {
-      method: 'PUT',
-      body: JSON.stringify(body),
-    });
-    const result = await res.json();
-    return result.content.sha;
-  }
 
   async syncData(
     localWarehouses: Warehouse[],
@@ -155,14 +161,14 @@ export class GitHubSyncService {
 
     const conflicts = [...w.conflicts, ...p.conflicts];
 
-    await AsyncStorage.setItem(BASE_SNAPSHOT_KEY, JSON.stringify(remoteData));
+    await AsyncStorage.setItem(BASE_SNAPSHOT_KEY, JSON.stringify(sanitizeForJson(remoteData)));
 
     if (conflicts.length > 0) {
       return { warehouses: merged.warehouses, products: merged.products, conflicts };
     }
 
     await this.uploadData(merged, remoteSha);
-    await AsyncStorage.setItem(BASE_SNAPSHOT_KEY, JSON.stringify(merged));
+    await AsyncStorage.setItem(BASE_SNAPSHOT_KEY, JSON.stringify(sanitizeForJson(merged)));
 
     return { warehouses: merged.warehouses, products: merged.products, conflicts: [] };
   }
@@ -185,16 +191,16 @@ export class GitHubSyncService {
 
   // Only PUT when different
   async uploadData(data: WarehouseFile, currentSha: string | null): Promise<string> {
-    const desiredText = stableStringify(data);     // deterministic text
-    const remote = await this.getRemoteFile();     // latest from GitHub
+    const sanitized = sanitizeForJson<WarehouseFile>(data);
+    const desiredText = stableStringify(sanitized);
+    const remote = await this.getRemoteFile();
 
-    // no-op if identical
     if (remote && remote.text === desiredText) {
-      return remote.sha; // nothing to do
+      return remote.sha;
     }
 
     const body: any = {
-      message: 'Update warehouse data',            // avoid timestamps to prevent churn
+      message: 'Update warehouse data',
       content: btoa(desiredText),
     };
     if (remote?.sha || currentSha) body.sha = remote?.sha ?? currentSha;
@@ -205,7 +211,7 @@ export class GitHubSyncService {
     });
     const result = await res.json();
     return result.content.sha as string;
-  }  
+  }
   
 }
 
