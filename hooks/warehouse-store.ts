@@ -56,26 +56,6 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       setWarehouses(normalizedLocalWarehouses);
       setProducts(normalizedLocalProducts);
       
-      // If GitHub is configured, try to sync
-      if (config) {
-        try {
-          const syncedData = await githubSync.syncData(
-            normalizedLocalWarehouses.filter(w => (w.storeId ?? 'local') === (user?.username ?? 'local')),
-            normalizedLocalProducts.filter(p => (p.storeId ?? 'local') === (user?.username ?? 'local')),
-          );
-          const normalizedRemoteWarehouses = syncedData.warehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
-          const normalizedRemoteProducts = syncedData.products.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
-          setWarehouses(normalizedRemoteWarehouses);
-          setProducts(normalizedRemoteProducts);
-          await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(normalizedRemoteWarehouses));
-          await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(normalizedRemoteProducts));
-          setLastSyncTime(new Date().toISOString());
-          setSyncStatus('synced');
-        } catch (error) {
-          console.error('Initial sync failed:', error);
-          setSyncStatus('error');
-        }
-      }
     } catch (error) {
       console.error('Failed to initialize data:', error);
     } finally {
@@ -102,12 +82,12 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
 
   const performSyncNow = useCallback(async () => {
     if (!githubConfig) {
-      console.log('GitHub not configured, skipping sync');
+      console.log('GitHub not configured, skipping push');
       return;
     }
     const networkState = await Network.getNetworkStateAsync();
     if (!networkState.isConnected || networkState.isInternetReachable === false) {
-      console.log('No network connection, sync postponed');
+      console.log('No network connection, push postponed');
       setSyncStatus('pending');
       return;
     }
@@ -115,38 +95,15 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     try {
       isPerformingSyncRef.current = true;
       setSyncStatus('syncing');
-      const syncedData = await githubSync.syncData(
+      await githubSync.pushLocalOnly(
         warehouses.filter(w => (w.storeId ?? 'local') === (user?.username ?? 'local')),
         products.filter(p => (p.storeId ?? 'local') === (user?.username ?? 'local')),
       );
-      
-      // Normalize storeId on incoming data
-      const normalizedRemoteWarehouses = syncedData.warehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
-      const normalizedRemoteProducts = syncedData.products.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
-
-      // Update local data with synced data only if changed
-      const warehousesJson = JSON.stringify(warehouses);
-      const productsJson = JSON.stringify(products);
-      const newWarehousesJson = JSON.stringify(normalizedRemoteWarehouses);
-      const newProductsJson = JSON.stringify(normalizedRemoteProducts);
-
-      if (warehousesJson !== newWarehousesJson) {
-        setWarehouses(normalizedRemoteWarehouses);
-      }
-      if (productsJson !== newProductsJson) {
-        setProducts(normalizedRemoteProducts);
-      }
-      
-      // Save synced data locally
-      await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, newWarehousesJson);
-      await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, newProductsJson);
-      
       setLastSyncTime(new Date().toISOString());
       setSyncStatus('synced');
-      
-      console.log('Sync completed successfully');
+      console.log('Push completed successfully');
     } catch (error) {
-      console.error('Sync failed:', error);
+      console.error('Push failed:', error);
       setSyncStatus('error');
       throw error;
     } finally {
@@ -221,7 +178,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   useEffect(() => {
     if (githubConfig && syncStatus === 'pending' && !isPerformingSyncRef.current) {
       performSync().catch((error) => {
-        console.error('Auto sync failed:', error);
+        console.error('Auto push failed:', error);
       });
     }
   }, [githubConfig, syncStatus, performSync]);
@@ -236,7 +193,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
         !isPerformingSyncRef.current
       ) {
         performSync().catch(error => {
-          console.error('Auto sync failed:', error);
+          console.error('Auto push failed:', error);
         });
       }
     });
@@ -246,13 +203,32 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const wasLoggedInRef = useRef(isLoggedIn);
 
   useEffect(() => {
-    if (isLoggedIn && !wasLoggedInRef.current && githubConfig) {
-      performSync().catch(error => {
-        console.error('Sync on login failed:', error);
-      });
+    const pullOnLogin = async () => {
+      try {
+        if (!githubConfig) return;
+        setSyncStatus('syncing');
+        const remote = await githubSync.pullRemoteOnLogin();
+        if (remote) {
+          const normalizedRemoteWarehouses = remote.warehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
+          const normalizedRemoteProducts = remote.products.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
+          setWarehouses(normalizedRemoteWarehouses);
+          setProducts(normalizedRemoteProducts);
+          await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(normalizedRemoteWarehouses));
+          await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(normalizedRemoteProducts));
+        }
+        setLastSyncTime(new Date().toISOString());
+        setSyncStatus('synced');
+      } catch (error) {
+        console.error('Pull on login failed:', error);
+        setSyncStatus('error');
+      }
+    };
+
+    if (isLoggedIn && !wasLoggedInRef.current) {
+      void pullOnLogin();
     }
     wasLoggedInRef.current = isLoggedIn;
-  }, [isLoggedIn, githubConfig, performSync]);
+  }, [isLoggedIn, githubConfig]);
 
   // Warehouse operations
   const currentStoreId = user?.username ?? 'local';
@@ -398,9 +374,21 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       setGithubConfig(config);
 
       githubSync.setUser(user?.username ?? 'local');
-      
-      // Perform initial sync after configuration
-      await performSync();
+
+      if (isLoggedIn) {
+        setSyncStatus('syncing');
+        const remote = await githubSync.pullRemoteOnLogin();
+        if (remote) {
+          const normalizedRemoteWarehouses = remote.warehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
+          const normalizedRemoteProducts = remote.products.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
+          setWarehouses(normalizedRemoteWarehouses);
+          setProducts(normalizedRemoteProducts);
+          await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(normalizedRemoteWarehouses));
+          await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(normalizedRemoteProducts));
+        }
+        setLastSyncTime(new Date().toISOString());
+        setSyncStatus('synced');
+      }
     } catch (error) {
       console.error('Failed to configure GitHub:', error);
       throw error;

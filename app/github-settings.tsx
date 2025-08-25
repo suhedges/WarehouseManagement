@@ -88,12 +88,12 @@ export default function GitHubSettingsScreen() {
     try {
       setIsLoading(true);
       await performSync();
-      Alert.alert('Success', 'Manual sync completed successfully!');
+      Alert.alert('Success', 'Manual push completed successfully!');
     } catch (error) {
-      console.error('Manual sync failed:', error);
+      console.error('Manual push failed:', error);
       Alert.alert(
-        'Sync Failed', 
-        error instanceof Error ? error.message : 'Failed to sync with GitHub'
+        'Push Failed', 
+        error instanceof Error ? error.message : 'Failed to push to GitHub'
       );
     } finally {
       setIsLoading(false);
@@ -138,7 +138,7 @@ export default function GitHubSettingsScreen() {
             </Text>
             
             <Button
-              title="Manual Sync"
+              title="Manual Push"
               onPress={handleManualSync}
               disabled={isLoading || syncStatus === 'syncing'}
               style={styles.syncButton}

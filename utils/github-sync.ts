@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Product, Warehouse, WarehouseFile, RecordConflict } from '@/types';
-import { mergeRecords } from './merge-records';
 
 const GITHUB_TOKEN_KEY = 'github_token';
 const GITHUB_REPO_KEY = 'github_repo';
@@ -169,41 +168,7 @@ export class GitHubSyncService {
     localWarehouses: Warehouse[],
     localProducts: Product[],
   ): Promise<{ warehouses: Warehouse[]; products: Product[]; conflicts: RecordConflict[] }> {
-    if (!this.config) {
-      throw new Error('GitHub configuration not set');
-    }
-
-    const defaultFile: WarehouseFile = { meta: { schemaVersion: 1 }, warehouses: [], products: [] };
-
-    const baseRaw = await AsyncStorage.getItem(this.baseSnapshotKey);
-    const parsedBase = safeParseJson<WarehouseFile | null>(baseRaw, null);
-    const base: WarehouseFile = isWarehouseFile(parsedBase) ? parsedBase : defaultFile;
-
-    const remote = await this.downloadData();
-    const remoteData: WarehouseFile = remote?.data || defaultFile;
-    const remoteSha = remote?.sha || null;
-
-    const w = mergeRecords(base.warehouses, localWarehouses, remoteData.warehouses, 'warehouse');
-    const p = mergeRecords(base.products, localProducts, remoteData.products, 'product');
-
-    const merged: WarehouseFile = {
-      meta: remoteData.meta || { schemaVersion: 1 },
-      warehouses: w.records,
-      products: p.records,
-    };
-
-    const conflicts = [...w.conflicts, ...p.conflicts];
-
-    await AsyncStorage.setItem(this.baseSnapshotKey, JSON.stringify(sanitizeForJson(remoteData)));
-
-    if (conflicts.length > 0) {
-      return { warehouses: merged.warehouses, products: merged.products, conflicts };
-    }
-
-    await this.uploadData(merged, remoteSha);
-    await AsyncStorage.setItem(this.baseSnapshotKey, JSON.stringify(sanitizeForJson(merged)));
-
-    return { warehouses: merged.warehouses, products: merged.products, conflicts: [] };
+    throw new Error('syncData is deprecated. Use pullRemoteOnLogin() and pushLocalOnly()');
   }
 
   isConfigured(): boolean {
@@ -263,6 +228,41 @@ export class GitHubSyncService {
       console.error('GitHubSyncService: Failed to reset BASE_SNAPSHOT', e);
       throw e as Error;
     }
+  }
+
+  async setBaseSnapshot(data: WarehouseFile): Promise<void> {
+    try {
+      await AsyncStorage.setItem(this.baseSnapshotKey, JSON.stringify(sanitizeForJson(data)));
+    } catch (e) {
+      console.error('GitHubSyncService: Failed to set BASE_SNAPSHOT', e);
+      throw e as Error;
+    }
+  }
+
+  async pullRemoteOnLogin(): Promise<WarehouseFile | null> {
+    const defaultFile: WarehouseFile = { meta: { schemaVersion: 1 }, warehouses: [], products: [] };
+    const remote = await this.downloadData();
+    if (!remote) {
+      return null;
+    }
+    const remoteData: WarehouseFile = isWarehouseFile(remote.data) ? remote.data : defaultFile;
+    await this.setBaseSnapshot(remoteData);
+    return remoteData;
+  }
+
+  async pushLocalOnly(localWarehouses: Warehouse[], localProducts: Product[]): Promise<void> {
+    if (!this.config) {
+      throw new Error('GitHub configuration not set');
+    }
+    const data: WarehouseFile = {
+      meta: { schemaVersion: 1 },
+      warehouses: localWarehouses,
+      products: localProducts,
+    };
+    const remote = await this.downloadData();
+    const newSha = await this.uploadData(data, remote?.sha ?? null);
+    await this.setBaseSnapshot(data);
+    console.log('pushLocalOnly: uploaded with sha', newSha);
   }
 }
 
