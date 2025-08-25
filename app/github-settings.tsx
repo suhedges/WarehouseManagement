@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Stack, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ArrowLeft, Github, Trash2, RefreshCw } from 'lucide-react-native';
+import { ArrowLeft, Github, Trash2, RefreshCw, RotateCcw } from 'lucide-react-native';
 import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { useWarehouse } from '@/hooks/warehouse-store';
@@ -22,7 +22,8 @@ export default function GitHubSettingsScreen() {
     disconnectGitHub, 
     performSync, 
     syncStatus,
-    lastSyncTime 
+    lastSyncTime,
+    resetSyncSnapshot,
   } = useWarehouse();
   
   const [token, setToken] = useState<string>(githubConfig?.token || '');
@@ -140,6 +141,28 @@ export default function GitHubSettingsScreen() {
               disabled={isLoading || syncStatus === 'syncing'}
               style={styles.syncButton}
               icon={<RefreshCw size={20} color="#fff" />}
+            />
+          </View>
+        )}
+
+        {githubConfig && (
+          <View style={styles.statusSection}>
+            <Text style={styles.sectionTitle}>Advanced</Text>
+            <Button
+              title="Reset Sync Snapshot"
+              onPress={async () => {
+                try {
+                  setIsLoading(true);
+                  await resetSyncSnapshot();
+                  Alert.alert('Snapshot Reset', 'Base snapshot cleared. Next sync will treat current local data as baseline.');
+                } catch (e) {
+                  Alert.alert('Error', e instanceof Error ? e.message : 'Failed to reset');
+                } finally {
+                  setIsLoading(false);
+                }
+              }}
+              variant="outline"
+              icon={<RotateCcw size={20} color="#0366d6" />}
             />
           </View>
         )}

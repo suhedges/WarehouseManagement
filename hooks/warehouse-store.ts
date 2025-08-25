@@ -390,6 +390,16 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     }
   };
 
+  const resetSyncSnapshot = async () => {
+    try {
+      await githubSync.resetBaseSnapshot();
+      setSyncStatus('pending');
+    } catch (error) {
+      console.error('Failed to reset sync snapshot:', error);
+      throw error;
+    }
+  };
+
   // Import/Export
   const importProducts = (warehouseId: string, csvData: Product[]) => {
     const timestamp = new Date().toISOString();  
@@ -430,5 +440,6 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     configureGitHub,
     performSync,
     disconnectGitHub,
+    resetSyncSnapshot,
   };
 });

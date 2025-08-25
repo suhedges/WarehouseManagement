@@ -233,6 +233,16 @@ export class GitHubSyncService {
     const result = await res.json();
     return (result?.content?.sha ?? '') as string;
   }
+
+  async resetBaseSnapshot(): Promise<void> {
+    try {
+      await AsyncStorage.removeItem(BASE_SNAPSHOT_KEY);
+      console.log('GitHubSyncService: BASE_SNAPSHOT reset');
+    } catch (e) {
+      console.error('GitHubSyncService: Failed to reset BASE_SNAPSHOT', e);
+      throw e as Error;
+    }
+  }
 }
 
 export const githubSync = new GitHubSyncService();
