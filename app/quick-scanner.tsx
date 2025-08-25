@@ -217,22 +217,24 @@ export default function QuickScannerScreen() {
 
               <View style={styles.modalButtons}>
                 <View style={styles.modalButton}>
-                  <Button title="Save" onPress={handleSaveQuantity} />
+                  <Button title="Save" onPress={handleSaveQuantity} style={styles.fullWidthButton} />
                 </View>
                 <View style={styles.modalButton}>
                   <Button
-                    title="View Details"
+                    title="Details"
                     variant="secondary"
                     onPress={handleViewDetails}
                     testID="view-details-button"
+                    style={styles.fullWidthButton}
                   />
                 </View>
                 
                 <View style={styles.modalButton}>
                   <Button
-                    title="Scan Another"
+                    title="Cancel"
                     variant="outline"
                     onPress={handleScanAnother}
+                    style={styles.fullWidthButton}
                   />
                 </View>
               </View>
@@ -426,4 +428,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 4,
   },  
+  fullWidthButton: {
+    width: '100%',
+  },
 });

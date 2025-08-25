@@ -209,7 +209,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   cancelButton: {
-    marginRight: 8,
   },
   warehouseCard: {
     flexDirection: 'row',

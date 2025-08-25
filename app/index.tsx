@@ -74,8 +74,8 @@ export default function LoginScreen() {
         <View style={styles.content}>
           <View style={styles.logoContainer}>
             <Warehouse size={64} color={colors.primary} />
-            <Text style={styles.title}>VentX</Text>
-            <Text style={styles.subtitle}>Inventory Management System</Text>
+            <Text style={styles.title}>TriZen</Text>
+            <Text style={styles.subtitle}>The Chillest Inventory System</Text>
           </View>
 
           <View style={styles.formContainer}>
