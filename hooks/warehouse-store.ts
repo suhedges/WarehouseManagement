@@ -40,22 +40,28 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       
       if (storedWarehouses) {
         localWarehouses = JSON.parse(storedWarehouses);
-        setWarehouses(localWarehouses);
       }
       
       if (storedProducts) {
         localProducts = JSON.parse(storedProducts);
-        setProducts(localProducts);
       }
+
+      const normalizedLocalWarehouses = localWarehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
+      const normalizedLocalProducts = localProducts.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
+
+      setWarehouses(normalizedLocalWarehouses);
+      setProducts(normalizedLocalProducts);
       
       // If GitHub is configured, try to sync
       if (config) {
         try {
-          const syncedData = await githubSync.syncData(localWarehouses, localProducts);
-          setWarehouses(syncedData.warehouses);
-          setProducts(syncedData.products);
-          await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(syncedData.warehouses));
-          await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(syncedData.products));
+          const syncedData = await githubSync.syncData(normalizedLocalWarehouses, normalizedLocalProducts);
+          const normalizedRemoteWarehouses = syncedData.warehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
+          const normalizedRemoteProducts = syncedData.products.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
+          setWarehouses(normalizedRemoteWarehouses);
+          setProducts(normalizedRemoteProducts);
+          await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(normalizedRemoteWarehouses));
+          await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(normalizedRemoteProducts));
           setLastSyncTime(new Date().toISOString());
           setSyncStatus('synced');
         } catch (error) {
@@ -100,17 +106,21 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       setSyncStatus('syncing');
       const syncedData = await githubSync.syncData(warehouses, products);
       
+      // Normalize storeId on incoming data
+      const normalizedRemoteWarehouses = syncedData.warehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
+      const normalizedRemoteProducts = syncedData.products.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
+
       // Update local data with synced data only if changed
       const warehousesJson = JSON.stringify(warehouses);
       const productsJson = JSON.stringify(products);
-      const newWarehousesJson = JSON.stringify(syncedData.warehouses);
-      const newProductsJson = JSON.stringify(syncedData.products);
+      const newWarehousesJson = JSON.stringify(normalizedRemoteWarehouses);
+      const newProductsJson = JSON.stringify(normalizedRemoteProducts);
 
       if (warehousesJson !== newWarehousesJson) {
-        setWarehouses(syncedData.warehouses);
+        setWarehouses(normalizedRemoteWarehouses);
       }
       if (productsJson !== newProductsJson) {
-        setProducts(syncedData.products);
+        setProducts(normalizedRemoteProducts);
       }
       
       // Save synced data locally
@@ -232,6 +242,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   }, [isLoggedIn, githubConfig, performSync]);
 
   // Warehouse operations
+  const currentStoreId = user?.username ?? 'local';
+
   const addWarehouse = (name: string) => {
     const newWarehouse: Warehouse = {
       id: generateId(),
@@ -240,6 +252,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       version: 1,
       updatedBy: user?.username ?? 'local',
       updatedAt: new Date().toISOString(),
+      storeId: currentStoreId,
     };
     setWarehouses([...warehouses, newWarehouse]);
     return newWarehouse;
@@ -248,13 +261,14 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const updateWarehouse = (id: string, data: Partial<Warehouse>) => {
     setWarehouses(prev => {
       const updated = prev.map(w =>
-        w.id === id
+        w.id === id && w.storeId === currentStoreId
           ? {
               ...w,
               ...data,
               version: (w.version ?? 0) + 1,
               updatedBy: user?.username ?? 'local',
               updatedAt: new Date().toISOString(),
+              storeId: w.storeId ?? currentStoreId,
             }
           : w
       );
@@ -267,14 +281,14 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     const timestamp = new Date().toISOString();
     setWarehouses(
       warehouses.map(w =>
-        w.id === id
+        w.id === id && w.storeId === currentStoreId
           ? { ...w, deleted: true, version: (w.version ?? 0) + 1, updatedBy: user?.username ?? 'local', updatedAt: timestamp }
           : w
       )
     );
     setProducts(
       products.map(p =>
-        p.warehouseId === id
+        p.warehouseId === id && p.storeId === currentStoreId
           ? { ...p, deleted: true, version: (p.version ?? 0) + 1, updatedBy: user?.username ?? 'local', updatedAt: timestamp }
           : p
       )
@@ -282,7 +296,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   };
 
   const getWarehouse = (id: string) => {
-    return warehouses.find(w => w.id === id && !w.deleted);
+    return warehouses.find(w => w.id === id && !w.deleted && w.storeId === currentStoreId);
   };
 
   // Product operations
@@ -294,6 +308,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       version: 1,
       updatedBy: user?.username ?? 'local',
       updatedAt: new Date().toISOString(),
+      storeId: currentStoreId,
     };
     setProducts([...products, newProduct]);
     return newProduct;
@@ -302,13 +317,14 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const updateProduct = (id: string, data: Partial<Product>) => {
     setProducts(
       products.map(p =>
-        p.id === id
+        p.id === id && p.storeId === currentStoreId
           ? {
               ...p,
               ...data,
               version: (p.version ?? 0) + 1,
               updatedBy: user?.username ?? 'local',
               updatedAt: new Date().toISOString(),
+              storeId: p.storeId ?? currentStoreId,
             }
           : p
       )
@@ -318,7 +334,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const deleteProduct = (id: string) => {
     setProducts(
       products.map(p =>
-        p.id === id
+        p.id === id && p.storeId === currentStoreId
           ? { ...p, deleted: true, version: (p.version ?? 0) + 1, updatedBy: user?.username ?? 'local', updatedAt: new Date().toISOString() }
           : p
       )
@@ -326,16 +342,16 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   };
 
   const getProduct = (id: string) => {
-    return products.find(p => p.id === id && !p.deleted);
+    return products.find(p => p.id === id && !p.deleted && p.storeId === currentStoreId);
   };
 
   const getWarehouseProducts = (warehouseId: string) => {
-    return products.filter(p => p.warehouseId === warehouseId && !p.deleted);
+    return products.filter(p => p.warehouseId === warehouseId && !p.deleted && p.storeId === currentStoreId);
   };
 
   const getProductsWithoutBarcode = (warehouseId: string) => {
     return products
-      .filter(p => p.warehouseId === warehouseId && !p.barcode && !p.deleted)
+      .filter(p => p.warehouseId === warehouseId && !p.barcode && !p.deleted && p.storeId === currentStoreId)
       .sort((a, b) =>
         a.location.localeCompare(b.location, undefined, {
           numeric: true,
@@ -346,19 +362,19 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
 
   const getProductsBelowMin = (warehouseId: string) => {
     return products.filter(
-      p => p.warehouseId === warehouseId && p.quantity < p.minAmount && !p.deleted
+      p => p.warehouseId === warehouseId && p.quantity < p.minAmount && !p.deleted && p.storeId === currentStoreId
     );
   };
 
   const getProductsOverstock = (warehouseId: string) => {
     return products.filter(
-      p => p.warehouseId === warehouseId && p.quantity > p.maxAmount && !p.deleted
+      p => p.warehouseId === warehouseId && p.quantity > p.maxAmount && !p.deleted && p.storeId === currentStoreId
     );
   };
 
   const findProductByBarcode = (warehouseId: string, barcode: string) => {
     return products.find(
-      p => p.warehouseId === warehouseId && p.barcode === barcode && !p.deleted
+      p => p.warehouseId === warehouseId && p.barcode === barcode && !p.deleted && p.storeId === currentStoreId
     );
   };
 
@@ -410,6 +426,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       version: 1,
       updatedBy: user?.username ?? 'local',
       updatedAt: timestamp,
+      storeId: currentStoreId,
     }));
     
     setProducts([...products, ...newProducts]);
@@ -417,8 +434,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   };
 
   return {
-    warehouses: warehouses.filter(w => !w.deleted),
-    products: products.filter(p => !p.deleted),
+    warehouses: warehouses.filter(w => !w.deleted && w.storeId === currentStoreId),
+    products: products.filter(p => !p.deleted && p.storeId === currentStoreId),
     isLoading,
     syncStatus,
     githubConfig,
