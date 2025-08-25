@@ -215,11 +215,21 @@ export class GitHubSyncService {
   }
 
   private async getRemoteFile(): Promise<{ sha: string; text: string } | null> {
-    const res = await this.makeGitHubRequest(`contents/${this.dataFilePath}`, { method: 'GET' });
-    const json = await res.json();
-    if (!json?.content || !json?.sha) return null;
-    const remoteBytes = atob(String(json.content).replace(/\n/g, ''));
-    return { sha: String(json.sha), text: remoteBytes };
+    try {
+      const res = await this.makeGitHubRequest(`contents/${this.dataFilePath}`, { method: 'GET' });
+      const json = await res.json();
+      if (!json?.content || !json?.sha) return null;
+      const remoteBytes = atob(String(json.content).replace(/\n/g, ''));
+      return { sha: String(json.sha), text: remoteBytes };
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      if (msg.includes('404')) {
+        console.log('getRemoteFile: file not found on GitHub, will create on next upload', this.dataFilePath);
+        return null;
+      }
+      console.error('getRemoteFile failed', e);
+      throw e as Error;
+    }
   }
 
   async uploadData(data: WarehouseFile, currentSha: string | null): Promise<string> {
