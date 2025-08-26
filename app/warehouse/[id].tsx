@@ -1,3 +1,4 @@
+// app/warehouse/[id].tsx
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, Switch } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,37 +13,39 @@ import { SyncStatus } from '@/components/SyncStatus';
 import { colors } from '@/constants/colors';
 import { useWarehouse } from '@/hooks/warehouse-store';
 import { formatNumber } from '@/utils/helpers';
-import { 
-  ArrowLeft, 
-  Plus, 
-  Package, 
-  Barcode, 
-  Upload, 
-  Download, 
-  AlertTriangle, 
+import {
+  ArrowLeft,
+  Plus,
+  Package,
+  Barcode,
+  Upload,
+  Download,
+  AlertTriangle,
   AlertCircle,
   Search,
   Settings,
   ScanLine,
   Filter,
   ArrowUpDown,
-  ChevronDown
+  ChevronDown,
+  Eye,
+  EyeOff,
 } from 'lucide-react-native';
 
 export default function WarehouseDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
-  const { 
-    getWarehouse, 
-    getWarehouseProducts, 
-    isLoading, 
+  const {
+    getWarehouse,
+    getWarehouseProducts,
+    isLoading,
     syncStatus,
     getProductsWithoutBarcode,
     getProductsBelowMin,
     getProductsOverstock,
     updateWarehouse,
   } = useWarehouse();
-  
+
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
   const [activeFilter, setActiveFilter] = useState<'all' | 'location' | 'belowMin' | 'belowMax' | 'overstock'>('all');
@@ -50,19 +53,20 @@ export default function WarehouseDetailScreen() {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [showFilters, setShowFilters] = useState(false);
   const [locationFilter, setLocationFilter] = useState('');
-  
+  const [showDashboard, setShowDashboard] = useState(true); // 👈 eyeball toggle
+
   const warehouse = getWarehouse(id);
   const products = getWarehouseProducts(id);
   const productsWithoutBarcode = getProductsWithoutBarcode(id);
   const productsBelowMin = getProductsBelowMin(id);
   const productsOverstock = getProductsOverstock(id);
-  
+
   const getFilteredProducts = () => {
     let filtered = products;
 
     // Apply search filter
     if (searchQuery) {
-      filtered = filtered.filter(product => 
+      filtered = filtered.filter((product) =>
         product.internalName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.customerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -74,19 +78,19 @@ export default function WarehouseDetailScreen() {
     switch (activeFilter) {
       case 'location':
         if (locationFilter) {
-          filtered = filtered.filter(product => 
+          filtered = filtered.filter((product) =>
             product.location.toLowerCase().includes(locationFilter.toLowerCase())
           );
         }
         break;
       case 'belowMin':
-        filtered = filtered.filter(product => product.quantity < product.minAmount);
+        filtered = filtered.filter((product) => product.quantity < product.minAmount);
         break;
       case 'belowMax':
-        filtered = filtered.filter(product => product.quantity < product.maxAmount);
+        filtered = filtered.filter((product) => product.quantity < product.maxAmount);
         break;
       case 'overstock':
-        filtered = filtered.filter(product => product.quantity > product.maxAmount);
+        filtered = filtered.filter((product) => product.quantity > product.maxAmount);
         break;
       default:
         break;
@@ -129,18 +133,31 @@ export default function WarehouseDetailScreen() {
     }
   }, [warehouse, isLoading, router]);
 
-
-
   const handleMassBarcodeScanning = () => {
     if (productsWithoutBarcode.length === 0) {
       Alert.alert('No Products', 'There are no products without barcodes');
       return;
     }
-    
+
     router.push({
       pathname: '/mass-scanner',
-      params: { warehouseId: id }
+      params: { warehouseId: id },
     });
+  };
+
+  // Stat click handlers
+  const handleClearAllFilters = () => {
+    setActiveFilter('all');
+    setLocationFilter('');
+    setSearchQuery('');
+  };
+  const handleFilterBelowMin = () => {
+    setActiveFilter('belowMin');
+    setLocationFilter('');
+  };
+  const handleFilterOverstock = () => {
+    setActiveFilter('overstock');
+    setLocationFilter('');
   };
 
   if (isLoading || !warehouse) {
@@ -151,15 +168,26 @@ export default function WarehouseDetailScreen() {
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       <View style={styles.header}>
         <View style={styles.headerContent}>
-          <TouchableOpacity 
-            onPress={() => router.back()} 
-            style={styles.backButton}
-          >
+          <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
             <ArrowLeft size={24} color={colors.text} />
           </TouchableOpacity>
           <Text style={styles.title}>{warehouse.name}</Text>
           <View style={styles.headerRight}>
-            <TouchableOpacity 
+            {/* 👁️ Eyeball toggle (left of settings) */}
+            <TouchableOpacity
+              onPress={() => setShowDashboard((prev) => !prev)}
+              style={styles.eyeButton}
+              accessibilityLabel={showDashboard ? 'Hide dashboard panels' : 'Show dashboard panels'}
+              testID="toggle-dashboard"
+            >
+              {showDashboard ? (
+                <Eye size={20} color={colors.text} />
+              ) : (
+                <EyeOff size={20} color={colors.text} />
+              )}
+            </TouchableOpacity>
+
+            <TouchableOpacity
               onPress={() => router.push(`/warehouse-settings/${id}`)}
               style={styles.settingsButton}
             >
@@ -170,24 +198,29 @@ export default function WarehouseDetailScreen() {
         </View>
       </View>
 
-      <View style={styles.statsContainer}>
-        <View style={styles.statCard}>
-          <Text style={styles.statValue}>{formatNumber(products.length)}</Text>
-          <Text style={styles.statLabel}>Products</Text>
+      {/* Stats – now clickable, and can be hidden via eyeball */}
+      {showDashboard && (
+        <View style={styles.statsContainer}>
+          <TouchableOpacity style={styles.statCard} onPress={handleClearAllFilters} testID="stat-products">
+            <Text style={styles.statValue}>{formatNumber(products.length)}</Text>
+            <Text style={styles.statLabel}>Products</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.statCard} onPress={handleFilterBelowMin} testID="stat-below-min">
+            <Text style={[styles.statValue, productsBelowMin.length > 0 ? styles.warningText : {}]}>
+              {formatNumber(productsBelowMin.length)}
+            </Text>
+            <Text style={styles.statLabel}>Below Min</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.statCard} onPress={handleFilterOverstock} testID="stat-overstock">
+            <Text style={[styles.statValue, productsOverstock.length > 0 ? styles.infoText : {}]}>
+              {formatNumber(productsOverstock.length)}
+            </Text>
+            <Text style={styles.statLabel}>Overstock</Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.statCard}>
-          <Text style={[styles.statValue, productsBelowMin.length > 0 ? styles.warningText : {}]}>
-            {formatNumber(productsBelowMin.length)}
-          </Text>
-          <Text style={styles.statLabel}>Below Min</Text>
-        </View>
-        <View style={styles.statCard}>
-          <Text style={[styles.statValue, productsOverstock.length > 0 ? styles.infoText : {}]}>
-            {formatNumber(productsOverstock.length)}
-          </Text>
-          <Text style={styles.statLabel}>Overstock</Text>
-        </View>
-      </View>
+      )}
 
       <View style={styles.qrToggleRow}>
         <Text style={styles.qrToggleText}>QR</Text>
@@ -197,49 +230,58 @@ export default function WarehouseDetailScreen() {
         />
       </View>
 
-      <ExpandableCard title="Actions">
-        <View style={styles.actionRow}>
-          <Button
-            title="Add Product"
-            onPress={() => router.push({
-              pathname: '/product/[id]',
-              params: { id: 'new', warehouseId: id }
-            })}
-            icon={<Plus size={18} color="white" />}
-            style={styles.actionButton}
-          />
-          <Button
-            title="Mass Barcode"
-            onPress={handleMassBarcodeScanning}
-            icon={<Barcode size={18} color="white" />}
-            variant="secondary"
-            style={styles.actionButton}
-            disabled={productsWithoutBarcode.length === 0}
-          />
-        </View>
-        <View style={styles.actionRow}>
-          <Button
-            title="Import CSV"
-            onPress={() => router.push({
-              pathname: '/import',
-              params: { warehouseId: id }
-            })}
-            icon={<Upload size={18} color={colors.primary} />}
-            variant="outline"
-            style={styles.actionButton}
-          />
-          <Button
-            title="Export"
-            onPress={() => router.push({
-              pathname: '/export',
-              params: { warehouseId: id }
-            })}
-            icon={<Download size={18} color={colors.primary} />}
-            variant="outline"
-            style={styles.actionButton}
-          />
-        </View>
-      </ExpandableCard>
+      {/* Actions – collapsible card, also hidden via eyeball */}
+      {showDashboard && (
+        <ExpandableCard title="Actions">
+          <View style={styles.actionRow}>
+            <Button
+              title="Add Product"
+              onPress={() =>
+                router.push({
+                  pathname: '/product/[id]',
+                  params: { id: 'new', warehouseId: id },
+                })
+              }
+              icon={<Plus size={18} color="white" />}
+              style={styles.actionButton}
+            />
+            <Button
+              title="Mass Barcode"
+              onPress={handleMassBarcodeScanning}
+              icon={<Barcode size={18} color="white" />}
+              variant="secondary"
+              style={styles.actionButton}
+              disabled={productsWithoutBarcode.length === 0}
+            />
+          </View>
+          <View style={styles.actionRow}>
+            <Button
+              title="Import CSV"
+              onPress={() =>
+                router.push({
+                  pathname: '/import',
+                  params: { warehouseId: id },
+                })
+              }
+              icon={<Upload size={18} color={colors.primary} />}
+              variant="outline"
+              style={styles.actionButton}
+            />
+            <Button
+              title="Export"
+              onPress={() =>
+                router.push({
+                  pathname: '/export',
+                  params: { warehouseId: id },
+                })
+              }
+              icon={<Download size={18} color={colors.primary} />}
+              variant="outline"
+              style={styles.actionButton}
+            />
+          </View>
+        </ExpandableCard>
+      )}
 
       {showSearch ? (
         <View style={styles.searchContainer}>
@@ -261,10 +303,7 @@ export default function WarehouseDetailScreen() {
           />
         </View>
       ) : (
-        <TouchableOpacity 
-          style={styles.searchButton} 
-          onPress={() => setShowSearch(true)}
-        >
+        <TouchableOpacity style={styles.searchButton} onPress={() => setShowSearch(true)}>
           <Search size={20} color={colors.gray[500]} />
           <Text style={styles.searchButtonText}>Search products...</Text>
         </TouchableOpacity>
@@ -273,26 +312,24 @@ export default function WarehouseDetailScreen() {
       {/* Filter and Sort Controls */}
       <View style={styles.controlsContainer}>
         <View style={styles.controlsRow}>
-          <TouchableOpacity 
-            style={styles.controlButton}
-            onPress={() => setShowFilters(!showFilters)}
-          >
+          <TouchableOpacity style={styles.controlButton} onPress={() => setShowFilters(!showFilters)}>
             <Filter size={16} color={colors.primary} />
             <Text style={styles.controlButtonText}>Filter</Text>
-            <ChevronDown 
-              size={16} 
-              color={colors.primary} 
-              style={[styles.chevron, showFilters && styles.chevronRotated]} 
+            <ChevronDown
+              size={16}
+              color={colors.primary}
+              style={[styles.chevron, showFilters && styles.chevronRotated]}
             />
           </TouchableOpacity>
-          
-          <TouchableOpacity 
+
+          <TouchableOpacity
             style={styles.controlButton}
             onPress={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
           >
             <ArrowUpDown size={16} color={colors.primary} />
             <Text style={styles.controlButtonText}>
-              Sort: {sortBy === 'location' ? 'Location' : sortBy === 'internalName' ? 'Internal' : 'Customer'} ({sortOrder.toUpperCase()})
+              Sort: {sortBy === 'location' ? 'Location' : sortBy === 'internalName' ? 'Internal' : 'Customer'} (
+              {sortOrder.toUpperCase()})
             </Text>
           </TouchableOpacity>
         </View>
@@ -309,7 +346,7 @@ export default function WarehouseDetailScreen() {
               >
                 <Text style={[styles.filterChipText, activeFilter === 'all' && styles.filterChipTextActive]}>All</Text>
               </TouchableOpacity>
-              
+
               <TouchableOpacity
                 style={[styles.filterChip, activeFilter === 'belowMin' && styles.filterChipActive]}
                 onPress={() => {
@@ -317,9 +354,11 @@ export default function WarehouseDetailScreen() {
                   setLocationFilter('');
                 }}
               >
-                <Text style={[styles.filterChipText, activeFilter === 'belowMin' && styles.filterChipTextActive]}>Below Min</Text>
+                <Text style={[styles.filterChipText, activeFilter === 'belowMin' && styles.filterChipTextActive]}>
+                  Below Min
+                </Text>
               </TouchableOpacity>
-              
+
               <TouchableOpacity
                 style={[styles.filterChip, activeFilter === 'belowMax' && styles.filterChipActive]}
                 onPress={() => {
@@ -327,9 +366,11 @@ export default function WarehouseDetailScreen() {
                   setLocationFilter('');
                 }}
               >
-                <Text style={[styles.filterChipText, activeFilter === 'belowMax' && styles.filterChipTextActive]}>Below Max</Text>
+                <Text style={[styles.filterChipText, activeFilter === 'belowMax' && styles.filterChipTextActive]}>
+                  Below Max
+                </Text>
               </TouchableOpacity>
-              
+
               <TouchableOpacity
                 style={[styles.filterChip, activeFilter === 'overstock' && styles.filterChipActive]}
                 onPress={() => {
@@ -337,19 +378,23 @@ export default function WarehouseDetailScreen() {
                   setLocationFilter('');
                 }}
               >
-                <Text style={[styles.filterChipText, activeFilter === 'overstock' && styles.filterChipTextActive]}>Overstock</Text>
+                <Text style={[styles.filterChipText, activeFilter === 'overstock' && styles.filterChipTextActive]}>
+                  Overstock
+                </Text>
               </TouchableOpacity>
             </View>
-            
+
             <View style={styles.filterRow}>
               <TouchableOpacity
                 style={[styles.filterChip, activeFilter === 'location' && styles.filterChipActive]}
                 onPress={() => setActiveFilter('location')}
               >
-                <Text style={[styles.filterChipText, activeFilter === 'location' && styles.filterChipTextActive]}>By Location</Text>
+                <Text style={[styles.filterChipText, activeFilter === 'location' && styles.filterChipTextActive]}>
+                  By Location
+                </Text>
               </TouchableOpacity>
             </View>
-            
+
             {activeFilter === 'location' && (
               <View style={styles.locationFilterContainer}>
                 <Input
@@ -360,7 +405,7 @@ export default function WarehouseDetailScreen() {
                 />
               </View>
             )}
-            
+
             <View style={styles.sortContainer}>
               <Text style={styles.sortLabel}>Sort by:</Text>
               <View style={styles.sortRow}>
@@ -370,19 +415,23 @@ export default function WarehouseDetailScreen() {
                 >
                   <Text style={[styles.sortChipText, sortBy === 'location' && styles.sortChipTextActive]}>Location</Text>
                 </TouchableOpacity>
-                
+
                 <TouchableOpacity
                   style={[styles.sortChip, sortBy === 'internalName' && styles.sortChipActive]}
                   onPress={() => setSortBy('internalName')}
                 >
-                  <Text style={[styles.sortChipText, sortBy === 'internalName' && styles.sortChipTextActive]}>Internal Name</Text>
+                  <Text style={[styles.sortChipText, sortBy === 'internalName' && styles.sortChipTextActive]}>
+                    Internal Name
+                  </Text>
                 </TouchableOpacity>
-                
+
                 <TouchableOpacity
                   style={[styles.sortChip, sortBy === 'customerName' && styles.sortChipActive]}
                   onPress={() => setSortBy('customerName')}
                 >
-                  <Text style={[styles.sortChipText, sortBy === 'customerName' && styles.sortChipTextActive]}>Customer Name</Text>
+                  <Text style={[styles.sortChipText, sortBy === 'customerName' && styles.sortChipTextActive]}>
+                    Customer Name
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -395,10 +444,12 @@ export default function WarehouseDetailScreen() {
           title="No Products"
           description="Add your first product to start managing inventory"
           buttonTitle="Add Product"
-          onButtonPress={() => router.push({
-            pathname: '/product/[id]',
-            params: { id: 'new', warehouseId: id }
-          })}
+          onButtonPress={() =>
+            router.push({
+              pathname: '/product/[id]',
+              params: { id: 'new', warehouseId: id },
+            })
+          }
           icon={<Package size={48} color={colors.gray[400]} />}
         />
       ) : filteredProducts.length === 0 && products.length > 0 ? (
@@ -418,10 +469,7 @@ export default function WarehouseDetailScreen() {
           data={filteredProducts}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => router.push(`/product/${item.id}`)}
-              testID={`product-${item.id}`}
-            >
+            <TouchableOpacity onPress={() => router.push(`/product/${item.id}`)} testID={`product-${item.id}`}>
               <Card>
                 <View style={styles.productCard}>
                   <View style={styles.productInfo}>
@@ -433,16 +481,19 @@ export default function WarehouseDetailScreen() {
                     </Text>
                   </View>
                   <View style={styles.productQuantity}>
-                    <Text style={[
-                      styles.quantityValue,
-                      item.quantity < item.minAmount ? styles.belowMinQuantity : 
-                      item.quantity > item.maxAmount ? styles.aboveMaxQuantity : {}
-                    ]}>
+                    <Text
+                      style={[
+                        styles.quantityValue,
+                        item.quantity < item.minAmount
+                          ? styles.belowMinQuantity
+                          : item.quantity > item.maxAmount
+                          ? styles.aboveMaxQuantity
+                          : {},
+                      ]}
+                    >
                       {formatNumber(item.quantity)}
                     </Text>
-                    <Text style={styles.quantityLabel}>
-                      Min: {item.minAmount} | Max: {item.maxAmount}
-                    </Text>
+                    <Text style={styles.quantityLabel}>Min: {item.minAmount} | Max: {item.maxAmount}</Text>
                     {item.quantity < item.minAmount && (
                       <AlertTriangle size={16} color={colors.warning} style={styles.quantityIcon} />
                     )}
@@ -461,15 +512,16 @@ export default function WarehouseDetailScreen() {
       {/* FAB Button */}
       <TouchableOpacity
         style={styles.fab}
-        onPress={() => router.push({
-          pathname: '/quick-scanner',
-          params: { warehouseId: id }
-        })}
+        onPress={() =>
+          router.push({
+            pathname: '/quick-scanner',
+            params: { warehouseId: id },
+          })
+        }
         testID="quick-scan-fab"
       >
         <ScanLine size={24} color="white" />
       </TouchableOpacity>
-
     </SafeAreaView>
   );
 }
@@ -500,6 +552,10 @@ const styles = StyleSheet.create({
   headerRight: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  eyeButton: {
+    marginRight: 12,
+    padding: 4,
   },
   statsContainer: {
     flexDirection: 'row',
