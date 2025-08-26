@@ -1,5 +1,5 @@
 // app/warehouse/[id].tsx
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -62,20 +62,42 @@ export default function WarehouseDetailScreen() {
   const productsBelowMin = getProductsBelowMin(id);
   const productsOverstock = getProductsOverstock(id);
 
-  // --- QR FAB animation (red -> green) ---
+  // --- QR FAB animation (red -> green) + press scale ---
   const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
   const qrAnim = useRef(new Animated.Value(warehouse?.qrOnly ? 1 : 0)).current;
+  const pressScale = useRef(new Animated.Value(1)).current;
+
   useEffect(() => {
     Animated.timing(qrAnim, {
       toValue: warehouse?.qrOnly ? 1 : 0,
-      duration: 250,
+      duration: 220,
       useNativeDriver: false, // backgroundColor can't use native driver
     }).start();
   }, [warehouse?.qrOnly, qrAnim]);
+
   const qrBg = qrAnim.interpolate({
     inputRange: [0, 1],
     outputRange: ['#dc3545', '#28a745'], // red -> green
   });
+
+  const onPressIn = useCallback(() => {
+    Animated.spring(pressScale, { toValue: 0.94, useNativeDriver: true, friction: 6, tension: 90 }).start();
+  }, [pressScale]);
+
+  const onPressOut = useCallback(() => {
+    Animated.spring(pressScale, { toValue: 1, useNativeDriver: true, friction: 6, tension: 90 }).start();
+  }, [pressScale]);
+
+  const toggleQrOnly = useCallback(() => {
+    // Optimistic visual response
+    Animated.timing(qrAnim, {
+      toValue: warehouse?.qrOnly ? 0 : 1,
+      duration: 180,
+      useNativeDriver: false,
+    }).start();
+
+    updateWarehouse(id, { qrOnly: !warehouse?.qrOnly });
+  }, [id, warehouse?.qrOnly, updateWarehouse, qrAnim]);
 
   const getFilteredProducts = () => {
     let filtered = products;
@@ -521,23 +543,31 @@ export default function WarehouseDetailScreen() {
         />
       )}
 
-      {/* ✅ NEW: QR Toggle FAB (above Quick-Scan) */}
+      {/* ✅ QR Toggle FAB (above Quick-Scan) */}
       <AnimatedTouchable
-        style={[styles.qrFab, { backgroundColor: qrBg }]}
-        onPress={() => updateWarehouse(id, { qrOnly: !warehouse?.qrOnly })}
-        accessibilityLabel="Toggle QR-only mode"
+        style={[
+          styles.qrFab,
+          { backgroundColor: qrBg, transform: [{ scale: pressScale }] },
+        ]}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        onPress={toggleQrOnly}
+        accessibilityLabel={warehouse?.qrOnly ? 'Disable QR-only mode' : 'Enable QR-only mode'}
         testID="qr-toggle-fab"
       >
         <QrCode size={24} color="white" />
       </AnimatedTouchable>
 
-      {/* Existing Quick-Scan FAB (unchanged) */}
+      {/* Quick-Scan FAB */}
       <TouchableOpacity
         style={styles.fab}
         onPress={() =>
           router.push({
             pathname: '/quick-scanner',
-            params: { warehouseId: id },
+            params: {
+              warehouseId: id,
+              qrOnly: warehouse?.qrOnly ? 'true' : 'false', // ensure immediate QR-only enforcement
+            },
           })
         }
         testID="quick-scan-fab"
@@ -696,7 +726,7 @@ const styles = StyleSheet.create({
     padding: 4,
   },
 
-  // Existing Quick-Scan FAB
+  // Quick-Scan FAB
   fab: {
     position: 'absolute',
     bottom: 24,
@@ -714,10 +744,10 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
   },
 
-  // New QR Toggle FAB (just above quick-scan)
+  // QR Toggle FAB (stacked above)
   qrFab: {
     position: 'absolute',
-    bottom: 92, // 56 (FAB) + 12–16 gap above the quick-scan FAB
+    bottom: 92, // 56 (FAB) + ~12–16 gap
     right: 24,
     width: 56,
     height: 56,
