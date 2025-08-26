@@ -15,6 +15,7 @@ import { Button } from '@/components/Button';
 import { useWarehouse } from '@/hooks/warehouse-store';
 import { useAuth } from '@/hooks/auth-store';
 import { SyncStatus } from '@/components/SyncStatus';
+import { StatusBar, Platform } from 'react-native';
 
 export default function GitHubSettingsScreen() {
   const { 
@@ -28,9 +29,10 @@ export default function GitHubSettingsScreen() {
   } = useWarehouse();
   const { user } = useAuth();
   
+  // ✅ Default to "suhedges" and "WarehouseManagement" if no config yet
   const [token, setToken] = useState<string>(githubConfig?.token || '');
-  const [owner, setOwner] = useState<string>(githubConfig?.owner || '');
-  const [repo, setRepo] = useState<string>(githubConfig?.repo || '');
+  const [owner, setOwner] = useState<string>(githubConfig?.owner ?? 'suhedges');
+  const [repo,  setRepo]  = useState<string>(githubConfig?.repo  ?? 'WarehouseManagement');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSave = async () => {
@@ -44,7 +46,7 @@ export default function GitHubSettingsScreen() {
       await configureGitHub({
         token: token.trim(),
         owner: owner.trim(),
-        repo: repo.trim(),
+        repo:  repo.trim(),
       });
       
       Alert.alert('Success', 'GitHub configuration saved and synced successfully!');
@@ -72,8 +74,8 @@ export default function GitHubSettingsScreen() {
             try {
               await disconnectGitHub();
               setToken('');
-              setOwner('');
-              setRepo('');
+              setOwner('suhedges');             // reset to default
+              setRepo('WarehouseManagement');    // reset to default
               Alert.alert('Success', 'GitHub disconnected successfully');
             } catch (error) {
               Alert.alert('Error', 'Failed to disconnect GitHub');
@@ -107,19 +109,22 @@ export default function GitHubSettingsScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Stack.Screen 
-        options={{
-          headerShown: true,
-          title: 'GitHub Settings',
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => router.back()}>
-              <ArrowLeft size={24} color="#000" />
-            </TouchableOpacity>
-          ),
-        }} 
-      />
-      
+    <>
+      {/* Hide Expo Router header to avoid status-bar overlap/back arrow duplication */}
+      <Stack.Screen options={{ headerShown: false }} />
+      {/* Make Android status bar non-obtrusive */}
+      <StatusBar translucent={false} barStyle={Platform.OS === 'ios' ? 'dark-content' : 'dark-content'} />
+
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+        {/* In-app header below the status bar */}
+        <View style={styles.appBar}>
+          <TouchableOpacity onPress={() => router.back()} style={styles.appBarBack}>
+            <ArrowLeft size={24} color="#24292e" />
+          </TouchableOpacity>
+          <Text style={styles.appBarTitle}>GitHub Settings</Text>
+          <View style={styles.appBarRight} />
+        </View>
+        
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Github size={48} color="#24292e" />
@@ -186,7 +191,7 @@ export default function GitHubSettingsScreen() {
             label="Repository Owner"
             value={owner}
             onChangeText={setOwner}
-            placeholder="your-username"
+            placeholder="suhedges"
             autoCapitalize="none"
             autoCorrect={false}
           />
@@ -195,7 +200,7 @@ export default function GitHubSettingsScreen() {
             label="Repository Name"
             value={repo}
             onChangeText={setRepo}
-            placeholder="warehouse-data"
+            placeholder="WarehouseManagement"
             autoCapitalize="none"
             autoCorrect={false}
           />
@@ -229,6 +234,8 @@ export default function GitHubSettingsScreen() {
         </View>
       </ScrollView>
     </SafeAreaView>
+    {/* ✅ CLOSE THE FRAGMENT */}
+    </>
   );
 }
 

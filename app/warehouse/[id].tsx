@@ -1,6 +1,6 @@
 // app/warehouse/[id].tsx
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, Switch } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Button } from '@/components/Button';
@@ -30,6 +30,7 @@ import {
   ChevronDown,
   Eye,
   EyeOff,
+  QrCode,
 } from 'lucide-react-native';
 
 export default function WarehouseDetailScreen() {
@@ -60,6 +61,21 @@ export default function WarehouseDetailScreen() {
   const productsWithoutBarcode = getProductsWithoutBarcode(id);
   const productsBelowMin = getProductsBelowMin(id);
   const productsOverstock = getProductsOverstock(id);
+
+  // --- QR FAB animation (red -> green) ---
+  const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
+  const qrAnim = useRef(new Animated.Value(warehouse?.qrOnly ? 1 : 0)).current;
+  useEffect(() => {
+    Animated.timing(qrAnim, {
+      toValue: warehouse?.qrOnly ? 1 : 0,
+      duration: 250,
+      useNativeDriver: false, // backgroundColor can't use native driver
+    }).start();
+  }, [warehouse?.qrOnly, qrAnim]);
+  const qrBg = qrAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['#dc3545', '#28a745'], // red -> green
+  });
 
   const getFilteredProducts = () => {
     let filtered = products;
@@ -222,13 +238,9 @@ export default function WarehouseDetailScreen() {
         </View>
       )}
 
-      <View style={styles.qrToggleRow}>
-        <Text style={styles.qrToggleText}>QR</Text>
-        <Switch
-          value={!!warehouse?.qrOnly}
-          onValueChange={(value) => updateWarehouse(id, { qrOnly: value })}
-        />
-      </View>
+      {/* 🔁 Removed old inline switch:
+          <View style={styles.qrToggleRow}> ... </View>
+      */}
 
       {/* Actions – collapsible card, also hidden via eyeball */}
       {showDashboard && (
@@ -509,7 +521,17 @@ export default function WarehouseDetailScreen() {
         />
       )}
 
-      {/* FAB Button */}
+      {/* ✅ NEW: QR Toggle FAB (above Quick-Scan) */}
+      <AnimatedTouchable
+        style={[styles.qrFab, { backgroundColor: qrBg }]}
+        onPress={() => updateWarehouse(id, { qrOnly: !warehouse?.qrOnly })}
+        accessibilityLabel="Toggle QR-only mode"
+        testID="qr-toggle-fab"
+      >
+        <QrCode size={24} color="white" />
+      </AnimatedTouchable>
+
+      {/* Existing Quick-Scan FAB (unchanged) */}
       <TouchableOpacity
         style={styles.fab}
         onPress={() =>
@@ -592,18 +614,9 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 4,
   },
-  qrToggleRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    marginTop: 4,
-    marginBottom: 8,
-  },
-  qrToggleText: {
-    marginRight: 8,
-    color: colors.text,
-    fontSize: 16,
-  },
+
+  // (Removed old qrToggleRow/qrToggleText styles)
+
   searchContainer: {
     flexDirection: 'row',
     padding: 16,
@@ -682,6 +695,8 @@ const styles = StyleSheet.create({
     marginRight: 12,
     padding: 4,
   },
+
+  // Existing Quick-Scan FAB
   fab: {
     position: 'absolute',
     bottom: 24,
@@ -694,13 +709,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     elevation: 8,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
   },
+
+  // New QR Toggle FAB (just above quick-scan)
+  qrFab: {
+    position: 'absolute',
+    bottom: 92, // 56 (FAB) + 12–16 gap above the quick-scan FAB
+    right: 24,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+  },
+
   controlsContainer: {
     backgroundColor: colors.card,
     marginBottom: 8,
