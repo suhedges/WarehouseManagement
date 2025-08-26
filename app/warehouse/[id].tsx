@@ -64,21 +64,9 @@ export default function WarehouseDetailScreen() {
 
   // --- QR FAB animation (red -> green) + press scale ---
   const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
-  const qrAnim = useRef(new Animated.Value(warehouse?.qrOnly ? 1 : 0)).current;
   const pressScale = useRef(new Animated.Value(1)).current;
 
-  useEffect(() => {
-    Animated.timing(qrAnim, {
-      toValue: warehouse?.qrOnly ? 1 : 0,
-      duration: 220,
-      useNativeDriver: false, // backgroundColor can't use native driver
-    }).start();
-  }, [warehouse?.qrOnly, qrAnim]);
-
-  const qrBg = qrAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['#dc3545', '#28a745'], // red -> green
-  });
+  const qrBgColor = warehouse?.qrOnly ? '#28a745' : '#dc3545';
 
   const onPressIn = useCallback(() => {
     Animated.spring(pressScale, { toValue: 0.94, useNativeDriver: true, friction: 6, tension: 90 }).start();
@@ -89,15 +77,9 @@ export default function WarehouseDetailScreen() {
   }, [pressScale]);
 
   const toggleQrOnly = useCallback(() => {
-    // Optimistic visual response
-    Animated.timing(qrAnim, {
-      toValue: warehouse?.qrOnly ? 0 : 1,
-      duration: 180,
-      useNativeDriver: false,
-    }).start();
-
+    console.log('Toggling qrOnly', { from: warehouse?.qrOnly, to: !warehouse?.qrOnly, warehouseId: id });
     updateWarehouse(id, { qrOnly: !warehouse?.qrOnly });
-  }, [id, warehouse?.qrOnly, updateWarehouse, qrAnim]);
+  }, [id, warehouse?.qrOnly, updateWarehouse]);
 
   const getFilteredProducts = () => {
     let filtered = products;
@@ -547,7 +529,7 @@ export default function WarehouseDetailScreen() {
       <AnimatedTouchable
         style={[
           styles.qrFab,
-          { backgroundColor: qrBg, transform: [{ scale: pressScale }] },
+          { backgroundColor: qrBgColor, transform: [{ scale: pressScale }] },
         ]}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
