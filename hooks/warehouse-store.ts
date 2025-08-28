@@ -64,7 +64,6 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   }, []);
 
   useEffect(() => {
-    // Kick off initial load (reads local storage, loads GitHub config, optional first sync)
     void initializeData();
 
     return () => {
@@ -77,8 +76,6 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   useEffect(() => {
     githubSync.setUser(user?.username ?? 'local');
   }, [user?.username]);
-
-
 
   const purgeDeletedRecords = useCallback(async () => {
     try {
