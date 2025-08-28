@@ -254,10 +254,12 @@ export class GitHubSyncService {
     if (!this.config) {
       throw new Error('GitHub configuration not set');
     }
+    const safeWarehouses = (localWarehouses ?? []).filter(w => !w?.deleted);
+    const safeProducts = (localProducts ?? []).filter(p => !p?.deleted);
     const data: WarehouseFile = {
       meta: { schemaVersion: 1 },
-      warehouses: localWarehouses,
-      products: localProducts,
+      warehouses: safeWarehouses,
+      products: safeProducts,
     };
     const remote = await this.downloadData();
     const newSha = await this.uploadData(data, remote?.sha ?? null);
