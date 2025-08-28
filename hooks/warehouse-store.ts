@@ -64,6 +64,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   }, []);
 
   useEffect(() => {
+    // Kick off initial load (reads local storage, loads GitHub config, optional first sync)
     void initializeData();
 
     return () => {
@@ -77,27 +78,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     githubSync.setUser(user?.username ?? 'local');
   }, [user?.username]);
 
-  const purgeDeletedRecords = useCallback(async () => {
-    try {
-      const beforeW = warehouses.length;
-      const beforeP = products.length;
-      const purgedWarehouses = warehouses.filter(w => !w.deleted);
-      const purgedProducts = products.filter(p => !p.deleted);
-      const afterW = purgedWarehouses.length;
-      const afterP = purgedProducts.length;
-      if (beforeW !== afterW || beforeP !== afterP) {
-        console.log('purgeDeletedRecords: purging deleted items', { beforeW, afterW, beforeP, afterP });
-      } else {
-        console.log('purgeDeletedRecords: nothing to purge');
-      }
-      setWarehouses(purgedWarehouses);
-      setProducts(purgedProducts);
-      await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(purgedWarehouses));
-      await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(purgedProducts));
-    } catch (e) {
-      console.error('purgeDeletedRecords failed', e);
-    }
-  }, [warehouses, products]);
+
 
   const performSyncNow = useCallback(async () => {
     if (!githubConfig) {
@@ -114,14 +95,10 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     try {
       isPerformingSyncRef.current = true;
       setSyncStatus('syncing');
-      const currentUser = user?.username ?? 'local';
-      const warehousesToPush = warehouses.filter(w => (w.storeId ?? 'local') === currentUser && !w.deleted);
-      const productsToPush = products.filter(p => (p.storeId ?? 'local') === currentUser && !p.deleted);
       await githubSync.pushLocalOnly(
-        warehousesToPush,
-        productsToPush,
+        warehouses.filter(w => (w.storeId ?? 'local') === (user?.username ?? 'local')),
+        products.filter(p => (p.storeId ?? 'local') === (user?.username ?? 'local')),
       );
-      await purgeDeletedRecords();
       setLastSyncTime(new Date().toISOString());
       setSyncStatus('synced');
       console.log('Push completed successfully');
@@ -132,7 +109,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     } finally {
       isPerformingSyncRef.current = false;
     }
-  }, [githubConfig, warehouses, products, user?.username, purgeDeletedRecords]);
+  }, [githubConfig, warehouses, products]);
   
   const performSync = useCallback((): Promise<void> => {
     if (pendingSyncPromise.current) {

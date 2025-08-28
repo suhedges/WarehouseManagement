@@ -1,1 +1,10 @@
 eas build -p android --profile preview --clear-cache
+
+
+If breaks on reset
+Environment Variables 
+C:\Users\sethh\AppData\Roaming\npm
+C:\Users\sethh\AppData\Local\nvm
+%NVM_SYMLINK%
+
+nvm use 20.16.0
