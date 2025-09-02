@@ -109,15 +109,33 @@ export default function ExportScreen() {
         const shareFile = async () => {
           if (!fileUri) return;
           try {
-            if (await Sharing.isAvailableAsync()) {
-              await Sharing.shareAsync(fileUri, {
+            let attachmentUri = fileUri;
+            if (attachmentUri.startsWith('content://')) {
+              const tempUri =
+                (FileSystem.cacheDirectory ?? FileSystem.documentDirectory) +
+                filename;
+              const content = await FileSystem.readAsStringAsync(attachmentUri);
+              await FileSystem.writeAsStringAsync(tempUri, content, {
+                encoding: FileSystem.EncodingType.UTF8,
+              });
+              attachmentUri = tempUri;
+            }
+
+            if (await MailComposer.isAvailableAsync()) {
+              await MailComposer.composeAsync({
+                attachments: [attachmentUri],
+                subject: filename,
+                body: `Exported ${products.length} products to ${filename}`,
+              });
+            } else if (await Sharing.isAvailableAsync()) {
+              await Sharing.shareAsync(attachmentUri, {
                 mimeType: 'text/csv',
                 dialogTitle: filename,
                 UTI: 'public.comma-separated-values-text',
               });
             } else {
               await RNShare.share({
-                url: fileUri,
+                url: attachmentUri,
                 title: filename,
                 message: `Exported ${products.length} products to ${filename}`,
               });
