@@ -277,12 +277,20 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
 
   const deleteWarehouse = (id: string) => {
     // Hard-delete: remove the warehouse and all of its products for this store
-    const newWarehouses = warehouses.filter(w => !(w.id === id && (w.storeId ?? currentStoreId) === currentStoreId));
-    const newProducts = products.filter(p => !(p.warehouseId === id && (p.storeId ?? currentStoreId) === currentStoreId));
+    const newWarehouses = warehouses.filter(
+      w => !(w.id === id && (w.storeId ?? currentStoreId) === currentStoreId)
+    );
+    const newProducts = products.filter(
+      p => !(p.warehouseId === id && (p.storeId ?? currentStoreId) === currentStoreId)
+    );
     setWarehouses(newWarehouses);
     setProducts(newProducts);
     // Persist immediately so GitHub push purges entries
-    void saveData(newWarehouses, newProducts);
+    void saveData(newWarehouses, newProducts).then(() => {
+      if (githubConfig) {
+        void performSync();
+      }
+    });
   };
 
   const getWarehouse = (id: string) => {
@@ -321,12 +329,23 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     );
   };
 
-  const deleteProduct = (id: string) => {
-    // Hard-delete: remove the product for this store
-    const newProducts = products.filter(p => !(p.id === id && (p.storeId ?? currentStoreId) === currentStoreId));
+  const deleteProduct = (id: string, warehouseId: string) => {
+    // Hard-delete: remove the product for this store and warehouse
+    const newProducts = products.filter(
+      p =>
+        !(
+          p.id === id &&
+          p.warehouseId === warehouseId &&
+          (p.storeId ?? currentStoreId) === currentStoreId
+        )
+    );
     setProducts(newProducts);
     // Persist immediately so GitHub push purges entries
-    void saveData(warehouses, newProducts);
+    void saveData(warehouses, newProducts).then(() => {
+      if (githubConfig) {
+        void performSync();
+      }
+    });
   };
 
   const getProduct = (id: string) => {

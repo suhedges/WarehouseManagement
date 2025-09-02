@@ -147,7 +147,8 @@ export default function ProductDetailScreen() {
           text: 'Delete',
           style: 'destructive',
           onPress: () => {
-            deleteProduct(params.id);
+            const wId = warehouse?.id ?? product?.warehouseId ?? '';
+            deleteProduct(params.id, wId);
             router.back();
           },
         },
