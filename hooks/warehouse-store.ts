@@ -49,12 +49,15 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       if (storedProducts) {
         localProducts = JSON.parse(storedProducts);
       }
-
       const normalizedLocalWarehouses = localWarehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
       const normalizedLocalProducts = localProducts.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
 
-      setWarehouses(normalizedLocalWarehouses);
-      setProducts(normalizedLocalProducts);
+      // Purge any soft-deleted records from local state on load
+      const purgedWarehouses = normalizedLocalWarehouses.filter(w => !w.deleted);
+      const purgedProducts = normalizedLocalProducts.filter(p => !p.deleted);
+
+      setWarehouses(purgedWarehouses);
+      setProducts(purgedProducts);
       
     } catch (error) {
       console.error('Failed to initialize data:', error);
@@ -96,8 +99,12 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       isPerformingSyncRef.current = true;
       setSyncStatus('syncing');
       await githubSync.pushLocalOnly(
-        warehouses.filter(w => (w.storeId ?? 'local') === (user?.username ?? 'local')),
-        products.filter(p => (p.storeId ?? 'local') === (user?.username ?? 'local')),
+        warehouses
+          .filter(w => (w.storeId ?? 'local') === (user?.username ?? 'local'))
+          .filter(w => !w.deleted),
+        products
+          .filter(p => (p.storeId ?? 'local') === (user?.username ?? 'local'))
+          .filter(p => !p.deleted),
       );
       setLastSyncTime(new Date().toISOString());
       setSyncStatus('synced');
@@ -211,10 +218,12 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
         if (remote) {
           const normalizedRemoteWarehouses = remote.warehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
           const normalizedRemoteProducts = remote.products.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
-          setWarehouses(normalizedRemoteWarehouses);
-          setProducts(normalizedRemoteProducts);
-          await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(normalizedRemoteWarehouses));
-          await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(normalizedRemoteProducts));
+          const purgedRemoteWarehouses = normalizedRemoteWarehouses.filter(w => !w.deleted);
+          const purgedRemoteProducts = normalizedRemoteProducts.filter(p => !p.deleted);
+          setWarehouses(purgedRemoteWarehouses);
+          setProducts(purgedRemoteProducts);
+          await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(purgedRemoteWarehouses));
+          await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(purgedRemoteProducts));
         }
         setLastSyncTime(new Date().toISOString());
         setSyncStatus('synced');
@@ -267,21 +276,13 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   };
 
   const deleteWarehouse = (id: string) => {
-    const timestamp = new Date().toISOString();
-    setWarehouses(
-      warehouses.map(w =>
-        w.id === id && w.storeId === currentStoreId
-          ? { ...w, deleted: true, version: (w.version ?? 0) + 1, updatedBy: user?.username ?? 'local', updatedAt: timestamp }
-          : w
-      )
-    );
-    setProducts(
-      products.map(p =>
-        p.warehouseId === id && p.storeId === currentStoreId
-          ? { ...p, deleted: true, version: (p.version ?? 0) + 1, updatedBy: user?.username ?? 'local', updatedAt: timestamp }
-          : p
-      )
-    );
+    // Hard-delete: remove the warehouse and all of its products for this store
+    const newWarehouses = warehouses.filter(w => !(w.id === id && (w.storeId ?? currentStoreId) === currentStoreId));
+    const newProducts = products.filter(p => !(p.warehouseId === id && (p.storeId ?? currentStoreId) === currentStoreId));
+    setWarehouses(newWarehouses);
+    setProducts(newProducts);
+    // Persist immediately so GitHub push purges entries
+    void saveData(newWarehouses, newProducts);
   };
 
   const getWarehouse = (id: string) => {
@@ -321,13 +322,11 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   };
 
   const deleteProduct = (id: string) => {
-    setProducts(
-      products.map(p =>
-        p.id === id && p.storeId === currentStoreId
-          ? { ...p, deleted: true, version: (p.version ?? 0) + 1, updatedBy: user?.username ?? 'local', updatedAt: new Date().toISOString() }
-          : p
-      )
-    );
+    // Hard-delete: remove the product for this store
+    const newProducts = products.filter(p => !(p.id === id && (p.storeId ?? currentStoreId) === currentStoreId));
+    setProducts(newProducts);
+    // Persist immediately so GitHub push purges entries
+    void saveData(warehouses, newProducts);
   };
 
   const getProduct = (id: string) => {
@@ -381,10 +380,12 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
         if (remote) {
           const normalizedRemoteWarehouses = remote.warehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
           const normalizedRemoteProducts = remote.products.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
-          setWarehouses(normalizedRemoteWarehouses);
-          setProducts(normalizedRemoteProducts);
-          await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(normalizedRemoteWarehouses));
-          await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(normalizedRemoteProducts));
+          const purgedRemoteWarehouses = normalizedRemoteWarehouses.filter(w => !w.deleted);
+          const purgedRemoteProducts = normalizedRemoteProducts.filter(p => !p.deleted);
+          setWarehouses(purgedRemoteWarehouses);
+          setProducts(purgedRemoteProducts);
+          await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(purgedRemoteWarehouses));
+          await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(purgedRemoteProducts));
         }
         setLastSyncTime(new Date().toISOString());
         setSyncStatus('synced');
