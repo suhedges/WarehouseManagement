@@ -441,19 +441,63 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
 
   // Import/Export
   const importProducts = (warehouseId: string, csvData: Product[]) => {
-    const timestamp = new Date().toISOString();  
-    const newProducts = csvData.map(product => ({
-      ...product,
-      id: generateId(),
-      warehouseId,
-      version: 1,
-      updatedBy: user?.username ?? 'local',
-      updatedAt: timestamp,
-      storeId: currentStoreId,
-    }));
-    
-    setProducts([...products, ...newProducts]);
-    return newProducts;
+    const timestamp = new Date().toISOString();
+    const username = user?.username ?? 'local';
+
+    const updatedProducts: Product[] = [];
+    const newProducts: Product[] = [];
+
+    // Start with current products array that we'll mutate/replace
+    const mergedProducts = [...products];
+
+    csvData.forEach(product => {
+      const existingIndex = mergedProducts.findIndex(
+        p =>
+          p.warehouseId === warehouseId &&
+          (p.storeId ?? currentStoreId) === currentStoreId &&
+          p.internalName === product.internalName &&
+          p.customerName === product.customerName &&
+          p.location === product.location
+      );
+
+      if (existingIndex !== -1) {
+        const existing = mergedProducts[existingIndex];
+        const updated: Product = {
+          ...existing,
+          quantity: product.quantity,
+          minAmount: product.minAmount,
+          maxAmount: product.maxAmount,
+          barcode: product.barcode,
+          version: (existing.version ?? 0) + 1,
+          updatedBy: username,
+          updatedAt: timestamp,
+          storeId: existing.storeId ?? currentStoreId,
+        };
+        mergedProducts[existingIndex] = updated;
+        updatedProducts.push(updated);
+      } else {
+        const newProduct: Product = {
+          ...product,
+          id: generateId(),
+          warehouseId,
+          version: 1,
+          updatedBy: username,
+          updatedAt: timestamp,
+          storeId: currentStoreId,
+        };
+        mergedProducts.push(newProduct);
+        newProducts.push(newProduct);
+      }
+    });
+
+    setProducts(mergedProducts);
+    void saveData(warehouses, mergedProducts).then(() => {
+      if (githubConfig) {
+        void performSync();
+      }
+    });
+
+    return [...newProducts, ...updatedProducts];
   };
 
   return {
