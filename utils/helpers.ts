@@ -1,8 +1,7 @@
 // utils/helpers.ts
 import * as FileSystem from 'expo-file-system';
-import * as Sharing from 'expo-sharing';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Platform, Share as RNShare } from 'react-native';
+import { Platform } from 'react-native';
 import { Product } from '@/types';
 
 /**
@@ -96,14 +95,16 @@ export const generateCSV = (products: Product[]): string => {
 
 /**
  * Export CSV:
- * - Web: triggers a normal file download via Blob + <a download>.
- * - Android: prefers SAF (user picks a folder like Downloads). We cache the folder permission.
- *            Fallback to share sheet if SAF not granted.
- * - iOS: writes to cacheDirectory and opens the share sheet.
+ * - Web: triggers a normal file download via Blob + <a download> and returns an empty string.
+ * - Android: prefers SAF (user picks a folder like Downloads). The selected file URI is returned.
+ * - iOS/other: writes to a local cache/document directory and returns the file URI.
  *
- * Returns true on success (or best-effort fallback), false on hard failure.
+ * Returns the URI of the exported file, an empty string for web download, or null on failure.
  */
-export const exportCSV = async (data: Product[], filename: string): Promise<boolean> => {
+export const exportCSV = async (
+  data: Product[],
+  filename: string
+): Promise<string | null> => {
   try {
     // Prepend BOM so Excel opens UTF-8 correctly. Use CRLF endings from generateCSV.
     const csvBody = generateCSV(data);
@@ -127,7 +128,7 @@ export const exportCSV = async (data: Product[], filename: string): Promise<bool
         URL.revokeObjectURL(url);
       }, 100);
 
-      return true;
+      return '';
     }
 
     // Native platforms
@@ -144,7 +145,7 @@ export const exportCSV = async (data: Product[], filename: string): Promise<bool
           await FileSystem.writeAsStringAsync(fileUri, csvContent, {
             encoding: FileSystem.EncodingType.UTF8,
           });
-          return true;
+          return fileUri;
         } catch (e) {
           // The cached permission may have been revoked or the folder deleted
           await AsyncStorage.removeItem(CSV_DIR_KEY);
@@ -164,49 +165,24 @@ export const exportCSV = async (data: Product[], filename: string): Promise<bool
           await FileSystem.writeAsStringAsync(fileUri, csvContent, {
             encoding: FileSystem.EncodingType.UTF8,
           });
-          return true;
+          return fileUri;
         }
       } catch (err) {
         // If SAF fails, we fall through to the share sheet fallback below
-        console.warn('SAF save failed; falling back to share sheet', err);
+        console.warn('SAF save failed; falling back to cache directory', err);
       }
     }
 
     // Fallback for iOS and Android if SAF was not granted:
-    const localUri = (FileSystem.cacheDirectory ?? FileSystem.documentDirectory) + filename;
+    const localUri =
+      (FileSystem.cacheDirectory ?? FileSystem.documentDirectory) + filename;
     await FileSystem.writeAsStringAsync(localUri, csvContent, {
       encoding: FileSystem.EncodingType.UTF8,
     });
 
-    // Prefer expo-sharing when available
-    try {
-      if (await Sharing.isAvailableAsync()) {
-        await Sharing.shareAsync(localUri, {
-          mimeType: 'text/csv',
-          dialogTitle: filename,
-          UTI: 'public.comma-separated-values-text',
-        });
-        return true;
-      }
-    } catch (e) {
-      // If expo-sharing throws, try RN Share as a last resort
-      console.warn('expo-sharing failed; trying React Native Share', e);
-    }
-
-    try {
-      await RNShare.share({
-        url: localUri,
-        title: filename,
-        message: `Exported ${data.length} products to ${filename}`,
-      });
-      return true;
-    } catch (e) {
-      console.warn('React Native Share failed. File still written locally at:', localUri, e);
-      // Even if share failed, the file exists locally.
-      return true;
-    }
+    return localUri;
   } catch (error) {
     console.error('Export failed:', error);
-    return false;
+    return null;
   }
 };

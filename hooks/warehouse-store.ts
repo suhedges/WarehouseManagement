@@ -285,12 +285,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     );
     setWarehouses(newWarehouses);
     setProducts(newProducts);
-    // Persist immediately so GitHub push purges entries
-    void saveData(newWarehouses, newProducts).then(() => {
-      if (githubConfig) {
-        void performSync();
-      }
-    });
+    // Persist immediately so GitHub push purges entries; sync will trigger automatically
+    void saveData(newWarehouses, newProducts);
   };
 
   const getWarehouse = (id: string) => {
@@ -340,12 +336,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
         )
     );
     setProducts(newProducts);
-    // Persist immediately so GitHub push purges entries
-    void saveData(warehouses, newProducts).then(() => {
-      if (githubConfig) {
-        void performSync();
-      }
-    });
+    // Persist immediately so GitHub push purges entries; sync will trigger automatically
+    void saveData(warehouses, newProducts);
   };
 
   const getProduct = (id: string) => {
@@ -491,11 +483,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     });
 
     setProducts(mergedProducts);
-    void saveData(warehouses, mergedProducts).then(() => {
-      if (githubConfig) {
-        void performSync();
-      }
-    });
+    // Persist immediately so GitHub push purges entries; sync will trigger automatically
+    void saveData(warehouses, mergedProducts);
 
     return [...newProducts, ...updatedProducts];
   };

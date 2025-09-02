@@ -1,5 +1,14 @@
 import React, { useMemo, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, Alert, Platform } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Alert,
+  Platform,
+  Share as RNShare,
+  AlertButton,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Button } from '@/components/Button';
@@ -7,6 +16,7 @@ import { Card } from '@/components/Card';
 import { colors } from '@/constants/colors';
 import { useWarehouse } from '@/hooks/warehouse-store';
 import { exportCSV } from '@/utils/helpers';
+import * as Sharing from 'expo-sharing';
 import { 
   Download, 
   X, 
@@ -90,13 +100,45 @@ export default function ExportScreen() {
       const timestamp = new Date().toISOString().split('T')[0];
       const filename = `${warehouseName}-${filePrefix}-${timestamp}.csv`;
       
-      const success = await exportCSV(products, filename);
-      
-      if (success) {
-        const where = Platform.OS === 'android' 
+      const fileUri = await exportCSV(products as any, filename);
+
+      if (fileUri !== null) {
+        const where = Platform.OS === 'android'
           ? 'Downloads (or the folder you chose)'
           : 'your Files/Share target';
-        Alert.alert('Export Successful', `Saved ${products.length} items to ${where}.`);
+        const shareFile = async () => {
+          if (!fileUri) return;
+          try {
+            if (await Sharing.isAvailableAsync()) {
+              await Sharing.shareAsync(fileUri, {
+                mimeType: 'text/csv',
+                dialogTitle: filename,
+                UTI: 'public.comma-separated-values-text',
+              });
+            } else {
+              await RNShare.share({
+                url: fileUri,
+                title: filename,
+                message: `Exported ${products.length} products to ${filename}`,
+              });
+            }
+          } catch (e) {
+            console.warn('Share failed', e);
+          }
+        };
+
+        const buttons: AlertButton[] = fileUri
+          ? [
+              { text: 'Share', onPress: shareFile },
+              { text: 'OK', style: 'cancel' as const },
+            ]
+          : [{ text: 'OK', style: 'cancel' as const }];
+
+        Alert.alert(
+          'Export Successful',
+          `Saved ${products.length} items to ${where}.`,
+          buttons
+        );
       } else {
         Alert.alert('Export Failed', 'Failed to export products');
       }
