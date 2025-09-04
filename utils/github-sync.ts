@@ -200,17 +200,21 @@ export class GitHubSyncService {
   async uploadData(data: WarehouseFile, currentSha: string | null): Promise<string> {
     const sanitized = sanitizeForJson<WarehouseFile>(data);
     const desiredText = stableStringify(sanitized);
-    const remote = await this.getRemoteFile();
+    let sha = currentSha;
 
-    if (remote && remote.text === desiredText) {
-      return remote.sha;
+    if (!sha) {
+      const remote = await this.getRemoteFile();
+      if (remote && remote.text === desiredText) {
+        return remote.sha;
+      }
+      sha = remote?.sha ?? null;
     }
 
     const body: Record<string, any> = {
       message: 'Update warehouse data',
       content: btoa(desiredText),
     };
-    if (remote?.sha || currentSha) body.sha = remote?.sha ?? currentSha;
+    if (sha) body.sha = sha;
 
     const res = await this.makeGitHubRequest(`contents/${this.dataFilePath}`, {
       method: 'PUT',
@@ -230,14 +234,31 @@ export class GitHubSyncService {
     }
   }
 
-  async setBaseSnapshot(data: WarehouseFile): Promise<void> {
+  async setBaseSnapshot(data: WarehouseFile, sha: string | null): Promise<void> {
     try {
-      await AsyncStorage.setItem(this.baseSnapshotKey, JSON.stringify(sanitizeForJson(data)));
+      const payload = { data: sanitizeForJson(data), sha };
+      await AsyncStorage.setItem(this.baseSnapshotKey, JSON.stringify(payload));
     } catch (e) {
       console.error('GitHubSyncService: Failed to set BASE_SNAPSHOT', e);
       throw e as Error;
     }
   }
+  
+  async getBaseSnapshot(): Promise<{ data: WarehouseFile; sha: string | null } | null> {
+    try {
+      const text = await AsyncStorage.getItem(this.baseSnapshotKey);
+      if (!text) return null;
+      const parsed = safeParseJson<any>(text, null);
+      if (!parsed) return null;
+      if (parsed.data && parsed.sha !== undefined) {
+        return { data: parsed.data as WarehouseFile, sha: parsed.sha as string | null };
+      }
+      return { data: parsed as WarehouseFile, sha: null };
+    } catch (e) {
+      console.error('GitHubSyncService: Failed to get BASE_SNAPSHOT', e);
+      return null;
+    }
+  }  
 
   async pullRemoteOnLogin(): Promise<WarehouseFile | null> {
     const defaultFile: WarehouseFile = { meta: { schemaVersion: 1 }, warehouses: [], products: [] };
@@ -246,11 +267,15 @@ export class GitHubSyncService {
       return null;
     }
     const remoteData: WarehouseFile = isWarehouseFile(remote.data) ? remote.data : defaultFile;
-    await this.setBaseSnapshot(remoteData);
+    await this.setBaseSnapshot(remoteData, remote.sha);
     return remoteData;
   }
 
-  async pushLocalOnly(localWarehouses: Warehouse[], localProducts: Product[]): Promise<void> {
+  async pushLocalOnly(
+    localWarehouses: Warehouse[],
+    localProducts: Product[],
+    currentSha: string | null,
+  ): Promise<string> {
     if (!this.config) {
       throw new Error('GitHub configuration not set');
     }
@@ -259,10 +284,16 @@ export class GitHubSyncService {
       warehouses: localWarehouses,
       products: localProducts,
     };
-    const remote = await this.downloadData();
-    const newSha = await this.uploadData(data, remote?.sha ?? null);
-    await this.setBaseSnapshot(data);
+    const base = await this.getBaseSnapshot();
+    const sanitized = sanitizeForJson<WarehouseFile>(data);
+    if (base && stableStringify(sanitized) === stableStringify(sanitizeForJson(base.data))) {
+      console.log('pushLocalOnly: no changes, skipping upload');
+      return base.sha ?? '';
+    }
+    const newSha = await this.uploadData(data, currentSha);
+    await this.setBaseSnapshot(data, newSha);
     console.log('pushLocalOnly: uploaded with sha', newSha);
+    return newSha;
   }
 }
 

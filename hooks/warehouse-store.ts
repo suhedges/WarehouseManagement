@@ -18,6 +18,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const [syncStatus, setSyncStatus] = useState<'synced' | 'pending' | 'syncing' | 'error'>('synced');
   const [githubConfig, setGithubConfig] = useState<GitHubConfig | null>(null);
   const [lastSyncTime, setLastSyncTime] = useState<string | null>(null);
+  const [cachedSha, setCachedSha] = useState<string | null>(null);
   const isPerformingSyncRef = useRef<boolean>(false);
   const lastSyncRef = useRef<number>(0);
   const pendingSyncTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -34,6 +35,9 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       setGithubConfig(config);
 
       githubSync.setUser(user?.username ?? 'local');
+      
+      const snapshot = await githubSync.getBaseSnapshot();
+      setCachedSha(snapshot?.sha ?? null);      
       
       // Load local data first
       const storedWarehouses = await AsyncStorage.getItem(WAREHOUSES_STORAGE_KEY);
@@ -98,14 +102,16 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     try {
       isPerformingSyncRef.current = true;
       setSyncStatus('syncing');
-      await githubSync.pushLocalOnly(
+      const newSha = await githubSync.pushLocalOnly(
         warehouses
           .filter(w => (w.storeId ?? 'local') === (user?.username ?? 'local'))
           .filter(w => !w.deleted),
         products
           .filter(p => (p.storeId ?? 'local') === (user?.username ?? 'local'))
           .filter(p => !p.deleted),
+        cachedSha,
       );
+      setCachedSha(newSha);
       setLastSyncTime(new Date().toISOString());
       setSyncStatus('synced');
       console.log('Push completed successfully');
@@ -116,7 +122,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     } finally {
       isPerformingSyncRef.current = false;
     }
-  }, [githubConfig, warehouses, products]);
+  }, [githubConfig, warehouses, products, cachedSha]);
   
   const performSync = useCallback((): Promise<void> => {
     if (pendingSyncPromise.current) {
@@ -225,6 +231,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
           await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(purgedRemoteWarehouses));
           await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(purgedRemoteProducts));
         }
+        const snapshot = await githubSync.getBaseSnapshot();
+        setCachedSha(snapshot?.sha ?? null);        
         setLastSyncTime(new Date().toISOString());
         setSyncStatus('synced');
       } catch (error) {
@@ -398,6 +406,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
           await AsyncStorage.setItem(WAREHOUSES_STORAGE_KEY, JSON.stringify(purgedRemoteWarehouses));
           await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(purgedRemoteProducts));
         }
+        const snapshot = await githubSync.getBaseSnapshot();
+        setCachedSha(snapshot?.sha ?? null);        
         setLastSyncTime(new Date().toISOString());
         setSyncStatus('synced');
       }
@@ -415,6 +425,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       setGithubConfig(null);
       setLastSyncTime(null);
       setSyncStatus('synced');
+      setCachedSha(null);
     } catch (error) {
       console.error('Failed to disconnect GitHub:', error);
       throw error;
@@ -425,6 +436,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     try {
       await githubSync.resetBaseSnapshot();
       setSyncStatus('pending');
+      setCachedSha(null);
     } catch (error) {
       console.error('Failed to reset sync snapshot:', error);
       throw error;

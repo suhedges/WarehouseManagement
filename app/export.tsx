@@ -17,11 +17,13 @@ import { colors } from '@/constants/colors';
 import { useWarehouse } from '@/hooks/warehouse-store';
 import { exportCSV } from '@/utils/helpers';
 import * as Sharing from 'expo-sharing';
-import { 
-  Download, 
-  X, 
-  Package, 
-  AlertTriangle, 
+import * as FileSystem from 'expo-file-system';
+import * as MailComposer from 'expo-mail-composer';
+import {
+  Download,
+  X,
+  Package,
+  AlertTriangle,
   AlertCircle 
 } from 'lucide-react-native';
 
