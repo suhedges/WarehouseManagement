@@ -9,12 +9,12 @@ import * as Network from 'expo-network';
 
 const WAREHOUSES_STORAGE_KEY = 'warehouses';
 const PRODUCTS_STORAGE_KEY = 'products';
-const SYNC_MIN_INTERVAL_MS = 5000; 
+const SYNC_MIN_INTERVAL_MS = 5000;
 
 export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [syncStatus, setSyncStatus] = useState<'synced' | 'pending' | 'syncing' | 'error'>('synced');
   const [githubConfig, setGithubConfig] = useState<GitHubConfig | null>(null);
   const [lastSyncTime, setLastSyncTime] = useState<string | null>(null);
@@ -29,32 +29,40 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   const initializeData = useCallback(async () => {
     try {
       setIsLoading(true);
-      
+
       // Load GitHub config first
       const config = await githubSync.loadConfig();
       setGithubConfig(config);
 
       githubSync.setUser(user?.username ?? 'local');
-      
+
       const snapshot = await githubSync.getBaseSnapshot();
-      setCachedSha(snapshot?.sha ?? null);      
-      
+      setCachedSha(snapshot?.sha ?? null);
+
       // Load local data first
       const storedWarehouses = await AsyncStorage.getItem(WAREHOUSES_STORAGE_KEY);
       const storedProducts = await AsyncStorage.getItem(PRODUCTS_STORAGE_KEY);
-      
+
       let localWarehouses: Warehouse[] = [];
       let localProducts: Product[] = [];
-      
+
       if (storedWarehouses) {
         localWarehouses = JSON.parse(storedWarehouses);
       }
-      
+
       if (storedProducts) {
         localProducts = JSON.parse(storedProducts);
       }
-      const normalizedLocalWarehouses = localWarehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
-      const normalizedLocalProducts = localProducts.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
+
+      // Normalize storeId fields for legacy records (storeId missing)
+      const normalizedLocalWarehouses = localWarehouses.map(w => ({
+        ...w,
+        storeId: w.storeId ?? (w.updatedBy || 'local'),
+      }));
+      const normalizedLocalProducts = localProducts.map(p => ({
+        ...p,
+        storeId: p.storeId ?? (p.updatedBy || 'local'),
+      }));
 
       // Purge any soft-deleted records from local state on load
       const purgedWarehouses = normalizedLocalWarehouses.filter(w => !w.deleted);
@@ -62,7 +70,6 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
 
       setWarehouses(purgedWarehouses);
       setProducts(purgedProducts);
-      
     } catch (error) {
       console.error('Failed to initialize data:', error);
     } finally {
@@ -85,8 +92,6 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     githubSync.setUser(user?.username ?? 'local');
   }, [user?.username]);
 
-
-
   const performSyncNow = useCallback(async () => {
     if (!githubConfig) {
       console.log('GitHub not configured, skipping push');
@@ -102,14 +107,15 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     try {
       isPerformingSyncRef.current = true;
       setSyncStatus('syncing');
+      // Do not filter out deleted records; only filter by storeId so that tombstones propagate
       const newSha = await githubSync.pushLocalOnly(
-        warehouses
-          .filter(w => (w.storeId ?? 'local') === (user?.username ?? 'local'))
-          .filter(w => !w.deleted),
-        products
-          .filter(p => (p.storeId ?? 'local') === (user?.username ?? 'local'))
-          .filter(p => !p.deleted),
-        cachedSha,
+        warehouses.filter(
+          w => (w.storeId ?? 'local') === (user?.username ?? 'local')
+        ),
+        products.filter(
+          p => (p.storeId ?? 'local') === (user?.username ?? 'local')
+        ),
+        cachedSha
       );
       setCachedSha(newSha);
       setLastSyncTime(new Date().toISOString());
@@ -123,7 +129,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       isPerformingSyncRef.current = false;
     }
   }, [githubConfig, warehouses, products, cachedSha]);
-  
+
   const performSync = useCallback((): Promise<void> => {
     if (pendingSyncPromise.current) {
       return pendingSyncPromise.current;
@@ -154,8 +160,8 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       });
     }
     return pendingSyncPromise.current;
-  }, [performSyncNow]);  
-  
+  }, [performSyncNow]);
+
   const saveData = useCallback(
     async (
       w: Warehouse[] = warehouses,
@@ -195,7 +201,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       });
     }
   }, [githubConfig, syncStatus, performSync]);
-  
+
   useEffect(() => {
     const subscription = Network.addNetworkStateListener(state => {
       if (
@@ -222,8 +228,14 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
         setSyncStatus('syncing');
         const remote = await githubSync.pullRemoteOnLogin();
         if (remote) {
-          const normalizedRemoteWarehouses = remote.warehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
-          const normalizedRemoteProducts = remote.products.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
+          const normalizedRemoteWarehouses = remote.warehouses.map(w => ({
+            ...w,
+            storeId: w.storeId ?? (w.updatedBy || 'local'),
+          }));
+          const normalizedRemoteProducts = remote.products.map(p => ({
+            ...p,
+            storeId: p.storeId ?? (p.updatedBy || 'local'),
+          }));
           const purgedRemoteWarehouses = normalizedRemoteWarehouses.filter(w => !w.deleted);
           const purgedRemoteProducts = normalizedRemoteProducts.filter(p => !p.deleted);
           setWarehouses(purgedRemoteWarehouses);
@@ -232,7 +244,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
           await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(purgedRemoteProducts));
         }
         const snapshot = await githubSync.getBaseSnapshot();
-        setCachedSha(snapshot?.sha ?? null);        
+        setCachedSha(snapshot?.sha ?? null);
         setLastSyncTime(new Date().toISOString());
         setSyncStatus('synced');
       } catch (error) {
@@ -284,16 +296,37 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   };
 
   const deleteWarehouse = (id: string) => {
-    // Hard-delete: remove the warehouse and all of its products for this store
-    const newWarehouses = warehouses.filter(
-      w => !(w.id === id && (w.storeId ?? currentStoreId) === currentStoreId)
+    // Soft-delete: mark the warehouse and all of its products as deleted and bump versions
+    const timestamp = new Date().toISOString();
+    const username = user?.username ?? 'local';
+
+    const newWarehouses = warehouses.map(w =>
+      w.id === id && (w.storeId ?? currentStoreId) === currentStoreId
+        ? {
+            ...w,
+            deleted: true,
+            version: (w.version ?? 0) + 1,
+            updatedBy: username,
+            updatedAt: timestamp,
+            storeId: w.storeId ?? currentStoreId,
+          }
+        : w
     );
-    const newProducts = products.filter(
-      p => !(p.warehouseId === id && (p.storeId ?? currentStoreId) === currentStoreId)
+    const newProducts = products.map(p =>
+      p.warehouseId === id && (p.storeId ?? currentStoreId) === currentStoreId
+        ? {
+            ...p,
+            deleted: true,
+            version: (p.version ?? 0) + 1,
+            updatedBy: username,
+            updatedAt: timestamp,
+            storeId: p.storeId ?? currentStoreId,
+          }
+        : p
     );
     setWarehouses(newWarehouses);
     setProducts(newProducts);
-    // Persist immediately so GitHub push purges entries; sync will trigger automatically
+    // Persist immediately so GitHub push can include tombstones
     void saveData(newWarehouses, newProducts);
   };
 
@@ -302,7 +335,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   };
 
   // Product operations
-  type AddProductInput = Omit<Product, 'id' | 'version' | 'updatedAt' | 'updatedBy'>;
+  type AddProductInput = Omit<Product, 'id' | 'version' | 'updatedBy' | 'updatedAt' | 'storeId'>;
   const addProduct = (product: AddProductInput) => {
     const newProduct: Product = {
       ...product,
@@ -334,17 +367,26 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
   };
 
   const deleteProduct = (id: string, warehouseId: string) => {
-    // Hard-delete: remove the product for this store and warehouse
-    const newProducts = products.filter(
-      p =>
-        !(
-          p.id === id &&
-          p.warehouseId === warehouseId &&
-          (p.storeId ?? currentStoreId) === currentStoreId
-        )
+    // Soft-delete: mark the product as deleted and bump version
+    const timestamp = new Date().toISOString();
+    const username = user?.username ?? 'local';
+
+    const newProducts = products.map(p =>
+      p.id === id &&
+      p.warehouseId === warehouseId &&
+      (p.storeId ?? currentStoreId) === currentStoreId
+        ? {
+            ...p,
+            deleted: true,
+            version: (p.version ?? 0) + 1,
+            updatedBy: username,
+            updatedAt: timestamp,
+            storeId: p.storeId ?? currentStoreId,
+          }
+        : p
     );
     setProducts(newProducts);
-    // Persist immediately so GitHub push purges entries; sync will trigger automatically
+    // Persist immediately so GitHub push can include tombstones
     void saveData(warehouses, newProducts);
   };
 
@@ -397,8 +439,14 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
         setSyncStatus('syncing');
         const remote = await githubSync.pullRemoteOnLogin();
         if (remote) {
-          const normalizedRemoteWarehouses = remote.warehouses.map(w => ({ ...w, storeId: w.storeId ?? (w.updatedBy || 'local') }));
-          const normalizedRemoteProducts = remote.products.map(p => ({ ...p, storeId: p.storeId ?? (p.updatedBy || 'local') }));
+          const normalizedRemoteWarehouses = remote.warehouses.map(w => ({
+            ...w,
+            storeId: w.storeId ?? (w.updatedBy || 'local'),
+          }));
+          const normalizedRemoteProducts = remote.products.map(p => ({
+            ...p,
+            storeId: p.storeId ?? (p.updatedBy || 'local'),
+          }));
           const purgedRemoteWarehouses = normalizedRemoteWarehouses.filter(w => !w.deleted);
           const purgedRemoteProducts = normalizedRemoteProducts.filter(p => !p.deleted);
           setWarehouses(purgedRemoteWarehouses);
@@ -407,7 +455,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
           await AsyncStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(purgedRemoteProducts));
         }
         const snapshot = await githubSync.getBaseSnapshot();
-        setCachedSha(snapshot?.sha ?? null);        
+        setCachedSha(snapshot?.sha ?? null);
         setLastSyncTime(new Date().toISOString());
         setSyncStatus('synced');
       }
@@ -416,8 +464,6 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
       throw error;
     }
   };
-
-
 
   const disconnectGitHub = async () => {
     try {
@@ -495,7 +541,7 @@ export const [WarehouseProvider, useWarehouse] = createContextHook(() => {
     });
 
     setProducts(mergedProducts);
-    // Persist immediately so GitHub push purges entries; sync will trigger automatically
+    // Persist immediately so GitHub push includes updates
     void saveData(warehouses, mergedProducts);
 
     return [...newProducts, ...updatedProducts];

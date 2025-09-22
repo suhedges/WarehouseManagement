@@ -9,7 +9,9 @@ import { colors } from '@/constants/colors';
 import { useAuth } from '@/hooks/auth-store';
 import { Warehouse } from 'lucide-react-native';
 
-const VALID_USERNAMES = new Set(['TSB2108', 'TSB414', 'TSB211', 'TSB1609', 'TSB5117', 'TSB1800', 'TSB2205', 'TSB1115', 'TSB1216', 'TSB716']);
+// Import the bundled users.json as a fallback
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const packagedUsers: string[] = require('../users.json');
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -18,6 +20,43 @@ export default function LoginScreen() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+
+  // Maintain the current set of valid usernames, defaulting to the packaged list
+  const [validUsernames, setValidUsernames] = useState<Set<string>>(
+    new Set(
+      packagedUsers
+        .filter((u) => typeof u === 'string' && u.trim().length > 0)
+        .map((u) => u.toUpperCase())
+    )
+  );
+
+  // Try to fetch users.json from GitHub on mount.  If it fails, fall back to packaged list.
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(
+          // Use raw.githubusercontent.com and add a cache-busting query parameter
+          'https://raw.githubusercontent.com/suhedges/WarehouseManagement/main/users.json?cacheBust=' +
+            Date.now()
+        );
+        if (response.ok) {
+          const data: unknown = await response.json();
+          if (Array.isArray(data)) {
+            const normalized = data
+              .filter((u) => typeof u === 'string' && u.trim().length > 0)
+              .map((u) => u.toUpperCase());
+            setValidUsernames(new Set(normalized));
+          }
+        } else {
+          console.warn('Failed to fetch users.json; using packaged list');
+        }
+      } catch (e) {
+        console.warn('Error fetching users.json; using packaged list', e);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   useEffect(() => {
     const loadSavedUsername = async () => {
@@ -36,14 +75,14 @@ export default function LoginScreen() {
   }, []);
 
   const handleLogin = async () => {
-    const input = username.trim();
+    const input = username.trim().toUpperCase();
 
     if (!input) {
       setError('Please enter your username');
       return;
     }
 
-    if (!VALID_USERNAMES.has(input)) {
+    if (!validUsernames.has(input)) {
       setError('Invalid username');
       return;
     }
@@ -55,7 +94,7 @@ export default function LoginScreen() {
         await AsyncStorage.setItem('saved_username', input);
       } else {
         await AsyncStorage.removeItem('saved_username');
-      }      
+      }
       router.replace('/warehouses');
     } catch (error) {
       console.error('Login error:', error);
@@ -158,5 +197,5 @@ const styles = StyleSheet.create({
   rememberText: {
     fontSize: 16,
     color: colors.text,
-  },  
+  },
 });
