@@ -1,1 +1,1 @@
-{"meta":{"schemaVersion":1},"products":[{"barcode":"848r727848","customerName":"Testr6","id":"lbuk184772b51jbfl1m1qe","internalName":"Test","location":"Hd65","maxAmount":5,"minAmount":1,"quantity":6,"storeId":"TSB2108","updatedAt":"2025-09-23T19:46:36.327Z","updatedBy":"TSB2108","version":1,"warehouseId":"1ou4jgid3qyi2u1phdw40pd"}],"warehouses":[{"id":"1ou4jgid3qyi2u1phdw40pd","name":"BERRY","qrOnly":false,"storeId":"TSB2108","updatedAt":"2025-09-23T19:46:18.549Z","updatedBy":"TSB2108","version":1}]}
+{"meta":{"schemaVersion":1},"products":[],"warehouses":[]}
